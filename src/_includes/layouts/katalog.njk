@@ -1,0 +1,24 @@
+{% extends "layouts/base.njk" %}
+
+{% block body %}
+<section class="py-24 ~px-4/8">
+  <div class="container m-auto text-center">
+    {% if topper %}<p class="uppercase tracking-wide text-sm text-neutral-500 mb-2">{{ topper }}</p>{% endif %}
+    <h1 class="text-4xl font-bold mb-10">{{ heading or title }}</h1>
+    <p class="text-xs opacity-60">
+  categories: {{ collections.productCategories | length }}
+</p>
+{% for c in collections.productCategories %}
+  <p class="text-xs">{{ c.name }} ({{ c.count }})</p>
+{% endfor %}
+    
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {% for cat in collections.productCategories %}
+  {# ŠPATNĚ: {% include "components/category-card.njk" with { cat: cat } %} #}
+        {% include "components/category-card.njk" %}
+    {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

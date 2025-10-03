@@ -1,0 +1,10 @@
+<a href="{{ p.url }}" class="block border rounded-2xl p-4 hover:shadow">
+  {% if p.data.image %}
+    <img src="{{ p.data.image }}" alt="{{ p.data.title }}" class="aspect-[4/3] w-full object-cover rounded-xl mb-3" loading="lazy">
+  {% endif %}
+  <h3 class="text-lg font-semibold">{{ p.data.title }}</h3>
+  <p class="text-sm opacity-80">
+    {% if p.data.price %}{{ p.data.price }} {{ p.data.currency or 'CZK' }} · {% endif %}
+    {{ p.data.category }}
+  </p>
+</a>

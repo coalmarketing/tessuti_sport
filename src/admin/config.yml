@@ -59,3 +59,184 @@ collections:
         }
       - { label: "Obsah", name: "body", widget: "markdown" }
       - { label: "Štítky", name: "tags", widget: "hidden", default: ["post"] }
+
+  # PRODUKTY (CS)
+  - label: "Produkty (CS)"
+    name: "products_cs"
+    folder: "src/content/i18n/cs/products"
+    create: true
+    # ukládá soubory do podsložek dle vybrané kategorie
+    path: "{{fields.category | slugify}}/{{slug}}"
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - label: "Kategorie"
+        name: "category"
+        widget: "select"
+        options:
+          - "Cyklovložky"
+          - "Rukavičky"
+          - "Tkaniny"
+          - "Dresoviny"
+          - "Elastické úplety"
+          - "Softshell"
+          - "Pásky, Gumy, Reflexní materiály"
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{fields.category | slugify}}/{{slug}}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # STRÁNKY (CS) – Katalog jako „files“ položka
+  - label: "Stránky (CS)"
+    name: "pages_cs"
+    files:
+      - label: "Katalog"
+        name: "katalog"
+        file: "src/content/i18n/cs/katalog.md"
+        fields:
+          - {
+              label: "Layout",
+              name: "layout",
+              widget: "hidden",
+              default: "katalog.njk",
+            }
+          - {
+              label: "Titulek",
+              name: "title",
+              widget: "string",
+              default: "Katalog",
+            }
+          - {
+              label: "Popis",
+              name: "description",
+              widget: "text",
+              required: false,
+            }
+          - {
+              label: "URL",
+              name: "permalink",
+              widget: "string",
+              default: "katalog/",
+            }
+          # obsah řízený přes front matter
+          - {
+              label: "Topper text",
+              name: "topper",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Hlavní nadpis",
+              name: "heading",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Podnadpis",
+              name: "subheading",
+              widget: "text",
+              required: false,
+            }
+          # hero/landing proměnné (volitelné)
+          - {
+              label: "Hero nadpis",
+              name: "hero_title",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Hero text",
+              name: "hero_text",
+              widget: "text",
+              required: false,
+            }
+          - {
+              label: "CTA text",
+              name: "hero_cta_label",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "CTA odkaz",
+              name: "hero_cta_url",
+              widget: "string",
+              required: false,
+            }
+          # zobrazení kategorií
+          - {
+              label: "Zobrazit kategorie",
+              name: "show_categories",
+              widget: "boolean",
+              default: true,
+              required: false,
+            }
+          - {
+              label: "Text nad kategoriemi",
+              name: "categories_intro",
+              widget: "string",
+              required: false,
+            }
+          # SEO/OG (volitelné)
+          - {
+              label: "OG obrázek",
+              name: "og_image",
+              widget: "image",
+              choose_url: false,
+              required: false,
+            }
+          - {
+              label: "Obsah (Markdown)",
+              name: "body",
+              widget: "markdown",
+              required: false,
+            }

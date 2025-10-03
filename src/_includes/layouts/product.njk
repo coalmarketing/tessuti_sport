@@ -1,0 +1,19 @@
+{% extends "layouts/base.njk" %}
+
+{% block body %}
+<article class="max-w-5xl mx-auto py-10">
+  <h1 class="text-3xl font-bold mb-2">{{ title }}</h1>
+  <p class="text-neutral-600 mb-6">
+    {% if price %}{{ price }} {{ currency or 'CZK' }}{% endif %}
+    · {{ category }}
+  </p>
+
+  {% if image %}
+    <img src="{{ image }}" alt="{{ title }}" class="w-full rounded-xl mb-6" loading="lazy">
+  {% endif %}
+
+  <div class="prose max-w-none">
+    {{ content | safe }}
+  </div>
+</article>
+{% endblock %}
