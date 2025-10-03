@@ -76,4 +76,4 @@ npm run build
 ├── tailwind.config.js # Konfigurace Tailwindu
 ├── package.json
 └── netlify.toml # Konfigurace pro Netlify
-```
+```# tessuti-spoert
