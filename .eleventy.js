@@ -150,6 +150,19 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // Filter products by category and language
+  eleventyConfig.addFilter(
+    "categoryProducts",
+    function (products, categoryName, lang = "cs") {
+      if (!Array.isArray(products)) return [];
+      return products.filter((product) => {
+        const hasCategory = product.data?.category === categoryName;
+        const hasLang = product.data?.tags && product.data.tags.includes(lang);
+        return hasCategory && hasLang;
+      });
+    }
+  );
+
   // ─────────────────────────────────────────────────────────────────────────
   // PRODUCTS: collections + helpers
   // ─────────────────────────────────────────────────────────────────────────
@@ -167,7 +180,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("slug", slugify);
 
   // Kolekce všech produktů (tag "product"), seřazené podle title (CZ kolace)
-  eleventyConfig.addCollection("product", (api) => {
+  eleventyConfig.addCollection("products", (api) => {
     return api
       .getFilteredByTag("product")
       .sort((a, b) =>
@@ -176,28 +189,52 @@ module.exports = function (eleventyConfig) {
   });
 
   // Kolekce kategorií: seskupení produktů podle data.category
-  // Filtrované na češtinu (i18n) přes page.lang === "cs"
-  eleventyConfig.addCollection("productCategories", (api) => {
+  // Filtrované na češtinu (i18n) přes tag 'cs' místo cesty
+  eleventyConfig.addCollection("categories", (api) => {
     const items = api
       .getFilteredByTag("product")
-      .filter((it) => (it.data.tags || []).includes("cs"));
-    const map = new Map();
+      .filter((it) => it.data.tags && it.data.tags.includes("cs"));
 
+    // Get category definition files
+    const categoryFiles = api
+      .getAll()
+      .filter(
+        (item) =>
+          item.inputPath.includes("/katalog/") &&
+          item.inputPath.endsWith("/index.md") &&
+          item.data.layout === "layouts/category.njk"
+      );
+
+    const map = new Map();
     for (const it of items) {
       const name = it.data.category || "Nezařazené";
       if (!map.has(name)) map.set(name, []);
       map.get(name).push(it);
     }
 
+    const slugify = (s = "") =>
+      s
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+
     return [...map.entries()]
-      .map(([name, arr]) => ({
-        name,
-        slug: slugify(name),
-        items: arr.sort((a, b) =>
-          (a.data.title || "").localeCompare(b.data.title || "", "cs")
-        ),
-        count: arr.length,
-      }))
+      .map(([name, arr]) => {
+        // Find matching category file
+        const categoryFile = categoryFiles.find(
+          (file) => file.data.name === name || file.data.slug === slugify(name)
+        );
+
+        return {
+          name,
+          slug: slugify(name),
+          description: categoryFile?.data.description || "",
+          image: categoryFile?.data.image || "",
+          count: arr.length,
+        };
+      })
       .sort((a, b) => a.name.localeCompare(b.name, "cs"));
   });
 

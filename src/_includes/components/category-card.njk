@@ -1,5 +1,12 @@
-
-<a href="/cs/katalog/{{ cat.slug }}/" class="block border rounded-2xl p-6 hover:shadow transition">
-  <h2 class="text-2xl font-semibold underline">{{ cat.name }}</h2>
-  <p class="opacity-70 mt-2">{{ cat.count }} položek</p>
-</a>
+<div class="block border rounded-2xl p-6 hover:shadow transition bg-white">
+  {% if cat.image %}
+    <img src="{{ cat.image }}" alt="{{ cat.name }}" class="w-full h-48 object-cover rounded-lg mb-4">
+  {% endif %}
+  <h2 class="text-2xl font-semibold mb-3">{{ cat.name }}</h2>
+  {% if cat.description %}
+    <p class="text-gray-600 mb-4 line-clamp-3">{{ cat.description }}</p>
+  {% endif %}
+  <a href="/cs/katalog/{{ cat.slug }}/" class="inline-block bg-[#E92429] text-white px-6 py-2 rounded-lg hover:bg-[#d41e24] transition">
+    Zobrazit produkty ({{ cat.count }})
+  </a>
+</div>

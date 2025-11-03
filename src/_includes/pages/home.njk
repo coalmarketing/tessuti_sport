@@ -9,13 +9,260 @@
     <!-- To ensure proper validation, prevent errors, and encourage developers to check, schema's are an opt-in feature. They're very bespoke and requires some customising  -->
     <!-- Uncomment the code below to enable Structured Data, and test it when you deploy to Netlify - https://developers.google.com/search/docs/appearance/structured-data -->
     {% include "components/home-schema.njk" %}
+
+    <script>
+    function toggleNote(button) {
+        const textBlock = button.parentElement;
+        const note = textBlock.querySelector('.note');
+        if (note) {
+            if (!note.classList.contains('expanded')) {
+                setTimeout(() => {
+                    note.classList.add('expanded');
+                }, 50);
+            } else {
+                note.classList.remove('expanded');
+            }
+        }
+        button.classList.toggle('rotated');
+    }
+    </script>
+    <style>
+    .rotated svg {
+        transform: rotate(180deg);
+    }
+    .note {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    .note.expanded {
+        max-height: 1000px;
+        opacity: 1;
+    }
+    .checkbox:checked + .checkmark {
+        background-color: #00A44F;
+        border-color: #00A44F;
+    }
+    .checkbox:checked + .checkmark svg {
+        opacity: 1;
+    }
+    </style>
 {% endblock %}
 
 {% block body %}
-    <!-- SECTION -->
-    <section class="py-24 ~px-4/8">
-        <div class="container m-auto"></div>
+    <!-- HERO SECTION -->
+    <section class="py-12 md:py-24 ~px-4/8">
+        <div class="container m-auto h-[65vh] md:h-[80vh] flex items-center">
+            <div class="container text-left mb-8 md:mb-16 flex flex-col gap-2 lg:gap-4">
+                <div class="inline-flex justify-start gap-2 md:gap-4 items-center w-fit bg-gradient-to-b from-[#CB8585]/60 via-[#F1F1F1]/60 to-[#F3F3F3]/10 bg-opacity-85 p-2 md:p-3 rounded-lg">
+                    <span class="uppercase tracking-wide text-sm text-neutral-500 mb-2 inline-block">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white"/>
+                        <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#320404"/>
+                        <path d="M0 5C0 2.23858 2.23858 0 5 0H13.3333V40H5C2.23857 40 0 37.7614 0 35V5Z" fill="#00A44F"/>
+                        <path d="M13.3333 0H26.6667V40H13.3333V0Z" fill="white"/>
+                        <path d="M26.6667 0H35C37.7614 0 40 2.23858 40 5V35C40 37.7614 37.7614 40 35 40H26.6667V0Z" fill="#E92429"/>
+                    </svg>
+                    </span>
+                    {% if hero.topper %}<span class="uppercase tracking-wide text-sm text-neutral-500 mb-2">{{ hero.topper }}</span>{% endif %}
+                </div>
+                {% if hero.heading1 %}<h1 class="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 font-Gabarito leading-[1.1]">{{ hero.heading1 | safe }}</h1>{% endif %}
+                {% if hero.paragraph1 %}<p class="text-base md:text-lg lg:text-3xl text-neutral-600 font-RedHatText">{{ hero.paragraph1 | safe }}</p>{% endif %}
+            </div>
+        </div>
     </section>
 
-    {% include "sections/cta.njk" %}
-{% endblock body %}
+    <!-- CTA SECTION -->
+    <section class="py-12 md:py-24 ~px-1/8 bg-[#E92429]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
+            {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#E92429]">{{ cta.btnCTA }}</a>{% endif %}
+        </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="py-24 ~px-4/8">
+        <div class="container m-auto">
+            <div class="grid gap-8 md:grid-cols-2">
+                <div class="~px-2/8">
+                    {% if section2.heading3 %}<h3 class="text-2xl font-bold mb-8 text-left leading-[1.1]">{{ section2.heading3 | safe }}</h3>{% endif %}
+                    {% for item in [section2.listspan1, section2.listspan2, section2.listspan3, section2.listspan4] %}
+                    <div class="text-block flex justify-between mb-6">
+                        <div class="flex items-start gap-4">
+                            <img src="/assets/images/Section2-icons/{% if loop.index0 == 0 %}Frame 5.png{% else %}Frame 5-{{ loop.index0 }}.png{% endif %}" alt="" class="w-16 h-16 flex-shrink-0">
+                            <div class="flex-1">
+                                {% if item.title %}<h4 class="text-xl font-semibold mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
+                                {% if item.description %}<p class="text-neutral-700 mb-2">{{ item.description }}</p>{% endif %}
+                                {% if item.note %}<div class="note mt-2  text-gray-500 rounded">{{ item.note }}</div>{% endif %}
+                            </div>
+                        </div>
+                        <button type="button" onclick="toggleNote(this)" class="self-start bg-green-500 text-white rounded p-1 transition-transform">
+                            <svg class="transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="~px-2/8">
+                    {% if section3.heading3 %}<h3 class="text-2xl font-bold mb-8 text-left leading-[1.1]">{{ section3.heading3 | safe }}</h3>{% endif %}
+                    {% for item in [section3.listspan1, section3.listspan2, section3.listspan3, section3.listspan4] %}
+                    <div class="text-block flex justify-between mb-6">
+                        <div class="flex items-start gap-4">
+                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 + 4 }}.png" alt="" class="w-16 h-16 flex-shrink-0">
+                            <div class="flex-1 mr-8">
+                                {% if item.title %}<h4 class="text-xl font-semibold mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
+                                {% if item.description %}<p class="text-neutral-600 mb-2">{{ item.description }}</p>{% endif %}
+                                {% if item.note %}<div class="note mt-2 text-gray-500 rounded">{{ item.note }}</div>{% endif %}
+                            </div>
+                        </div>
+                        <button type="button" onclick="toggleNote(this)" class="self-start bg-red-500 text-white rounded p-1 transition-transform">
+                            <svg class="transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-12 md:py-24 ~px-1/8 bg-[#E92429]/20">
+    <div class="container m-auto flex flex-col">
+            {% if section4.heading1 %}<h3 class=" text-3xl md:text-5xl lg:text-6xl font-bold text-left text-black leading-[1.1]">{{ section4.heading1 | safe }}</h3>{% endif %}
+            {% if section4.subheading1 %}<h4 class="text-3xl md:text-5xl lg:text-6xl text-[#E92429] font-bold mb-12 leading-[1.1]">{{ section4.subheading1 | safe }}</h4>{% endif %}
+            <div class="grid gap-8 md:grid-cols-2">
+                <div class="flex flex-col gap-8 ">
+                    {% for i in range(1, 5) %}
+                    <div class="text-black flex justify-between items-start p-4 rounded-lg bg-white/50 mx-4 border-2 border-black border-dashed">
+                        <div class="flex-1 mr-8">
+                            {% if section4['listheading' + i] %}<h4 class="text-4xl font-semibold mb-2 leading-[1.1]">{{ section4['listheading' + i] }}</h4>{% endif %}
+                            {% if section4['listnote' + i] %}<p class="text-lg font-regular">{{ section4['listnote' + i] }}</p>{% endif %}
+                        </div>
+                        <img src="/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1{% if i > 1 %}-{{ i-1 }}{% endif %}.png" alt="" style="width:220px; height:147px;" class="flex-shrink-0">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col gap-8">
+                    {% for i in range(5, 9) %}
+                    <div class="text-black flex justify-between items-start p-4 rounded-lg bg-white/50 mx-4 border-2 border-black border-dashed">
+                        <div class="flex-1 mr-8">
+                            {% if section4['listheading' + i] %}<h4 class="text-4xl font-semibold mb-2 leading-[1.1]">{{ section4['listheading' + i] | safe }}</h4>{% endif %}
+                            {% if section4['listnote' + i] %}<p class="text-lg font-regular">{{ section4['listnote' + i] }}</p>{% endif %}
+                        </div>
+                        <img src="/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1{% if i > 1 %}-{{ i-1 }}{% endif %}.png" alt="" style="width:220px; height:147px;" class="flex-shrink-0">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="py-12 md:py-24 ~px-1/8 bg-[#00A44F]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
+            {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta2.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#00A44F]">{{ cta2.btnCTA }}</a>{% endif %}
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="py-12 md:py-24 ~px-4/8">
+        <div class="container m-auto">
+            {% if contact.heading %}<h2 class="text-3xl md:text-5xl font-bold mb-4 text-block leading-[1.1]">{{ contact.heading }}</h2>{% endif %}
+            {% if contact.note %}<p class="text-xl text-neutral-600 mb-8 text-block">{{ contact.note }}</p>{% endif %}
+            <form name="contact" method="POST" data-netlify="true" class="grid md:grid-cols-2 gap-24">
+                <div class="flex flex-col gap-4">
+                    <label for="name" class="text-2xl font-semibold">Jméno *</label>
+                    <input type="text" id="name" name="name" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                    <label for="surname" class="text-2xl font-semibold">Příjmení *</label>
+                    <input type="text" id="surname" name="surname" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                    <label for="company" class="text-2xl font-semibold">Firma *</label>
+                    <input type="text" id="company" name="company" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                    <label for="email" class="text-2xl font-semibold">Email *</label>
+                    <input type="email" id="email" name="email" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                    <label for="phone" class="text-2xl font-semibold">Tel. Číslo</label>
+                    <input type="tel" id="phone" name="phone" class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                    <div class="flex items-start gap-2 mt-4">
+                        <label for="policy" class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="policy" name="policy" required class="sr-only checkbox">
+                            <span class="checkmark w-14 h-12 border-2 border-gray-300 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white opacity-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <span class="text-xl text-black ml-2">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <label for="message" class="text-2xl font-semibold">Zpráva *</label>
+                    <textarea id="message" name="message" rows="22" required class="p-7 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 resize-none focus:border-[#E92429]"></textarea>
+                    <button type="submit" class="mt-4 text-2xl md:text-4xl px-16 md:px-16 py-4 md:py-6 rounded-xl text-white bg-[#00A44F] self-end">Odeslat zprávu</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="w-full h-96 border-2 border-black border-dashed">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.5!2d14.4!3d50.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA2JzAwLjAiTiAxNMKwMjQnMDAuMCJF!5e0!3m2!1sen!2scz!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <section class="bg-white py-12">
+        <div class="container m-auto">
+            <img src="/assets/images/Katalog-imgs/tessuti-colored.png" alt="Tessuti Logo" class="mb-4 w-64">
+            <h3 class="text-3xl font-bold mb-4 leading-[1.1]">{{ bottomSection.locationheading }}</h3>
+            <div class="flex items-start mb-8">
+                <img src="/assets/images/hero/Vector (1).png" alt="" class="w-12 h-10 mr-4">
+                <p class="text-xl">{{ bottomSection.location | safe }}</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-36">
+                <div>
+                    <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.contactheading }}</h4>
+                    <ul class="grid grid-cols-2 gap-6">
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (2).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.web }}
+                        </li>
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.dic }}
+                        </li>
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.ic }}
+                        </li>
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (4).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.mail }}
+                        </li>
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (5).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.tel }}
+                        </li>
+                        <li class="flex items-center text-2xl">
+                            <img src="/assets/images/hero/Vector (6).png" alt="" class="w-8 h-8 mr-2">
+                            {{ bottomSection.tel2 }}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.Catalogheading }}</h4>
+                    <ul class="grid grid-cols-2 gap-3">
+                        {% for i in range(1,9) %}
+                            <li class="text-2xl text-[#E92429]">{{ bottomSectio['listheading' + i] | safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

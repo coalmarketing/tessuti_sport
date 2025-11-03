@@ -62,11 +62,10 @@ collections:
 
   # PRODUKTY (CS)
   - label: "Produkty (CS)"
-    name: "products_cs"
-    folder: "src/content/i18n/cs/products"
+    name: "products"
+    folder: "src/products"
     create: true
-    # ukládá soubory do podsložek dle vybrané kategorie
-    path: "{{fields.category | slugify}}/{{slug}}"
+    nested: { depth: 1 }
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
@@ -126,13 +125,13 @@ collections:
           label: "Layout",
           name: "layout",
           widget: "hidden",
-          default: "product.njk",
+          default: "layouts/product.njk",
         }
       - {
           label: "Permalink",
           name: "permalink",
           widget: "hidden",
-          default: "/cs/katalog/{{fields.category | slugify}}/{{slug}}/",
+          default: "/cs/katalog/{{fields.category | slug}}/{{slug}}/",
         }
       - { label: "Obsah", name: "body", widget: "markdown", required: false }
 

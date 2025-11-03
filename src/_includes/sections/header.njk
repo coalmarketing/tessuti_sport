@@ -1,13 +1,13 @@
-<header class="py-4 ~px-4/8 fixed flex w-full bg-black/50 z-50">
+<header class="py-10 ~px-4/8 absolute flex w-full bg-white z-50">
   <div class="container m-auto flex justify-between items-center gap-8">
     <!-- LOGO -->
     <a href="/">
       <img
-        class="~h-5/6 w-auto"
-        src="/assets/svgs/senoweb-logo-white.svg"
-        alt="Senoweb logo"
-        width="170"
-        height="24"
+        class="h-12 lg:h-20 w-auto"
+        src="/assets/images/tessuti-logo.png"
+        alt="Tessuti logo"
+        width="266"
+        height="75"
         loading="lazy"
         decoding="async"
         aria-hidden="true"
@@ -70,9 +70,9 @@
             {% else %}
               {# Normal pages are rendered as <a> tags, in the normal way you'd expect #}
               <a
-                class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md
-                {%- if entry.url == page.url %} text-primary font-semibold max-lg:border-l-primary max-lg:bg-primary/10
-                {%- else %} text-gray-200 hover:text-white{% endif %}"
+                class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 text-xl max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md
+                {%- if entry.url == page.url %} text-primary font-semibold text-2xl max-lg:border-l-primary max-lg:bg-primary/10
+                {%- else %} text-black hover:text-gray-600 hover:underline decoration-dashed{% endif %}"
                 href="{{ entry.url }}"
                 {%- if entry.url == page.url -%}aria-current="page"{%- endif -%}>
                 {{ entry.key }}
@@ -85,92 +85,8 @@
 
     <!-- DARKMODE + CTA -->
     <div class="flex items-center gap-2 lg:gap-4">
-      <!-- DARKMODE BUTTON -->
-      <label for="dark-mode-toggle" class="darkmode-container">
-        <span class="sr-only">Přepínač tmavého režimu</span>
-        <input id="dark-mode-toggle" type="checkbox">
-        <span class="planet"></span>
-        <span class="elements">
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="250,60 100,400 400,400"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle
-            cx="250"
-            cy="250"
-            r="200"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle
-            cx="250"
-            cy="250"
-            r="200"/>
-          </svg>
-          <svg
-            version="1.1"
-            viewBox="0 0 500 500"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle
-            cx="250"
-            cy="250"
-            r="200"/>
-          </svg>
-        </span>
-      </label>
-
       <!-- CTA -->
-      <a href="/kontakt" class="btn max-lg:hidden">Kontakt</a>
+      <a href="/kontakt" class="btn max-lg:hidden bg-[#00A44F] rounded-lg">Kontakt</a>
 
       <!-- MOBILE MENU BUTTON -->
       <button

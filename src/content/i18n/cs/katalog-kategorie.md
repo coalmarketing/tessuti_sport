@@ -1,7 +1,7 @@
 ---
 layout: "layouts/category.njk"
 pagination:
-  data: collections.productCategories
+  data: collections.categories
   size: 1
   alias: cat
 permalink: "/cs/katalog/{{ cat.slug }}/"

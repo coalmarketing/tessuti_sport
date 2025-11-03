@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import fluid, { extract, fontSize, screens } from 'fluid-tailwind'
-const defaultTheme = require('tailwindcss/defaultTheme')
+import fluid, { extract, fontSize, screens } from "fluid-tailwind";
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   darkMode: "selector",
@@ -13,17 +13,19 @@ module.exports = {
     screens: screens,
     extend: {
       fontFamily: {
-        "sans": ["Poppins", defaultTheme.fontFamily.sans]
+        sans: ["Poppins", defaultTheme.fontFamily.sans],
+        Gabarito: ["Gabarito", "sans-serif"],
+        RedHatText: ["Red Hat Text", "sans-serif"],
       },
       colors: {
-        primary: "#E11D48"
-      }
+        primary: "#E11D48",
+      },
     },
   },
   plugins: [
     fluid,
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require('tailwind-scrollbar'),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("tailwind-scrollbar"),
   ],
-}
+};

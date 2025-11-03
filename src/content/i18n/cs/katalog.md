@@ -8,6 +8,7 @@ eleventyNavigation:
   key: Katalog
   order: 200
 
-topper: "Prohlédněte si náš"
-heading: "Katalog"
+topper: Prohlédněte si náš
+heading: Katalog Tessuti Sport
+searchbar: Hledáte konkrétní předmět?
 ---
