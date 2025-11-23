@@ -220,7 +220,7 @@ module.exports = function (eleventyConfig) {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
-    return [...map.entries()]
+    const result = [...map.entries()]
       .map(([name, arr]) => {
         // Find matching category file
         const categoryFile = categoryFiles.find(
@@ -236,6 +236,8 @@ module.exports = function (eleventyConfig) {
         };
       })
       .sort((a, b) => a.name.localeCompare(b.name, "cs"));
+
+    return result;
   });
 
   // ═════════════════════════════════════════════════════════════════════════

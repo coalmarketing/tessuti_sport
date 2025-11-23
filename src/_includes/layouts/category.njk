@@ -1,16 +1,78 @@
 {% extends "layouts/base.njk" %}
 
 {% block body %}
-<section class="py-24 ~px-4/8">
-  <div class="container m-auto">
-    <h1 class="text-3xl font-bold mb-8">{{ cat.name }}</h1>
-    {% set categoryProducts = collections.products | categoryProducts(cat.name) %}
+<section class="py-16 ~px-4/8 bg-[#E92429]/20">
+  <div class="container m-auto max-w-7xl">
+    <!-- Header -->
+    <div class="mb-8 mt-16">
+      <h1 class="text-3xl font-bold mb-2">Katalog {{ name }}</h1>
+      <nav class="text-sm text-gray-600">
+        <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
+        <span class="mx-2">»</span>
+        <a href="/cs/katalog" class="hover:text-[#E92429]">Katalog</a>
+        <span class="mx-2">»</span>
+        <span>{{ name }}</span>
+      </nav>
+    </div>
+
+    {% set categoryProducts = collections.products | categoryProducts(name) %}
     
     {% if categoryProducts | length > 0 %}
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Collect all unique labels from products in this category -->
+      {% set allLabels = [] %}
+      {% for product in categoryProducts %}
+        {% if product.data.labels %}
+          {% for label in product.data.labels %}
+            {% set labelText = label.label if label.label else label %}
+            {% if labelText and allLabels.indexOf(labelText) == -1 %}
+              {% set allLabels = allLabels.concat([labelText]) %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- Label Filters -->
+      {% if allLabels.length > 0 %}
+        <div class="mb-8">
+          <div class="mb-4">
+            <span class="text-lg font-semibold">Filtry:</span>
+          </div>
+          
+          <div class="flex flex-wrap gap-3">
+            <!-- Clear All Filter -->
+            <button id="clearFilters" class="filter-tag active px-4 py-2 bg-[#00A44F] text-white rounded-full text-sm font-medium transition-colors hover:bg-green-700">
+              Vše
+            </button>
+            
+            <!-- Label Filter Tags -->
+            {% for label in allLabels %}
+              <button class="filter-tag px-4 py-2 bg-white border-2 border-[#00A44F] text-[#00A44F] rounded-full text-sm font-medium transition-colors hover:bg-[#00A44F] hover:text-white" data-label="{{ label }}">
+                #{{ label }}
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Products Grid -->
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
         {% for p in categoryProducts %}
-          {% include "components/product-card.njk" %}
+          {% set productLabels = [] %}
+          {% if p.data.labels %}
+            {% for label in p.data.labels %}
+              {% set labelText = label.label if label.label else label %}
+              {% set productLabels = productLabels.concat([labelText]) %}
+            {% endfor %}
+          {% endif %}
+          <div class="product-item" data-labels="{{ productLabels | join(',') }}">
+            {% include "components/product-card.njk" %}
+          </div>
         {% endfor %}
+      </div>
+      
+      <!-- Results Counter -->
+      <div class="text-center">
+        <p id="resultsCounter" class="text-lg text-gray-700">V kategorii se nachází {{ categoryProducts | length }} položek.</p>
       </div>
     {% else %}
       <div class="text-center py-12">
@@ -19,4 +81,97 @@
     {% endif %}
   </div>
 </section>
+
+<!-- JavaScript for Filtering -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterTags = document.querySelectorAll('.filter-tag');
+  const clearFiltersBtn = document.getElementById('clearFilters');
+  const productItems = document.querySelectorAll('.product-item');
+  const resultsCounter = document.getElementById('resultsCounter');
+  
+  let activeFilters = [];
+
+  // Filter Functions
+  function applyFilters() {
+    let visibleCount = 0;
+    
+    productItems.forEach(item => {
+      const itemLabels = item.dataset.labels ? item.dataset.labels.split(',') : [];
+      const shouldShow = activeFilters.length === 0 || activeFilters.some(filter => itemLabels.includes(filter));
+      
+      if (shouldShow) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    
+    // Update counter
+    resultsCounter.textContent = `Zobrazeno ${visibleCount} z {{ categoryProducts | length }} položek`;
+  }
+
+  function clearAllFilters() {
+    activeFilters = [];
+    
+    // Reset all filter buttons
+    filterTags.forEach(tag => {
+      if (tag.id === 'clearFilters') {
+        tag.classList.add('active', 'bg-[#00A44F]', 'text-white');
+        tag.classList.remove('bg-white', 'text-[#00A44F]');
+      } else {
+        tag.classList.remove('active', 'bg-[#00A44F]', 'text-white');
+        tag.classList.add('bg-white', 'text-[#00A44F]');
+      }
+    });
+    
+    applyFilters();
+  }
+
+  function toggleFilter(label, button) {
+    const index = activeFilters.indexOf(label);
+    
+    if (index === -1) {
+      // Add filter
+      activeFilters.push(label);
+      button.classList.add('active', 'bg-[#00A44F]', 'text-white');
+      button.classList.remove('bg-white', 'text-[#00A44F]');
+      
+      // Deactivate "Vše" button
+      clearFiltersBtn.classList.remove('active', 'bg-[#00A44F]', 'text-white');
+      clearFiltersBtn.classList.add('bg-white', 'text-[#00A44F]');
+    } else {
+      // Remove filter
+      activeFilters.splice(index, 1);
+      button.classList.remove('active', 'bg-[#00A44F]', 'text-white');
+      button.classList.add('bg-white', 'text-[#00A44F]');
+      
+      // If no filters active, activate "Vše" button
+      if (activeFilters.length === 0) {
+        clearFiltersBtn.classList.add('active', 'bg-[#00A44F]', 'text-white');
+        clearFiltersBtn.classList.remove('bg-white', 'text-[#00A44F]');
+      }
+    }
+    
+    applyFilters();
+  }
+
+  // Event Listeners
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', clearAllFilters);
+  }
+  
+  filterTags.forEach(tag => {
+    if (tag.dataset.label) {
+      tag.addEventListener('click', () => {
+        toggleFilter(tag.dataset.label, tag);
+      });
+    }
+  });
+
+  // Initialize with no filters
+  clearAllFilters();
+});
+</script>
 {% endblock %}

@@ -1,12 +1,26 @@
-<div class="block border rounded-2xl p-6 hover:shadow transition bg-white">
+<div class="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-white hover:shadow-lg transition-shadow group">
   {% if cat.image %}
-    <img src="{{ cat.image }}" alt="{{ cat.name }}" class="w-full h-48 object-cover rounded-lg mb-4">
+    <div class="mb-4 overflow-hidden rounded">
+      <img src="{{ cat.image }}" alt="{{ cat.name }}" class="w-full h-40 object-cover">
+    </div>
   {% endif %}
-  <h2 class="text-2xl font-semibold mb-3">{{ cat.name }}</h2>
-  {% if cat.description %}
-    <p class="text-gray-600 mb-4 line-clamp-3">{{ cat.description }}</p>
-  {% endif %}
-  <a href="/cs/katalog/{{ cat.slug }}/" class="inline-block bg-[#E92429] text-white px-6 py-2 rounded-lg hover:bg-[#d41e24] transition">
-    Zobrazit produkty ({{ cat.count }})
-  </a>
+  
+  <div class="space-y-3">
+    <h3 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ cat.name }}</h3>
+    {% if cat.description %}
+      <p class="text-gray-600 text-lg leading-relaxed">{{ cat.description }}</p>
+    {% endif %}
+    
+    <div class="pt-2">
+      {% if cat.name == "Individuální poptávka" %}
+        <a href="#contact-form" class="inline-block bg-green-600 text-white px-4 py-2 rounded text-xl hover:bg-green-700 transition-colors">
+          Kontaktní formulář
+        </a>
+      {% else %}
+        <a href="/cs/katalog/{{ cat.slug }}/" class="inline-block bg-[#E92429] text-white px-4 py-2 rounded text-xl hover:bg-[#d41e24] transition-colors">
+          Otevřít kategorii
+        </a>
+      {% endif %}
+    </div>
+  </div>
 </div>

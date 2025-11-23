@@ -1,18 +1,20 @@
 ---
-title: Dres Test
-slug: dres-test
-price: 999
+title: Tkanina Test
+slug: tkanina-test
+price: 1999
 currency: CZK
-excerpt: Testovací dres
+excerpt: Testovací tkanina
 image: /assets/images/cms/divazus-fabric-store-6vjeqaemnia-unsplash-1.png
-category: Dresoviny
+category: Tkaniny
 labels:
-  - UV protection
-  - prodyšný
+  - prodyšná
+parameters:
+  - name: Velikosti
+    value: XS, MS, XL
 tags:
   - product
   - cs
 layout: layouts/product.njk
 permalink: /cs/katalog/{{ category | slug }}/{{ slug }}/
 ---
-Testovací dres
+Testoavcí obsah k 19.11

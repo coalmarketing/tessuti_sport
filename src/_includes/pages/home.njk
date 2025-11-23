@@ -77,7 +77,7 @@
     <section class="py-12 md:py-24 ~px-1/8 bg-[#E92429]">
         <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
             {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#E92429]">{{ cta.btnCTA }}</a>{% endif %}
+            {% if cta.btnCTA %}<a href="/cs/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#E92429]">{{ cta.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
@@ -90,7 +90,7 @@
                     {% for item in [section2.listspan1, section2.listspan2, section2.listspan3, section2.listspan4] %}
                     <div class="text-block flex justify-between mb-6">
                         <div class="flex items-start gap-4">
-                            <img src="/assets/images/Section2-icons/{% if loop.index0 == 0 %}Frame 5.png{% else %}Frame 5-{{ loop.index0 }}.png{% endif %}" alt="" class="w-16 h-16 flex-shrink-0">
+                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 }}.png" alt="" class="w-16 h-16 flex-shrink-0">
                             <div class="flex-1">
                                 {% if item.title %}<h4 class="text-xl font-semibold mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
                                 {% if item.description %}<p class="text-neutral-700 mb-2">{{ item.description }}</p>{% endif %}
@@ -163,12 +163,12 @@
     <section class="py-12 md:py-24 ~px-1/8 bg-[#00A44F]">
         <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
             {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta2.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#00A44F]">{{ cta2.btnCTA }}</a>{% endif %}
+            {% if cta.btnCTA %}<a href="#contact-form" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#00A44F]">{{ cta2.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="py-12 md:py-24 ~px-4/8">
+    <section class="py-12 md:py-24 ~px-4/8" id= "contact-form">
         <div class="container m-auto">
             {% if contact.heading %}<h2 class="text-3xl md:text-5xl font-bold mb-4 text-block leading-[1.1]">{{ contact.heading }}</h2>{% endif %}
             {% if contact.note %}<p class="text-xl text-neutral-600 mb-8 text-block">{{ contact.note }}</p>{% endif %}

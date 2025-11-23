@@ -1,19 +1,270 @@
 {% extends "layouts/base.njk" %}
 
 {% block body %}
-<section class="py-48 ~px-4/8">
-  <div class="container ml-auto text-center flex flex-col justify-center items-start h-[30dvh]">
-    {% if topper %}<p class="uppercase tracking-wide text-sm text-neutral-500 mb-2">{{ topper }}</p>{% endif %}
-    <h1 class="text-4xl font-bold mb-10">{{ heading or title }}</h1>
-    <input type="text" placeholder="{{ searchbar }}" class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10">
+<section class="py-16 ~px-4/8 bg-[#E92429]/20">
+  <div class="container m-auto max-w-7xl">
+    <!-- Header -->
+    <div class="mb-8 mt-16">
+      <h1 class="text-4xl font-bold mb-2">{{ heading or title }}</h1>
+      {% if topper %}<p class="text-md text-red-500 mb-4">{{ topper }}</p>{% endif %}
+    </div>
 
-  </div>
-  <div class="container m-auto px-32">
-    <div class="grid gap-8 md:grid-cols-2">
-        {% for cat in collections.categories %}
-          {% include "components/category-card.njk" %}
-        {% endfor %}
+    <!-- View Toggle Controls -->
+
+    <div class="flex justify-end items-center mb-6">
+      <div class="flex items-center space-x-2">
+        <span class="text-lg text-grey-800">Zobrazení:</span>
+        <div class="flex border rounded overflow-hidden">
+          <button id="gridViewBtn" class="view-toggle active px-2 py-1 bg-[#E92429] text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button id="listViewBtn" class="view-toggle px-2 py-1 bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid View -->
+    <div id="gridView" class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+      {% set staticCategories = [
+        {
+          name: "Cyklovložky",
+          slug: "cyklovlozky",
+          description: "Kvalitní cyklovložky pro cyklisty všech úrovní. Pohodlí a ochrana během dlouhých jízd.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-1.png"
+        },
+        {
+          name: "Dresoviny",
+          slug: "dresoviny",
+          description: "Kvalitní dresoviny vhodné pro sportovní oblečení a aktivní životní styl. Prodyšné a pohodlné materiály.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-2.png"
+        },
+        {
+          name: "Tkaniny",
+          slug: "tkaniny",
+          description: "Široký výběr tkanin pro různé účely. Od lehkých materiálů po robustní tkaniny pro náročné podmínky.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-3.png"
+        },
+        {
+          name: "Elastické úplety",
+          slug: "elasticke-uplety",
+          description: "Pružné a pohodlné materiály ideální pro sportovní a funkční oblečení.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-4.png"
+        },
+        {
+          name: "Softshell",
+          slug: "softshell",
+          description: "Funkční softshellové materiály pro outdoor aktivity. Odolnost proti větru a vodě.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-5.png"
+        },
+        {
+          name: "Rukavičky",
+          slug: "rukavicky",
+          description: "Specializované materiály pro výrobu rukavic různých typů a účelů.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-6.png"
+        },
+        {
+          name: "Pásky, gumy, reflexní materiály",
+          slug: "pasky-gumy-reflexni-materialy", 
+          description: "Bezpečnostní a funkční materiály pro zlepšení viditelnosti a ochrany.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-7.png"
+        },
+        {
+          name: "Individuální poptávka",
+          slug: "individuální poptávka",
+          description: "Různé doplňky pro sportovní a outdoor vybavení.",
+          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-8.png"
+        }
+      ] %}
+      
+      {% for cat in staticCategories %}
+        {% include "components/category-card.njk" %}
+      {% endfor %}
+    </div>
+
+    <!-- List View -->
+    <div id="listView" class="grid grid-cols-1 lg:grid-cols-2 gap-6 hidden">
+      {% for cat in staticCategories %}
+        <div class="flex items-center justify-between px-4 py-4 border-2 border-dashed border-gray-400 rounded-lg bg-white hover:shadow-md transition-shadow">
+          <div class="flex items-center space-x-6">
+            <div class="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
+              <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-gray-900">{{ cat.name }}</span>
+          </div>
+          {% if cat.name == "Individuální poptávka" %}
+            <a href="/cs/kontakt/" class="flex items-center space-x-3 px-6 py-4 text-xl bg-[#00A44F] text-white rounded hover:bg-green-700 transition-colors">
+              <span>Kontaktní formulář</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </a>
+          {% else %}
+            <a href="/cs/katalog/{{ cat.slug }}/" class="flex items-center space-x-3 px-6 py-4 text-xl bg-[#E92429] text-white rounded hover:bg-[#d41e24] transition-colors">
+              <span>Otevřít kategorii</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
+
+<!-- CTA SECTION -->
+<section class="py-12 md:py-24 ~px-1/8 bg-[#00A44F]">
+    <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
+        {% if cta2.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta2.heading2 | safe }}</h2>{% endif %}
+        {% if cta2.btnCTA %}<a href="/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#00A44F]">{{ cta2.btnCTA }}</a>{% endif %}
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="py-12 md:py-24 ~px-4/8">
+    <div class="container m-auto">
+        {% if contact.heading %}<h2 class="text-3xl md:text-5xl font-bold mb-4 text-block leading-[1.1]">{{ contact.heading }}</h2>{% endif %}
+        {% if contact.note %}<p class="text-xl text-neutral-600 mb-8 text-block">{{ contact.note }}</p>{% endif %}
+        <form name="contact" method="POST" data-netlify="true" class="grid md:grid-cols-2 gap-24">
+            <div class="flex flex-col gap-4">
+                <label for="name" class="text-2xl font-semibold">Jméno *</label>
+                <input type="text" id="name" name="name" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                <label for="surname" class="text-2xl font-semibold">Příjmení *</label>
+                <input type="text" id="surname" name="surname" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                <label for="company" class="text-2xl font-semibold">Firma *</label>
+                <input type="text" id="company" name="company" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                <label for="email" class="text-2xl font-semibold">Email *</label>
+                <input type="email" id="email" name="email" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                <label for="phone" class="text-2xl font-semibold">Tel. Číslo</label>
+                <input type="tel" id="phone" name="phone" class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+
+                <div class="flex items-start gap-2 mt-4">
+                    <label for="policy" class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="policy" name="policy" required class="sr-only checkbox">
+                        <span class="checkmark w-14 h-12 border-2 border-gray-300 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white opacity-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="text-xl text-black ml-2">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <label for="message" class="text-2xl font-semibold">Zpráva *</label>
+                <textarea id="message" name="message" rows="22" required class="p-7 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 resize-none focus:border-[#E92429]"></textarea>
+                <button type="submit" class="mt-4 text-2xl md:text-4xl px-16 md:px-16 py-4 md:py-6 rounded-xl text-white bg-[#00A44F] self-end">Odeslat zprávu</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<!-- FOOTER SECTION -->
+<section class="bg-white py-12">
+    <div class="container m-auto">
+        <img src="/assets/images/Katalog-imgs/tessuti-colored.png" alt="Tessuti Logo" class="mb-4 w-64">
+        <h3 class="text-3xl font-bold mb-4 leading-[1.1]">{{ bottomSection.locationheading }}</h3>
+        <div class="flex items-start mb-8">
+            <img src="/assets/images/hero/Vector (1).png" alt="" class="w-12 h-10 mr-4">
+            <p class="text-xl">{{ bottomSection.location | safe }}</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-36">
+            <div>
+                <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.contactheading }}</h4>
+                <ul class="grid grid-cols-2 gap-6">
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (2).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.web }}
+                    </li>
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.dic }}
+                    </li>
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.ic }}
+                    </li>
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (4).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.mail }}
+                    </li>
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (5).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.tel }}
+                    </li>
+                    <li class="flex items-center text-2xl">
+                        <img src="/assets/images/hero/Vector (6).png" alt="" class="w-8 h-8 mr-2">
+                        {{ bottomSection.tel2 }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.Catalogheading }}</h4>
+                <ul class="grid grid-cols-2 gap-3">
+                    {% for i in range(1,9) %}
+                        <li class="text-2xl text-[#E92429]">{{ bottomSection['listheading' + i] | safe }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for View Toggle -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const gridViewBtn = document.getElementById('gridViewBtn');
+  const listViewBtn = document.getElementById('listViewBtn');
+  const gridView = document.getElementById('gridView');
+  const listView = document.getElementById('listView');
+
+  function showGridView() {
+    gridView.classList.remove('hidden');
+    listView.classList.add('hidden');
+    gridViewBtn.classList.add('active', 'bg-[#E92429]', 'text-white');
+    gridViewBtn.classList.remove('bg-white', 'text-gray-600');
+    listViewBtn.classList.remove('active', 'bg-[#E92429]', 'text-white');
+    listViewBtn.classList.add('bg-white', 'text-gray-600');
+  }
+
+  function showListView() {
+    gridView.classList.add('hidden');
+    listView.classList.remove('hidden');
+    listViewBtn.classList.add('active', 'bg-[#E92429]', 'text-white');
+    listViewBtn.classList.remove('bg-white', 'text-gray-600');
+    gridViewBtn.classList.remove('active', 'bg-[#E92429]', 'text-white');
+    gridViewBtn.classList.add('bg-white', 'text-gray-600');
+  }
+
+  gridViewBtn.addEventListener('click', showGridView);
+  listViewBtn.addEventListener('click', showListView);
+
+  // Initialize with grid view
+  showGridView();
+});
+</script>
 {% endblock %}

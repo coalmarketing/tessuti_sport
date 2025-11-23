@@ -1,19 +1,185 @@
 {% extends "layouts/base.njk" %}
 
 {% block body %}
-<article class="max-w-5xl mx-auto py-10">
-  <h1 class="text-3xl font-bold mb-2">{{ title }}</h1>
-  <p class="text-neutral-600 mb-6">
-    {% if price %}{{ price }} {{ currency or 'CZK' }}{% endif %}
-    · {{ category }}
-  </p>
+<section class="py-16 ~px-4/8 bg-[#E92429]/20">
+  <div class="container m-auto max-w-7xl">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-gray-600 mb-8 mt-16">
+      <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
+      <span class="mx-2">»</span>
+      <a href="/cs/katalog" class="hover:text-[#E92429]">Katalog</a>
+      <span class="mx-2">»</span>
+      <a href="/cs/katalog/{{ category | slug }}/" class="hover:text-[#E92429]">{{ category }}</a>
+      <span class="mx-2">»</span>
+      <span>{{ title }}</span>
+    </nav>
 
-  {% if image %}
-    <img src="{{ image }}" alt="{{ title }}" class="w-full rounded-xl mb-6" loading="lazy">
-  {% endif %}
+    <!-- Product Detail -->
+    <div class="bg-white rounded-lg border-2 border-dashed border-gray-400 p-8">
+      <div class="grid lg:grid-cols-2 gap-12">
+        
+        <!-- Product Image -->
+        <div class="space-y-4">
+          {% if image %}
+            <div class="aspect-[3/3] overflow-hidden rounded-lg border-2 border-dashed border-gray-400">
+              <img src="{{ image }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          {% endif %}
+          
+          <!-- Additional Images Gallery -->
+          {% if images and images.length > 0 %}
+            <div class="grid grid-cols-4 gap-4">
+              {% for img in images %}
+                <div class="aspect-square overflow-hidden rounded border border-gray-300">
+                  <img src="{{ img.image }}" alt="{{ title }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80" loading="lazy">
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
 
-  <div class="prose max-w-none">
-    {{ content | safe }}
+        <!-- Product Info -->
+        <div class="space-y-6">
+          <!-- Title and Labels -->
+          <div>
+            <h1 class="text-3xl font-bold mb-4">{{ title }}</h1>
+            
+            <!-- Labels -->
+            {% if labels and labels.length > 0 %}
+              <div class="flex flex-wrap gap-2 mb-4">
+                {% for label in labels %}
+                  {% set labelText = label.label if label.label else label %}
+                  <span class="inline-block bg-[#00A44F] text-white px-3 py-1 rounded text-sm font-medium">
+                    #{{ labelText }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Price -->
+          {% if price %}
+            <div class="text-3xl font-bold text-[#E92429]">
+              {{ price }} {{ currency or 'CZK' }}
+            </div>
+          {% endif %}
+
+          <!-- Category -->
+          <div class="text-lg text-gray-600">
+            <strong>Kategorie:</strong> {{ category }}
+          </div>
+
+          <!-- Description -->
+          <div class="text-gray-700">
+            <h3 class="text-xl font-semibold mb-3">Popis produktu</h3>
+            {% if excerpt %}
+              <p class="text-lg mb-4">{{ excerpt }}</p>
+            {% endif %}
+            {% if content %}
+              <div class="prose max-w-none">
+                {{ content | safe }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Parameters Table -->
+          {% if parameters and parameters.length > 0 %}
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Parametry</h3>
+              <div class="border-2 border-dashed border-gray-400 rounded-lg overflow-hidden">
+                <table class="w-full">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-dashed border-gray-400">Parametr</th>
+                      <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-dashed border-gray-400">Hodnota</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for param in parameters %}
+                      <tr class="{% if not loop.last %}border-b border-dashed border-gray-400{% endif %}">
+                        <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ param.name }}</td>
+                        <td class="px-4 py-3 text-sm text-gray-700">{{ param.value }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+            <button onclick="document.getElementById('contact-form').scrollIntoView({behavior: 'smooth'})" class="flex-1 bg-[#E92429] hover:bg-[#E92429]/90 text-white px-8 py-3 rounded font-semibold transition-colors cursor-pointer">
+              Kontaktovat ohledně produktu
+            </button>
+            <a href="/cs/katalog/{{ category | slug }}/" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 px-8 py-3 rounded font-semibold text-center transition-colors">
+              Zpět na kategorii
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="contact-form" class="mt-16 p-8">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4 text-block leading-[1.1]">Kontaktujte nás ohledně produktu</h2>
+        <p class="text-xl text-neutral-600 mb-8 text-block">Máte zájem o tento produkt? Napište nám a my se vám ozveme s nabídkou.</p>
+        <form name="product-contact" method="POST" data-netlify="true" class="grid md:grid-cols-2 gap-24">
+            <input type="hidden" name="product" value="{{ title }}">
+            <input type="hidden" name="category" value="{{ category }}">
+            <div class="flex flex-col gap-4">
+                <label for="name" class="text-2xl font-semibold">Jméno *</label>
+                <input type="text" id="name" name="name" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <label for="surname" class="text-2xl font-semibold">Příjmení *</label>
+                <input type="text" id="surname" name="surname" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <label for="company" class="text-2xl font-semibold">Firma *</label>
+                <input type="text" id="company" name="company" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <label for="email" class="text-2xl font-semibold">Email *</label>
+                <input type="email" id="email" name="email" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <label for="phone" class="text-2xl font-semibold">Tel. Číslo</label>
+                <input type="tel" id="phone" name="phone" class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <div class="flex items-start gap-2 mt-4">
+                    <label for="policy" class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="policy" name="policy" required class="sr-only checkbox">
+                        <span class="checkmark w-14 h-12 border-2 border-gray-300 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white opacity-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="text-xl text-black ml-2">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <label for="message" class="text-2xl font-semibold">Zpráva *</label>
+                <textarea id="message" name="message" rows="22" required class="p-7 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 resize-none focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Napište nám o vašem zájmu o produkt {{ title }}..."></textarea>
+                <button type="submit" class="mt-4 text-2xl md:text-4xl px-16 md:px-16 py-4 md:py-6 rounded-xl text-white bg-[#00A44F] self-end hover:bg-green-700 transition-colors">Odeslat poptávku</button>
+            </div>
+        </form>
+    </div>
+    </div>
+   
+    <!-- Related Products Section -->
+    <div class="mt-16">
+      <h2 class="text-2xl font-bold mb-8">Podobné produkty</h2>
+      {% set categoryProducts = collections.products | categoryProducts(category) %}
+      {% set relatedProducts = [] %}
+      {% for p in categoryProducts %}
+        {% if p.data.title != title and relatedProducts.length < 3 %}
+          {% set relatedProducts = relatedProducts.concat([p]) %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if relatedProducts.length > 0 %}
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {% for p in relatedProducts %}
+            {% include "components/product-card.njk" %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
   </div>
-</article>
+</section>
 {% endblock %}

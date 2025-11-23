@@ -114,7 +114,37 @@ collections:
           - "Dresoviny"
           - "Elastické úplety"
           - "Softshell"
-          - "Pásky, Gumy, Reflexní materiály"
+          - "Pásky, gumy, reflexní materiály"
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
       - {
           label: "Tagy",
           name: "tags",
@@ -131,7 +161,7 @@ collections:
           label: "Permalink",
           name: "permalink",
           widget: "hidden",
-          default: "/cs/katalog/{{fields.category | slug}}/{{slug}}/",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
         }
       - { label: "Obsah", name: "body", widget: "markdown", required: false }
 
