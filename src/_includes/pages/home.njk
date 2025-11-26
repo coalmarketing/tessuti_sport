@@ -52,12 +52,13 @@
 
 {% block body %}
     <!-- HERO SECTION -->
-    <section class="py-12 md:py-24 ~px-4/8">
-        <div class="container m-auto h-[65vh] md:h-[80vh] flex items-center">
-            <div class="container text-left mb-8 md:mb-16 flex flex-col gap-2 lg:gap-4">
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 relative overflow-hidden lg:bg-[url('/assets/images/hero/MaskHero.png')] bg-white" style="background-size: 100%; background-position: right top; background-repeat: no-repeat;">
+        <!-- Content Container -->
+        <div class="container m-auto mt-16 min-h-[35vh] md:h-[35vh] lg:h-[80vh] lg:mt-0 flex items-center relative z-10">
+            <div class="w-full text-left mb-4 md:mb-8 lg:mb-16 flex flex-col gap-3 md:gap-4 lg:gap-6">
                 <div class="inline-flex justify-start gap-2 md:gap-4 items-center w-fit bg-gradient-to-b from-[#CB8585]/60 via-[#F1F1F1]/60 to-[#F3F3F3]/10 bg-opacity-85 p-2 md:p-3 rounded-lg">
                     <span class="uppercase tracking-wide text-sm text-neutral-500 mb-2 inline-block">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="32" height="32" md:width="40" md:height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-10 md:h-10">
                         <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white"/>
                         <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#320404"/>
                         <path d="M0 5C0 2.23858 2.23858 0 5 0H13.3333V40H5C2.23857 40 0 37.7614 0 35V5Z" fill="#00A44F"/>
@@ -65,60 +66,60 @@
                         <path d="M26.6667 0H35C37.7614 0 40 2.23858 40 5V35C40 37.7614 37.7614 40 35 40H26.6667V0Z" fill="#E92429"/>
                     </svg>
                     </span>
-                    {% if hero.topper %}<span class="uppercase tracking-wide text-sm text-neutral-500 mb-2">{{ hero.topper }}</span>{% endif %}
+                    {% if hero.topper %}<span class="uppercase tracking-wide text-xs md:text-sm text-neutral-500 mb-2">{{ hero.topper }}</span>{% endif %}
                 </div>
-                {% if hero.heading1 %}<h1 class="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 font-Gabarito leading-[1.1]">{{ hero.heading1 | safe }}</h1>{% endif %}
-                {% if hero.paragraph1 %}<p class="text-base md:text-lg lg:text-3xl text-neutral-600 font-RedHatText">{{ hero.paragraph1 | safe }}</p>{% endif %}
+                {% if hero.heading1 %}<h1 class="text-2xl md:text-4xl lg:text-7xl font-bold mb-2 md:mb-4 font-Gabarito leading-[1.1]">{{ hero.heading1 | safe }}</h1>{% endif %}
+                {% if hero.paragraph1 %}<p class="text-sm md:text-lg lg:text-3xl text-neutral-600 font-RedHatText pr-0 md:pr-8">{{ hero.paragraph1 | safe }}</p>{% endif %}
             </div>
         </div>
     </section>
 
     <!-- CTA SECTION -->
-    <section class="py-12 md:py-24 ~px-1/8 bg-[#E92429]">
-        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
-            {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="/cs/katalog" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#E92429]">{{ cta.btnCTA }}</a>{% endif %}
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#E92429]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8">
+            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-0 text-center md:text-left text-white leading-[1.1] max-w-xs md:max-w-none">{{ cta.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="/cs/katalog" class="text-lg md:text-2xl lg:text-4xl flex px-6 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl bg-white text-[#E92429] whitespace-nowrap">{{ cta.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
     <!-- SECTION 2 -->
-    <section class="py-24 ~px-4/8">
+    <section class="py-12 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16">
         <div class="container m-auto">
-            <div class="grid gap-8 md:grid-cols-2">
-                <div class="~px-2/8">
-                    {% if section2.heading3 %}<h3 class="text-2xl font-bold mb-8 text-left leading-[1.1]">{{ section2.heading3 | safe }}</h3>{% endif %}
+            <div class="grid gap-8 lg:gap-12 md:grid-cols-2">
+                <div class="px-2 md:px-4 lg:px-8">
+                    {% if section2.heading3 %}<h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-left leading-[1.1]">{{ section2.heading3 | safe }}</h3>{% endif %}
                     {% for item in [section2.listspan1, section2.listspan2, section2.listspan3, section2.listspan4] %}
-                    <div class="text-block flex justify-between mb-6">
-                        <div class="flex items-start gap-4">
-                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 }}.png" alt="" class="w-16 h-16 flex-shrink-0">
+                    <div class="text-block flex justify-between mb-4 md:mb-6">
+                        <div class="flex items-start gap-3 md:gap-4 flex-1">
+                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 }}.png" alt="" class="w-12 h-12 md:w-16 md:h-16 flex-shrink-0">
                             <div class="flex-1">
-                                {% if item.title %}<h4 class="text-xl font-semibold mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
-                                {% if item.description %}<p class="text-neutral-700 mb-2">{{ item.description }}</p>{% endif %}
-                                {% if item.note %}<div class="note mt-2  text-gray-500 rounded">{{ item.note }}</div>{% endif %}
+                                {% if item.title %}<h4 class="text-lg md:text-xl font-semibold mb-1 md:mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
+                                {% if item.description %}<p class="text-sm md:text-base text-neutral-700 mb-2">{{ item.description }}</p>{% endif %}
+                                {% if item.note %}<div class="note mt-2 text-xs md:text-sm text-gray-500 rounded">{{ item.note }}</div>{% endif %}
                             </div>
                         </div>
-                        <button type="button" onclick="toggleNote(this)" class="self-start bg-green-500 text-white rounded p-1 transition-transform">
-                            <svg class="transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <button type="button" onclick="toggleNote(this)" class="self-start bg-green-500 text-white rounded p-1 transition-transform ml-2 flex-shrink-0">
+                            <svg class="transition-transform w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                             </svg>
                         </button>
                     </div>
                     {% endfor %}
                 </div>
-                <div class="~px-2/8">
-                    {% if section3.heading3 %}<h3 class="text-2xl font-bold mb-8 text-left leading-[1.1]">{{ section3.heading3 | safe }}</h3>{% endif %}
+                <div class="px-2 md:px-4 lg:px-8">
+                    {% if section3.heading3 %}<h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-left leading-[1.1]">{{ section3.heading3 | safe }}</h3>{% endif %}
                     {% for item in [section3.listspan1, section3.listspan2, section3.listspan3, section3.listspan4] %}
-                    <div class="text-block flex justify-between mb-6">
-                        <div class="flex items-start gap-4">
-                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 + 4 }}.png" alt="" class="w-16 h-16 flex-shrink-0">
-                            <div class="flex-1 mr-8">
-                                {% if item.title %}<h4 class="text-xl font-semibold mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
-                                {% if item.description %}<p class="text-neutral-600 mb-2">{{ item.description }}</p>{% endif %}
-                                {% if item.note %}<div class="note mt-2 text-gray-500 rounded">{{ item.note }}</div>{% endif %}
+                    <div class="text-block flex justify-between mb-4 md:mb-6">
+                        <div class="flex items-start gap-3 md:gap-4 flex-1">
+                            <img src="/assets/images/Section2-icons/Frame 5-{{ loop.index0 + 4 }}.png" alt="" class="w-12 h-12 md:w-16 md:h-16 flex-shrink-0">
+                            <div class="flex-1">
+                                {% if item.title %}<h4 class="text-lg md:text-xl font-semibold mb-1 md:mb-2 leading-[1.1]">{{ item.title }}</h4>{% endif %}
+                                {% if item.description %}<p class="text-sm md:text-base text-neutral-600 mb-2">{{ item.description }}</p>{% endif %}
+                                {% if item.note %}<div class="note mt-2 text-xs md:text-sm text-gray-500 rounded">{{ item.note }}</div>{% endif %}
                             </div>
                         </div>
-                        <button type="button" onclick="toggleNote(this)" class="self-start bg-red-500 text-white rounded p-1 transition-transform">
-                            <svg class="transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <button type="button" onclick="toggleNote(this)" class="self-start bg-red-500 text-white rounded p-1 transition-transform ml-2 flex-shrink-0">
+                            <svg class="transition-transform w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                             </svg>
                         </button>
@@ -128,12 +129,146 @@
             </div>
         </div>
     </section>
-    <section class="py-12 md:py-24 ~px-1/8 bg-[#E92429]/20">
-    <div class="container m-auto flex flex-col">
-            {% if section4.heading1 %}<h3 class=" text-3xl md:text-5xl lg:text-6xl font-bold text-left text-black leading-[1.1]">{{ section4.heading1 | safe }}</h3>{% endif %}
-            {% if section4.subheading1 %}<h4 class="text-3xl md:text-5xl lg:text-6xl text-[#E92429] font-bold mb-12 leading-[1.1]">{{ section4.subheading1 | safe }}</h4>{% endif %}
-            <div class="grid gap-8 md:grid-cols-2">
-                <div class="flex flex-col gap-8 ">
+    <!-- News from catalogue -->
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#B8E8D1]">
+        <div class="container m-auto">
+            <!-- Section Title -->
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-[#00A44F] mb-2 md:mb-3 lg:mb-4">Novinky</h2>
+            <p class="text-lg md:text-xl lg:text-2xl text-black mb-8 md:mb-12 lg:mb-16">Nejnovější látky v našem katalogu:</p>
+            
+            <!-- Products Grid -->
+            {% set newProducts = collections.products | newProducts(3) %}
+            {% if newProducts.length > 0 %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12 lg:mb-16">
+                    {% for product in newProducts %}
+                        <div class="bg-white border-2 border-dashed border-gray-400 rounded-lg p-4 md:p-6 hover:shadow-lg transition-shadow">
+                            <!-- Product Image -->
+                            {% if product.data.image %}
+                                <div class="aspect-[4/3] mb-4 md:mb-6 overflow-hidden rounded border-2 border-dashed border-gray-300">
+                                    <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="w-full h-full object-cover" loading="lazy">
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Product Title and Labels -->
+                            <div class="mb-3 md:mb-4">
+                                <!-- Product Name -->
+                                <h3 class="text-xl md:text-2xl font-bold text-black mb-2 md:mb-3 leading-tight">
+                                    {{ product.data.title }}
+                                    {% set hasNewLabel = false %}
+                                    {% for label in product.data.labels %}
+                                        {% set labelText = label.label if label.label else label %}
+                                        {% if labelText == 'nový' %}
+                                            {% set hasNewLabel = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </h3>
+                                
+                                <!-- Labels -->
+                                {% if product.data.labels and product.data.labels.length > 0 %}
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        {% for label in product.data.labels %}
+                                            {% set labelText = label.label if label.label else label %}
+                                            {% if labelText != 'nový' %}
+                                                <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm font-medium">
+                                                    #{{ labelText }}
+                                                </span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Product Description -->
+                            {% if product.data.excerpt %}
+                                {% set truncatedExcerpt = product.data.excerpt | truncate(150, true, '...') %}
+                                <p class="text-sm md:text-base text-gray-700 mb-4 md:mb-6 leading-relaxed">{{ truncatedExcerpt }}</p>
+                            {% endif %}
+                            
+                            <!-- View Product Button -->
+                            <a href="{{ product.url }}" class="inline-block w-full text-center bg-[#E92429] text-white px-4 md:px-6 py-2 md:py-3 rounded font-semibold hover:bg-[#d41e24] transition-colors text-sm md:text-base">
+                                Zobrazit produkt
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-8 md:py-12">
+                    <p class="text-lg md:text-xl text-gray-600">Momentálně nejsou k dispozici žádné novinky.</p>
+                </div>
+            {% endif %}
+            
+            <!-- View Complete Catalog Link -->
+            <div class="text-center">
+                <a href="/cs/katalog" class="inline-flex items-center gap-2 md:gap-3 text-lg md:text-xl lg:text-2xl font-bold text-[#00A44F] hover:text-[#008f3f] transition-colors">
+                    Zobrazit kompletní katalog
+                    <span class="inline-block bg-[#00A44F] text-white rounded-full p-1 md:p-2">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-8 md:py-12 lg:py-12 px-4 md:px-8 lg:px-16 bg-white border-t-4 border-dashed border-[#E92429]">
+        <div class="container m-auto">
+            <!-- Section Title -->
+            <div class="text-center mb-8 md:mb-12 lg:mb-16">
+                <h2 class="text-2xl md:text-4xl lg:text-4xl font-bold text-[#E92429] mb-4 md:mb-6 leading-[1.1]">Tessuti sport podporuje Zdravotního klauna a SK Žamberk Tessuti team.</h2>
+            </div>
+            
+            <!-- Partners Logos Grid -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 lg:gap-16">
+                <!-- Partner 1: ZK Hlava Klauna -->
+                <div class="flex justify-center items-center p-6 md:p-8 bg-white border-2 border-dashed border-white rounded-lg hover:border-[#E92429] transition-colors duration-300 w-full md:w-auto">
+                    <img src="/assets/images/hero/ZK_hlava_klauna.png" alt="ZK Hlava Klauna" class="max-h-20 md:max-h-24 lg:max-h-28 w-auto object-contain filter hover:brightness-110 transition-all duration-300">
+                </div>
+                
+                <!-- Partner 2: Tessuti -->
+                <div class="flex justify-center items-center p-6 md:p-8 bg-white border-2 border-dashed border-white rounded-lg hover:border-[#E92429] transition-colors duration-300 w-full md:w-auto">
+                    <img src="/assets/images/hero/tessuti_red.png" alt="Tessuti" class="max-h-20 md:max-h-24 lg:max-h-28 w-auto object-contain filter hover:brightness-110 transition-all duration-300">
+                </div>
+            </div>
+            
+            <!-- Optional CTA under partners -->
+            <div class="text-center mt-8 md:mt-12 lg:mt-16">
+                <p class="text-base md:text-lg text-gray-600 mb-4 md:mb-6">
+                    Chcete se stát naším partnerem?
+                </p>
+                <a href="#contact-form" class="inline-flex items-center gap-2 text-lg md:text-xl font-semibold text-[#E92429] hover:text-[#d41e24] transition-colors">
+                    Kontaktujte nás
+                    <span class="inline-block bg-[#E92429] text-white rounded-full p-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#E92429]/20">
+        <div class="container m-auto flex flex-col">
+            {% if section4.heading1 %}<h3 class="text-2xl md:text-4xl lg:text-6xl font-bold text-left text-black leading-[1.1]">{{ section4.heading1 | safe }}</h3>{% endif %}
+            {% if section4.subheading1 %}<h4 class="text-2xl md:text-4xl lg:text-6xl text-[#E92429] font-bold mb-8 md:mb-12 leading-[1.1]">{{ section4.subheading1 | safe }}</h4>{% endif %}
+            
+            <!-- Mobile/Tablet Layout: Single Column -->
+            <div class="flex flex-col gap-4 md:gap-6 lg:hidden items-center">
+                {% for i in range(1, 9) %}
+                <div class="text-black flex flex-col items-center p-4 rounded-lg bg-white/50 border-2 border-black border-dashed w-4/5">
+                    <div class="w-full mb-4">
+                        {% if section4['listheading' + i] %}<h4 class="text-xl md:text-2xl font-semibold mb-3 leading-[1.1] text-center">{{ section4['listheading' + i] | safe }}</h4>{% endif %}
+                        {% if section4['listnote' + i] %}<p class="text-sm md:text-base font-regular text-center text-gray-700 mb-4">{{ section4['listnote' + i] }}</p>{% endif %}
+                    </div>
+                    <img src="/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1{% if i > 1 %}-{{ i-1 }}{% endif %}.png" alt="" class="w-full h-40 md:h-48 object-cover rounded mx-auto" style="max-width: 320px;">
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Desktop Layout: Two Columns -->
+            <div class="hidden lg:grid gap-8 md:grid-cols-2">
+                <div class="flex flex-col gap-8">
                     {% for i in range(1, 5) %}
                     <div class="text-black flex justify-between items-start p-4 rounded-lg bg-white/50 mx-4 border-2 border-black border-dashed">
                         <div class="flex-1 mr-8">
@@ -160,51 +295,51 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="py-12 md:py-24 ~px-1/8 bg-[#00A44F]">
-        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center">
-            {% if cta.heading2 %}<h2 class="text-3xl md:text-6xl font-bold mb-4 text-center md:text-left text-white leading-[1.1]">{{ cta2.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="#contact-form" class="text-2xl md:text-4xl flex px-8 md:px-16 py-4 md:py-6 rounded-xl bg-white text-[#00A44F]">{{ cta2.btnCTA }}</a>{% endif %}
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#00A44F]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8">
+            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-0 text-center md:text-left text-white leading-[1.1] max-w-xs md:max-w-none">{{ cta2.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="#contact-form" class="text-lg md:text-2xl lg:text-4xl flex px-6 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl bg-white text-[#00A44F] whitespace-nowrap">{{ cta2.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="py-12 md:py-24 ~px-4/8" id= "contact-form">
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16" id="contact-form">
         <div class="container m-auto">
-            {% if contact.heading %}<h2 class="text-3xl md:text-5xl font-bold mb-4 text-block leading-[1.1]">{{ contact.heading }}</h2>{% endif %}
-            {% if contact.note %}<p class="text-xl text-neutral-600 mb-8 text-block">{{ contact.note }}</p>{% endif %}
-            <form name="contact" method="POST" data-netlify="true" class="grid md:grid-cols-2 gap-24">
-                <div class="flex flex-col gap-4">
-                    <label for="name" class="text-2xl font-semibold">Jméno *</label>
-                    <input type="text" id="name" name="name" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+            {% if contact.heading %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-block leading-[1.1]">{{ contact.heading }}</h2>{% endif %}
+            {% if contact.note %}<p class="text-lg md:text-xl text-neutral-600 mb-6 md:mb-8 text-block">{{ contact.note }}</p>{% endif %}
+            <form name="contact" method="POST" data-netlify="true" class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-24">
+                <div class="flex flex-col gap-3 md:gap-4">
+                    <label for="name" class="text-lg md:text-xl lg:text-2xl font-semibold">Jméno *</label>
+                    <input type="text" id="name" name="name" required class="p-3 md:p-4 lg:p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429] text-base md:text-lg">
 
-                    <label for="surname" class="text-2xl font-semibold">Příjmení *</label>
-                    <input type="text" id="surname" name="surname" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+                    <label for="surname" class="text-lg md:text-xl lg:text-2xl font-semibold">Příjmení *</label>
+                    <input type="text" id="surname" name="surname" required class="p-3 md:p-4 lg:p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429] text-base md:text-lg">
 
-                    <label for="company" class="text-2xl font-semibold">Firma *</label>
-                    <input type="text" id="company" name="company" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+                    <label for="company" class="text-lg md:text-xl lg:text-2xl font-semibold">Firma *</label>
+                    <input type="text" id="company" name="company" required class="p-3 md:p-4 lg:p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429] text-base md:text-lg">
 
-                    <label for="email" class="text-2xl font-semibold">Email *</label>
-                    <input type="email" id="email" name="email" required class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+                    <label for="email" class="text-lg md:text-xl lg:text-2xl font-semibold">Email *</label>
+                    <input type="email" id="email" name="email" required class="p-3 md:p-4 lg:p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429] text-base md:text-lg">
 
-                    <label for="phone" class="text-2xl font-semibold">Tel. Číslo</label>
-                    <input type="tel" id="phone" name="phone" class="p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429]">
+                    <label for="phone" class="text-lg md:text-xl lg:text-2xl font-semibold">Tel. Číslo</label>
+                    <input type="tel" id="phone" name="phone" class="p-3 md:p-4 lg:p-5 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 focus:border-[#E92429] text-base md:text-lg">
 
-                    <div class="flex items-start gap-2 mt-4">
-                        <label for="policy" class="flex items-center cursor-pointer">
+                    <div class="flex items-start gap-2 mt-2 md:mt-4">
+                        <label for="policy" class="flex items-start cursor-pointer">
                             <input type="checkbox" id="policy" name="policy" required class="sr-only checkbox">
-                            <span class="checkmark w-14 h-12 border-2 border-gray-300 flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white opacity-0" fill="currentColor" viewBox="0 0 20 20">
+                            <span class="checkmark w-10 h-8 md:w-12 lg:w-14 md:h-10 lg:h-12 border-2 border-gray-300 flex items-center justify-center mt-1 flex-shrink-0">
+                                <svg class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white opacity-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </span>
-                            <span class="text-xl text-black ml-2">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
+                            <span class="text-sm md:text-lg lg:text-xl text-black ml-2 leading-relaxed">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
                         </label>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <label for="message" class="text-2xl font-semibold">Zpráva *</label>
-                    <textarea id="message" name="message" rows="22" required class="p-7 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 resize-none focus:border-[#E92429]"></textarea>
-                    <button type="submit" class="mt-4 text-2xl md:text-4xl px-16 md:px-16 py-4 md:py-6 rounded-xl text-white bg-[#00A44F] self-end">Odeslat zprávu</button>
+                <div class="flex flex-col gap-3 md:gap-4">
+                    <label for="message" class="text-lg md:text-xl lg:text-2xl font-semibold">Zpráva *</label>
+                    <textarea id="message" name="message" rows="15" md:rows="18" lg:rows="22" required class="p-4 md:p-5 lg:p-7 border-2 border-[#E92429] rounded-lg bg-[#E92429]/20 resize-none focus:border-[#E92429] text-base md:text-lg min-h-[200px] md:min-h-[300px]"></textarea>
+                    <button type="submit" class="mt-2 md:mt-4 text-lg md:text-2xl lg:text-4xl px-8 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl text-white bg-[#00A44F] self-center md:self-end">Odeslat zprávu</button>
                 </div>
             </form>
         </div>
@@ -216,49 +351,49 @@
     </section>
 
     <!-- FOOTER SECTION -->
-    <section class="bg-white py-12">
+    <section class="bg-white py-8 md:py-12 px-4 md:px-8 lg:px-16">
         <div class="container m-auto">
-            <img src="/assets/images/Katalog-imgs/tessuti-colored.png" alt="Tessuti Logo" class="mb-4 w-64">
-            <h3 class="text-3xl font-bold mb-4 leading-[1.1]">{{ bottomSection.locationheading }}</h3>
-            <div class="flex items-start mb-8">
-                <img src="/assets/images/hero/Vector (1).png" alt="" class="w-12 h-10 mr-4">
-                <p class="text-xl">{{ bottomSection.location | safe }}</p>
+            <img src="/assets/images/Katalog-imgs/tessuti-colored.png" alt="Tessuti Logo" class="mb-3 md:mb-4 w-48 md:w-64">
+            <h3 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 leading-[1.1]">{{ bottomSection.locationheading }}</h3>
+            <div class="flex items-start mb-6 md:mb-8">
+                <img src="/assets/images/hero/Vector (1).png" alt="" class="w-8 h-8 md:w-12 md:h-10 mr-3 md:mr-4 flex-shrink-0 mt-1">
+                <p class="text-base md:text-xl">{{ bottomSection.location | safe }}</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-36">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-36">
                 <div>
-                    <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.contactheading }}</h4>
-                    <ul class="grid grid-cols-2 gap-6">
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (2).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.web }}
+                    <h4 class="text-2xl md:text-3xl font-semibold mb-3 md:mb-4">{{ bottomSection.contactheading }}</h4>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (2).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span class="break-all">{{ bottomSection.web }}</span>
                         </li>
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.dic }}
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span>{{ bottomSection.dic }}</span>
                         </li>
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.ic }}
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (3).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span>{{ bottomSection.ic }}</span>
                         </li>
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (4).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.mail }}
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (4).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span class="break-all">{{ bottomSection.mail }}</span>
                         </li>
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (5).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.tel }}
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (5).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span>{{ bottomSection.tel }}</span>
                         </li>
-                        <li class="flex items-center text-2xl">
-                            <img src="/assets/images/hero/Vector (6).png" alt="" class="w-8 h-8 mr-2">
-                            {{ bottomSection.tel2 }}
+                        <li class="flex items-center text-lg md:text-2xl">
+                            <img src="/assets/images/hero/Vector (6).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
+                            <span>{{ bottomSection.tel2 }}</span>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-3xl font-semibold mb-4">{{ bottomSection.Catalogheading }}</h4>
-                    <ul class="grid grid-cols-2 gap-3">
+                    <h4 class="text-2xl md:text-3xl font-semibold mb-3 md:mb-4">{{ bottomSection.Catalogheading }}</h4>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                         {% for i in range(1,9) %}
-                            <li class="text-2xl text-[#E92429]">{{ bottomSectio['listheading' + i] | safe }}</li>
+                            <li class="text-lg md:text-2xl text-[#E92429]">{{ bottomSection['listheading' + i] | safe }}</li>
                         {% endfor %}
                     </ul>
                 </div>

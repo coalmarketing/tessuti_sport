@@ -9,6 +9,7 @@ category: Rukavičky
 labels:
   - label: waterproof
   - label: breathable
+  - label: nový
 parameters:
   - name: Materiál
     value: Syntetická kůže s textilním podšívkou

@@ -163,6 +163,27 @@ module.exports = function (eleventyConfig) {
     }
   );
 
+  // Filter products with "nový" label for featured section
+  eleventyConfig.addFilter(
+    "newProducts",
+    function (products, limit = 3, lang = "cs") {
+      if (!Array.isArray(products)) return [];
+      return products
+        .filter((product) => {
+          const hasLang =
+            product.data?.tags && product.data.tags.includes(lang);
+          const hasNewLabel =
+            product.data?.labels &&
+            product.data.labels.some((label) => {
+              const labelText = typeof label === "string" ? label : label.label;
+              return labelText === "nový";
+            });
+          return hasLang && hasNewLabel;
+        })
+        .slice(0, limit);
+    }
+  );
+
   // ─────────────────────────────────────────────────────────────────────────
   // PRODUCTS: collections + helpers
   // ─────────────────────────────────────────────────────────────────────────

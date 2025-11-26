@@ -20,6 +20,7 @@ images:
 category: Cyklovložky
 labels:
   - silniční
+  - nový
 parameters:
   - name: Kategorie
     value: Silniční

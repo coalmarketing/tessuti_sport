@@ -1,4 +1,4 @@
-<header class="py-4 ~px-4/8 absolute flex w-full bg-white z-50">
+<header class="py-4 ~px-4/8 absolute flex w-full z-50{% if page.url != '/' %} bg-white{% endif %}">
   <div class="container m-auto flex justify-between items-center gap-8">
     <!-- LOGO -->
     <a href="/">
@@ -16,7 +16,7 @@
 
     <!-- NAVIGATION -->
     <nav class="max-lg:hidden max-lg:group-[.mobile-menu]/body:block max-lg:absolute max-lg:top-[calc(100%+0.5rem)] max-lg:left-1/2 max-lg:-translate-x-1/2
-      max-lg:w-[calc(100vw-2rem)] max-lg:p-4 max-lg:bg-black max-lg:rounded-lg">
+      max-lg:w-[calc(100vw-2rem)] max-lg:p-4 max-lg:bg-white max-lg:border-2 max-lg:border-black max-lg:rounded-lg">
       <ul class="flex max-lg:flex-col ~gap-2/8">
         {% set navPages = collections.all | eleventyNavigation %}
 
@@ -71,7 +71,7 @@
               {# Normal pages are rendered as <a> tags, in the normal way you'd expect #}
               <a
                 class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 text-xl max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md
-                {%- if entry.url == page.url %} text-primary font-semibold text-2xl max-lg:border-l-primary max-lg:bg-primary/10
+                {%- if entry.url == page.url %} text-[#E92429] font-semibold text-2xl max-lg:border-l-[#E92429] max-lg:bg-primary/10
                 {%- else %} text-black hover:text-gray-600 hover:underline decoration-dashed{% endif %}"
                 href="{{ entry.url }}"
                 {%- if entry.url == page.url -%}aria-current="page"{%- endif -%}>
@@ -97,9 +97,9 @@
       >
         <span class="sr-only">Otevřít navigaci</span>
         <span class="relative block h-3.5 w-5">
-          <span class="absolute top-0 block h-0.5 w-full bg-white rounded-full transition-transform duration-300 group-[.active]:rotate-45 group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
-          <span class="absolute top-1/2 -translate-y-1/2 block h-0.5 w-full bg-white rounded-full transition-[opacity] duration-300 group-[.active]:opacity-0"></span>
-          <span class="absolute bottom-0 block h-0.5 w-full bg-white rounded-full transition-transform duration-300 group-[.active]:rotate-[315deg] group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
+          <span class="absolute top-0 block h-0.5 w-full bg-black rounded-full transition-transform duration-300 group-[.active]:rotate-45 group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
+          <span class="absolute top-1/2 -translate-y-1/2 block h-0.5 w-full bg-black rounded-full transition-[opacity] duration-300 group-[.active]:opacity-0"></span>
+          <span class="absolute bottom-0 block h-0.5 w-full bg-black rounded-full transition-transform duration-300 group-[.active]:rotate-[315deg] group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
         </span>
       </button>
     </div>
