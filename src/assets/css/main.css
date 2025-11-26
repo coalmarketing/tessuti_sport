@@ -1489,10 +1489,6 @@ select {
   margin-right: 0.75rem;
 }
 
-.mr-4 {
-  margin-right: 1rem;
-}
-
 .mr-8 {
   margin-right: 2rem;
 }
@@ -1599,10 +1595,6 @@ select {
   height: 0.125rem;
 }
 
-.h-10 {
-  height: 2.5rem;
-}
-
 .h-11 {
   height: 2.75rem;
 }
@@ -1699,10 +1691,6 @@ select {
   width: 1.5rem;
 }
 
-.w-64 {
-  width: 16rem;
-}
-
 .w-8 {
   width: 2rem;
 }
@@ -1752,10 +1740,6 @@ select {
   max-width: 20rem;
 }
 
-.max-w-3xl {
-  max-width: 48rem;
-}
-
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1800,10 +1784,6 @@ select {
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-4 {
@@ -1858,10 +1838,6 @@ select {
   gap: 0.75rem;
 }
 
-.gap-36 {
-  gap: 9rem;
-}
-
 .gap-4 {
   gap: 1rem;
 }
@@ -1884,12 +1860,6 @@ select {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1968,21 +1938,8 @@ select {
   border-width: 2px;
 }
 
-.border-4 {
-  border-width: 4px;
-}
-
-.border-x-4 {
-  border-left-width: 4px;
-  border-right-width: 4px;
-}
-
 .border-b {
   border-bottom-width: 1px;
-}
-
-.border-t-4 {
-  border-top-width: 4px;
 }
 
 .border-dashed {
@@ -2027,6 +1984,11 @@ select {
 .bg-\[\#00A44F\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 164 79 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#B8E8D1\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(184 232 209 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[\#E92429\] {
@@ -2095,11 +2057,6 @@ select {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-\[\#B8E8D1\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(184 232 209 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-85 {
@@ -2477,6 +2434,12 @@ select {
   transition-duration: 150ms;
 }
 
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2491,12 +2454,6 @@ select {
 
 .transition-transform {
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-all {
-  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2533,11 +2490,6 @@ select {
 
 .\~p-1\.5\/4 {
   padding: clamp(0.375rem,-0.071rem + 1.116vw,1rem)/* fluid from 0.375rem at 40rem to 1rem at 96rem */;
-}
-
-.\~px-1\/8 {
-  padding-left: clamp(0.25rem,-1rem + 3.13vw,2rem)/* fluid from 0.25rem at 40rem to 2rem at 96rem */;
-  padding-right: clamp(0.25rem,-1rem + 3.13vw,2rem)/* fluid from 0.25rem at 40rem to 2rem at 96rem */;
 }
 
 .\~px-4\/8 {
@@ -2593,6 +2545,22 @@ select {
   display: block;
   width: var(--scrollbar-width, 16px);
   height: var(--scrollbar-height, 16px);
+}
+
+.border-t-dashed-custom-red {
+  border-top: none;
+  background-image: linear-gradient(90deg, #E92429 50%, transparent 50%);
+  background-size: 36px 2.5px;
+  background-repeat: repeat-x;
+  background-position: top;
+}
+
+.border-b-dashed-custom {
+  border-bottom: none;
+  background-image: linear-gradient(90deg, #6b7280 50%, transparent 50%);
+  background-size: 36px 2.5px;
+  background-repeat: repeat-x;
+  background-position: bottom;
 }
 
 /* poppins-200 - latin-ext */
@@ -2936,9 +2904,19 @@ html {
   background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:text-\[\#008f3f\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 143 63 / var(--tw-text-opacity, 1));
+}
+
 .hover\:text-\[\#E92429\]:hover {
   --tw-text-opacity: 1;
   color: rgb(233 36 41 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-\[\#d41e24\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(212 30 36 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-gray-600:hover {
@@ -2949,16 +2927,6 @@ html {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-\[\#008f3f\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 143 63 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-\[\#d41e24\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(212 30 36 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {
@@ -3279,12 +3247,6 @@ html {
     gap: 2rem;
   }
 
-  .md\:space-y-6 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-  }
-
   .md\:space-x-3 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -3297,8 +3259,18 @@ html {
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
+  .md\:space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+  }
+
   .md\:self-end {
     align-self: flex-end;
+  }
+
+  .md\:p-2 {
+    padding: 0.5rem;
   }
 
   .md\:p-3 {
@@ -3317,10 +3289,6 @@ html {
     padding: 1.5rem;
   }
 
-  .md\:p-2 {
-    padding: 0.5rem;
-  }
-
   .md\:p-8 {
     padding: 2rem;
   }
@@ -3328,11 +3296,6 @@ html {
   .md\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
-  }
-
-  .md\:px-16 {
-    padding-left: 4rem;
-    padding-right: 4rem;
   }
 
   .md\:px-3 {
@@ -3343,6 +3306,16 @@ html {
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .md\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .md\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .md\:px-8 {
@@ -3360,11 +3333,6 @@ html {
     padding-bottom: 4rem;
   }
 
-  .md\:py-24 {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
   .md\:py-3 {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -3373,21 +3341,6 @@ html {
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
-  }
-
-  .md\:py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .md\:px-5 {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .md\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 
   .md\:pr-8 {
@@ -3417,9 +3370,9 @@ html {
     line-height: 2.5rem;
   }
 
-  .md\:text-6xl {
-    font-size: 3.75rem;
-    line-height: 3.75rem;
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 3rem;
   }
 
   .md\:text-base {
@@ -3441,11 +3394,6 @@ html {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-
-  .md\:text-5xl {
-    font-size: 3rem;
-    line-height: 3rem;
-  }
 }
 
 @media (min-width: 64rem) {
@@ -3453,12 +3401,12 @@ html {
     margin-bottom: 4rem;
   }
 
-  .lg\:mt-0 {
-    margin-top: 0px;
-  }
-
   .lg\:mb-4 {
     margin-bottom: 1rem;
+  }
+
+  .lg\:mt-0 {
+    margin-top: 0px;
   }
 
   .lg\:mt-16 {
@@ -3533,6 +3481,10 @@ html {
     gap: 3rem;
   }
 
+  .lg\:gap-16 {
+    gap: 4rem;
+  }
+
   .lg\:gap-24 {
     gap: 6rem;
   }
@@ -3547,10 +3499,6 @@ html {
 
   .lg\:gap-6 {
     gap: 1.5rem;
-  }
-
-  .lg\:gap-16 {
-    gap: 4rem;
   }
 
   .lg\:bg-\[url\(\'\/assets\/images\/hero\/MaskHero\.png\'\)\] {
@@ -3583,14 +3531,29 @@ html {
     padding-right: 4rem;
   }
 
+  .lg\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 
+  .lg\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   .lg\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .lg\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .lg\:py-5 {
@@ -3601,21 +3564,6 @@ html {
   .lg\:py-6 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-  }
-
-  .lg\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .lg\:py-4 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .lg\:py-12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
   }
 
   .lg\:text-2xl {
