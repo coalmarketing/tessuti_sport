@@ -13,7 +13,7 @@ module.exports = {
     screens: screens,
     extend: {
       fontFamily: {
-        sans: ["Poppins", defaultTheme.fontFamily.sans],
+        sans: ["Red Hat Text", defaultTheme.fontFamily.sans],
         Gabarito: ["Gabarito", "sans-serif"],
         RedHatText: ["Red Hat Text", "sans-serif"],
       },
@@ -47,10 +47,12 @@ module.exports = {
       // Basic dashed border classes with custom style
       dashedBorderUtilities[".border-dashed-custom"] = {
         border: "none",
-        "background-image": `url("${createDashedBorderSVG("#6b7280", 2)}")`,
-        "background-size": "24px 2px",
-        "background-repeat": "repeat-x",
+        "border-radius": "0.75rem", // Same as rounded-xl (12px)
+        "background-image": `linear-gradient(90deg, #6b7280 50%, transparent 50%), linear-gradient(90deg, #6b7280 50%, transparent 50%), linear-gradient(0deg, #6b7280 50%, transparent 50%), linear-gradient(0deg, #6b7280 50%, transparent 50%)`,
+        "background-size": "36px 2px, 36px 2px, 2px 36px, 2px 36px",
+        "background-repeat": "repeat-x, repeat-x, repeat-y, repeat-y",
         "background-position": "top, bottom, left, right",
+        "background-clip": "padding-box",
       };
 
       // Dashed border with specific sides using background approach
@@ -193,6 +195,26 @@ module.exports = {
       };
 
       addUtilities(dashedBorderUtilities);
+
+      // Add typography utilities for consistent font usage
+      const typographyUtilities = {
+        // All headings use Gabarito font with tighter line-height
+        "h1, h2, h3, h4, h5, h6": {
+          "font-family": '"Gabarito", sans-serif',
+          "line-height": "1.2",
+        },
+        // Utility classes for explicit font usage
+        ".font-heading": {
+          "font-family": '"Gabarito", sans-serif',
+          "line-height": "1.2",
+        },
+        ".font-body": {
+          "font-family": '"Red Hat Text", sans-serif',
+          "line-height": "1.2",
+        },
+      };
+
+      addUtilities(typographyUtilities);
     },
   ],
 };

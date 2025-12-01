@@ -8,7 +8,7 @@ eleventyNavigation:
   key: Katalog
   order: 200
 
-topper: HLavní stránka
+topper: Hlavní stránka
 heading: Katalog
 
 cta2:

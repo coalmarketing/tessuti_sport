@@ -5,3 +5,9 @@ slug: "elasticke-uplety"
 description: "Pružné a pohodlné elastické úplety ideální pro sportovní oblečení a aktivní pohyb."
 image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-4.png"
 permalink: "/cs/katalog/{{ slug }}/"
+
+eleventyNavigation:
+  key: Elastické úplety
+  parent: Katalog
+  order: 500
+---
