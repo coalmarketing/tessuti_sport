@@ -2,7 +2,7 @@
 layout: "pages/home.njk"
 
 title: "Tessuti sport"
-description: "V Senoweb se specializujeme na tvorbu webových stránek na míru. Nepoužíváme koupené šablony, nástroje pro automatizované budování webů ani nástroje, které by váš web zahlcovali zbytečným kódem a tím vaší stránku zpomalovaly."
+description: "Jsme jedničkou v importu materiálu pro sportovní oblečení · Cyklovložky · Rukavičky · Tkaniny · Dresoviny · Elastické úplety · Softshell · Pásky , Gumy"
 permalink: "/"
 
 eleventyNavigation:
