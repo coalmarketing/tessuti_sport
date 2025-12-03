@@ -123,7 +123,7 @@
             <span class="text-base md:text-lg lg:text-xl font-bold text-gray-900 font-heading">{{ cat.name }}</span>
           </div>
           {% if cat.name == "Individuální poptávka" %}
-            <a href="/cs/kontakt/" class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3 px-4 md:px-5 lg:px-6 py-2 md:py-3 lg:py-4 text-sm md:text-lg lg:text-xl bg-[#00A44F] text-white rounded hover:bg-green-700 transition-colors font-body">
+            <a href="#contact-form" class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3 px-4 md:px-5 lg:px-6 py-2 md:py-3 lg:py-4 text-sm md:text-lg lg:text-xl bg-[#00A44F] text-white rounded hover:bg-green-700 transition-colors font-body">
               <span>Kontaktní formulář</span>
               <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <polyline points="9,18 15,12 9,6"></polyline>
@@ -272,8 +272,22 @@
                 <div>
                     <h4 class="text-2xl md:text-3xl font-semibold mb-3 md:mb-4">{{ bottomSection.Catalogheading }}</h4>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
-                        {% for i in range(1,9) %}
-                            <li class="text-lg md:text-2xl text-[#E92429]">{{ bottomSection['listheading' + i] | safe }}</li>
+                        {% set categoryLinks = [
+                            { heading: bottomSection.listheading1, url: "/cs/katalog/cyklovlozky/" },
+                            { heading: bottomSection.listheading2, url: "/cs/katalog/tkaniny/" },
+                            { heading: bottomSection.listheading3, url: "/cs/katalog/elasticke-uplety/" },
+                            { heading: bottomSection.listheading4, url: "/cs/katalog/softshell/" },
+                            { heading: bottomSection.listheading5, url: "/cs/katalog/rukavicky/" },
+                            { heading: bottomSection.listheading6, url: "/cs/katalog/dresoviny/" },
+                            { heading: bottomSection.listheading7, url: "/cs/katalog/pasky-gumy-reflexni-materialy/" },
+                            { heading: bottomSection.listheading8, url: "/cs/katalog/#contact-form" }
+                        ] %}
+                        {% for category in categoryLinks %}
+                            {% if category.heading %}
+                                <li>
+                                    <a href="{{ category.url }}" class="text-lg md:text-2xl text-[#E92429] hover:text-[#B8182A] transition-colors duration-300 hover:underline">{{ category.heading | safe }}</a>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

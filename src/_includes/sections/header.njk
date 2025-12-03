@@ -63,7 +63,7 @@
                   class="~p-1.5/4 whitespace-nowrap transition-colors duration-300 text-xl font-body max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md
                   {%- if entry.url == page.url %} text-[#E92429] font-semibold text-2xl max-lg:border-l-[#E92429] max-lg:bg-primary/10
                   {%- else %} text-black hover:text-gray-600 hover:underline decoration-dashed{% endif %}"
-                  href="{{ entry.url }}"
+                  href="{{ entry.data.eleventyNavigation.url or entry.url }}"
                   {%- if entry.url == page.url -%}aria-current="page"{%- endif -%}>
                   {{ entry.key }}
                 </a>
@@ -118,20 +118,29 @@
                 class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 text-xl font-body max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md
                 {%- if entry.url == page.url %} text-[#E92429] font-semibold text-2xl max-lg:border-l-[#E92429] max-lg:bg-primary/10
                 {%- else %} text-black hover:text-gray-600 hover:underline decoration-dashed{% endif %}"
-                href="{{ entry.url }}"
+                href="{{ entry.data.eleventyNavigation.url or entry.url }}"
                 {%- if entry.url == page.url -%}aria-current="page"{%- endif -%}>
                 {{ entry.key }}
               </a>
             {% endif %}
           </li>
         {% endfor %}
+        
+        {# Add Kontakt button for mobile menu #}
+        <li class="lg:hidden">
+          <a
+            href="/#contact-form"
+            class="w-1/3 p-3 mt-4 bg-[#00A44F] text-white text-center rounded-lg font-body font-medium transition-colors duration-300 hover:bg-[#008f43] block">
+            Kontakt
+          </a>
+        </li>
       </ul>
     </nav>
 
     <!-- DARKMODE + CTA -->
     <div class="flex items-center gap-2 lg:gap-4">
       <!-- CTA -->
-      <a href="/#contact-form" class="max-lg:hidden bg-[#00A44F] hover:bg-[#008f3f] rounded-lg font-body text-white py-2 px-6 font-semibold transition-colors duration-300">Kontakt</a>
+      <a href="/#contact-form" class="btn max-lg:hidden bg-[#00A44F] rounded-lg font-body">Kontakt</a>
 
       <!-- MOBILE MENU BUTTON -->
       <button
