@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tessuti Sport Contact Form - Static Version</title>
+  </head>
+  <body>
+    <!-- This hidden form is used by Netlify to detect the form fields during build time -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="surname" />
+      <input type="text" name="company" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="checkbox" name="policy" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <!-- Product contact form for static detection -->
+    <form name="product-contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="surname" />
+      <input type="text" name="company" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="checkbox" name="policy" />
+      <textarea name="message"></textarea>
+      <input type="text" name="product" />
+      <input type="text" name="category" />
+    </form>
+  </body>
+</html>

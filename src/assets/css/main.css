@@ -1410,6 +1410,10 @@ body,
   border-width: 0;
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
 }
@@ -2434,6 +2438,11 @@ body,
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-\[\#C181C6\] {
+  --tw-text-opacity: 1;
+  color: rgb(193 129 198 / var(--tw-text-opacity, 1));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -3148,6 +3157,11 @@ html {
 .hover\:bg-\[\#008f43\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(0 143 67 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:text-xl:hover {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .hover\:text-\[\#008f3f\]:hover {

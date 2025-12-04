@@ -36,7 +36,7 @@ bottomSection:
   ic: IČO 25916521
   mail: info@tessuti-sport.cz
   tel2: +420 603 853 086
-  tel: 465 613 179
+  tel: +420 465 613 179
 
   listheading1: Cyklovložky
   listheading2: Tkaniny
