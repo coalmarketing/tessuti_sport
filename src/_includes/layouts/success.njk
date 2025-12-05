@@ -1,0 +1,59 @@
+---
+layout: layouts/base.njk
+---
+
+{% block body %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div class="text-center">
+                <!-- Success Icon -->
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-8 mt-12 pt-8">
+                    <svg class="h-12 w-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                
+                <!-- Success Message -->
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">
+                    Děkujeme za vaši zprávu!
+                </h2>
+                
+                <p class="text-lg text-gray-600 mb-8 font-body">
+                    Vaše zpráva byla úspěšně odeslána. Odpovíme vám co nejdříve na uvedený email.
+                </p>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/cs/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#00A44F] hover:bg-green-700 transition-colors duration-300 font-body">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Zpět na hlavní stránku
+                    </a>
+                    
+                    <a href="/cs/katalog/" class="inline-flex items-center justify-center px-6 py-3 border-2 border-[#E92429] text-base font-medium rounded-md text-[#E92429] bg-white hover:bg-[#E92429] hover:text-white transition-all duration-300 font-body">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        Prohlédnout katalog
+                    </a>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm text-gray-500 mb-2 font-body">
+                        Potřebujete rychlejší odpověď?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center text-sm">
+                        <a href="tel:+420603853086" class="text-[#00A44F] hover:text-green-700 transition-colors duration-300 font-body">
+                            📞 +420 603 853 086
+                        </a>
+                        <a href="mailto:info@tessuti.cz" class="text-[#00A44F] hover:text-green-700 transition-colors duration-300 font-body">
+                            ✉️ info@tessuti.cz
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
