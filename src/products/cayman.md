@@ -1,6 +1,6 @@
 ---
-title: Cayman
-slug: cayman
+title: Cayman2
+slug: cayman-2
 price: 365
 currency: Kč/m bez DPH
 excerpt: |-
