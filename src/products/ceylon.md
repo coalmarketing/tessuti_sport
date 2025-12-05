@@ -12,7 +12,6 @@ image: /assets/images/cms/ceylon-1-.jpg
 category: Elastické úplety
 labels:
   - barevný
-  - nový
 parameters:
   - name: Druh
     value: Elastický úplet letní - barevný

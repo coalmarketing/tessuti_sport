@@ -1,6 +1,6 @@
 ---
-title: Manta
-slug: manta
+title: Manta test
+slug: manta-test
 price: 195
 currency: CZK  bez DPH
 excerpt: Manta, nejnovější vývojový typ v nabídce firmy Teosport. Cyklovložka má
