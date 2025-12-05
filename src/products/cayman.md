@@ -2,7 +2,7 @@
 title: Cayman
 slug: cayman
 price: 365
-currency: 365 Kč/m bez DPH
+currency: Kč/m bez DPH
 excerpt: |-
   Materiál je podobný jako Bridge , ale je v černé barvě.
 
