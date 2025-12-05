@@ -108,7 +108,7 @@
     </div>
 
     <!-- List View -->
-    <div id="listView" class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 hidden">
+    <div id="listView" class="grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 hidden">
       {% for cat in staticCategories %}
         <div class="flex flex-col md:flex-row md:items-center md:justify-between px-3 md:px-4 py-3 md:py-4 border-dashed-custom rounded-lg bg-white hover:shadow-md transition-shadow">
           <div class="flex items-center space-x-3 md:space-x-6 mb-3 md:mb-0">
@@ -188,7 +188,7 @@
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                        <span class="text-sm md:text-lg lg:text-xl text-black ml-2 leading-relaxed font-body">Tímto souhlasím se <span class="text-[#00A44F] underline">Zásadami ochrany osobních údajů</span> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
+                        <span class="text-sm md:text-lg lg:text-xl text-black ml-2 leading-relaxed font-body">Tímto souhlasím se <a href="/gdpr/" class="text-[#00A44F] underline hover:text-green-700 transition-colors duration-300">Zásadami ochrany osobních údajů</a> a <span class="text-[#00A44F] underline">Zpracováním souborů cookies</span>.</span>
                     </label>
                 </div>
             </div>
@@ -313,6 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showGridView() {
     gridView.classList.remove('hidden');
     listView.classList.add('hidden');
+    listView.classList.remove('grid');
     gridViewBtn.classList.add('active', 'bg-[#E92429]', 'text-white');
     gridViewBtn.classList.remove('bg-white', 'text-gray-600');
     listViewBtn.classList.remove('active', 'bg-[#E92429]', 'text-white');
@@ -322,6 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showListView() {
     gridView.classList.add('hidden');
     listView.classList.remove('hidden');
+    listView.classList.add('grid');
     listViewBtn.classList.add('active', 'bg-[#E92429]', 'text-white');
     listViewBtn.classList.remove('bg-white', 'text-gray-600');
     gridViewBtn.classList.remove('active', 'bg-[#E92429]', 'text-white');

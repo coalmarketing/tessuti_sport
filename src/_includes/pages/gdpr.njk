@@ -1,32 +1,185 @@
 {% extends "layouts/base.njk" %}
 
 {% block body %}
-    {% include "sections/landing.njk" %}
-
-    <!-- GDPR -->
-    <section class="py-24 ~px-4/8">
-        <div class="container m-auto">
-            <div class="max-w-[75ch]">
-                {% for item in contentOne.items %}
-                    <div class="mb-6">
-                        {% if item.heading %}
-                            <h3 class="dark:text-white ~text-xl/2xl font-semibold mb-4">{{ item.heading }}</h3>
-                        {% endif -%}
-
-                        {%- if item.text %}
-                            <p class="~text-sm/base text-gray-800 dark:text-gray-200 mb-2">{{ item.text }}</p>
-                        {% endif -%}
-
-                        {%- if item.subitems %}
-                            <ul class="list-disc max-w-2xl space-y-1 ml-8">
-                                {% for subitem in item.subitems %}
-                                    <li class="font-work-sans text-gray-800 dark:text-gray-200">{{ subitem.text }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-red-50 to-red-100 py-12 md:py-20 ~px-4/8">
+        <div class="container m-auto max-w-4xl">
+            <div class="text-center">
+                {% if contentOne.topper %}
+                    <span class="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider mb-4">
+                        {{ contentOne.topper }}
+                    </span>
+                {% endif %}
+                <h1 class="font-heading text-gray-900 ~text-3xl/5xl font-bold mb-6 leading-tight">
+                    {{ contentOne.heading or title }}
+                </h1>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+                {% if contentOne.content %}
+                    <p class="font-body ~text-lg/xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        {{ contentOne.content | safe }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </section>
+
+    <!-- GDPR Content -->
+    <section class="py-16 md:py-24 ~px-4/8 bg-white">
+        <div class="container m-auto max-w-4xl">
+            <!-- Table of Contents -->
+            <div class="bg-gray-50 rounded-lg p-6 mb-12 border border-gray-200">
+                <h2 class="font-heading text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                    </svg>
+                    Obsah dokumentu
+                </h2>
+                <nav class="space-y-2">
+                    {% for item in contentOne.items %}
+                        {% if item.heading %}
+                            <a href="#section-{{ loop.index }}" 
+                               class="block text-gray-700 hover:text-red-600 font-body text-sm md:text-base transition-colors duration-200 hover:pl-2">
+                                {{ item.heading }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="space-y-12">
+                {% for item in contentOne.items %}
+                    <div class="group" {% if item.heading %}id="section-{{ loop.index }}"{% endif %}>
+                        {% if item.heading %}
+                            <div class="flex items-start mb-6">
+                                <div class="flex-shrink-0 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4 mt-1">
+                                    {{ loop.index }}
+                                </div>
+                                <h2 class="font-heading text-gray-900 ~text-xl/3xl font-semibold leading-tight flex-1">
+                                    {{ item.heading }}
+                                </h2>
+                            </div>
+                        {% endif %}
+
+                        {% if item.text %}
+                            <div class="{% if item.heading %}ml-12{% endif %} mb-6">
+                                <div class="bg-white border-l-4 border-red-200 pl-6 py-4 rounded-r-lg shadow-sm">
+                                    <p class="font-body ~text-base/lg text-gray-700 leading-relaxed">
+                                        {{ item.text | safe }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if item.subitems %}
+                            <div class="{% if item.heading %}ml-12{% endif %} mb-6">
+                                <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                                    <ul class="space-y-3">
+                                        {% for subitem in item.subitems %}
+                                            <li class="flex items-start">
+                                                <div class="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full mt-2.5 mr-4"></div>
+                                                <span class="font-body ~text-base/lg text-gray-700 leading-relaxed flex-1">
+                                                    {{ subitem.text }}
+                                                </span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if not item.heading %}
+                            <div class="mb-8">
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                    <p class="font-body ~text-base/lg text-blue-800 leading-relaxed">
+                                        {{ item.text | safe }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {% if not loop.last and item.heading %}
+                        <hr class="border-gray-200 my-12">
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Contact Section -->
+            <div class="mt-16 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl p-8 md:p-12 text-white">
+                <div class="text-center">
+                    <svg class="w-12 h-12 mx-auto mb-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h3 class="font-heading ~text-xl/2xl font-semibold mb-4">
+                        Máte dotazy ohledně zpracování osobních údajů?
+                    </h3>
+                    <p class="font-body ~text-base/lg mb-6 opacity-90">
+                        Neváhejte nás kontaktovat pro jakékoliv dotazy týkající se ochrany vašich osobních údajů.
+                    </p>
+                    <a href="/#contact-form" 
+                       class="inline-flex items-center bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                        Kontaktovat nás
+                    </a>
+                </div>
+            </div>
+
+            <!-- Back to Top -->
+            <div class="mt-12 text-center">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+                        class="inline-flex items-center text-gray-600 hover:text-red-600 font-body transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                    </svg>
+                    Zpět na začátek
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Styling -->
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Responsive text scaling */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        
+        /* Enhanced hover effects */
+        .group:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        /* Print styles */
+        @media print {
+            .bg-gradient-to-r,
+            .bg-gray-50,
+            .bg-blue-50 {
+                background: white !important;
+                border: 1px solid #ccc !important;
+            }
+            
+            .text-white {
+                color: black !important;
+            }
+        }
+        
+        /* Focus styles for accessibility */
+        a:focus,
+        button:focus {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
+    </style>
 {% endblock body %}
