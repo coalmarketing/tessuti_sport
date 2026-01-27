@@ -266,8 +266,8 @@
             
             <!-- Mobile/Tablet Layout: Single Column -->
             <div class="flex flex-col gap-4 md:gap-6 lg:hidden items-center">
-                {% for i in range(1, 9) %}
-                {% set categoryLinks = ['/cs/katalog/cyklovlozky/', '/cs/katalog/tkaniny/', '/cs/katalog/elasticke-uplety/', '/cs/katalog/pasky-gumy-reflexni-materialy/', '/cs/katalog/rukavicky/', '/cs/katalog/dresoviny/', '/cs/katalog/softshell/', '#contact-form'] %}
+                {% for i in range(1, 7) %}
+                {% set categoryLinks = ['/cs/katalog/cyklovlozky/', '/cs/katalog/tkaniny/', '/cs/katalog/elasticke-uplety/', '/cs/katalog/pasky-gumy-reflexni-materialy/', '/cs/katalog/materialy-s-membranou/', '/cs/katalog/dresoviny/'] %}
                 <a href="{{ categoryLinks[i-1] }}" class="text-black flex flex-col items-center p-4 rounded-lg bg-white border-2 border-black border-dashed-custom w-4/5 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
                     <div class="w-full mb-4">
                         {% if section4['listheading' + i] %}<h4 class="text-xl md:text-2xl font-semibold mb-3 text-center group-hover:text-[#E92429] transition-colors duration-300 font-heading">{{ section4['listheading' + i] | safe }}</h4>{% endif %}
@@ -281,8 +281,8 @@
             <!-- Desktop Layout: Two Columns -->
             <div class="hidden lg:grid gap-8 md:grid-cols-2">
                 <div class="flex flex-col gap-8">
-                    {% for i in range(1, 5) %}
-                    {% set categoryLinks = ['/cs/katalog/cyklovlozky/', '/cs/katalog/tkaniny/', '/cs/katalog/elasticke-uplety/', '/cs/katalog/pasky-gumy-reflexni-materialy/'] %}
+                    {% for i in range(1, 4) %}
+                    {% set categoryLinks = ['/cs/katalog/cyklovlozky/', '/cs/katalog/tkaniny/', '/cs/katalog/elasticke-uplety/'] %}
                     <a href="{{ categoryLinks[i-1] }}" class="text-black flex justify-between items-start p-4 rounded-lg bg-white mx-4 border-dashed-custom hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
                         <div class="flex-1 mr-8">
                             {% if section4['listheading' + i] %}<h4 class="text-4xl font-semibold mb-2 group-hover:text-[#E92429] transition-colors duration-300 font-heading">{{ section4['listheading' + i] }}</h4>{% endif %}
@@ -293,9 +293,9 @@
                     {% endfor %}
                 </div>
                 <div class="flex flex-col gap-8">
-                    {% for i in range(5, 9) %}
-                    {% set categoryLinks = ['/cs/katalog/rukavicky/', '/cs/katalog/dresoviny/', '/cs/katalog/softshell/', '#contact-form'] %}
-                    <a href="{{ categoryLinks[i-5] }}" class="text-black flex justify-between items-start p-4 rounded-lg bg-white mx-4 border-2 border-black border-dashed-custom hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
+                    {% for i in range(4, 7) %}
+                    {% set categoryLinks = ['/cs/katalog/pasky-gumy-reflexni-materialy/', '/cs/katalog/materialy-s-membranou/', '/cs/katalog/dresoviny/'] %}
+                    <a href="{{ categoryLinks[i-4] }}" class="text-black flex justify-between items-start p-4 rounded-lg bg-white mx-4 border-2 border-black border-dashed-custom hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
                         <div class="flex-1 mr-8">
                             {% if section4['listheading' + i] %}<h4 class="text-4xl font-semibold mb-2 group-hover:text-[#E92429] transition-colors duration-300 font-heading">{{ section4['listheading' + i] | safe }}</h4>{% endif %}
                             {% if section4['listnote' + i] %}<p class="text-lg font-regular group-hover:text-gray-600 transition-colors duration-300 font-body">{{ section4['listnote' + i] }}</p>{% endif %}
@@ -452,11 +452,10 @@
                             { heading: bottomSection.listheading1, url: "/cs/katalog/cyklovlozky/" },
                             { heading: bottomSection.listheading2, url: "/cs/katalog/tkaniny/" },
                             { heading: bottomSection.listheading3, url: "/cs/katalog/elasticke-uplety/" },
-                            { heading: bottomSection.listheading4, url: "/cs/katalog/softshell/" },
-                            { heading: bottomSection.listheading5, url: "/cs/katalog/rukavicky/" },
+                            { heading: bottomSection.listheading4, url: "/cs/katalog/materialy-s-membranou/" },
+                            { heading: bottomSection.listheading5, url: "/cs/katalog/pasky-gumy-reflexni-materialy/" },
                             { heading: bottomSection.listheading6, url: "/cs/katalog/dresoviny/" },
-                            { heading: bottomSection.listheading7, url: "/cs/katalog/pasky-gumy-reflexni-materialy/" },
-                            { heading: bottomSection.listheading8, url: "/cs/katalog/#contact-form" }
+                            { heading: bottomSection.listheading7, url: "/cs/katalog/#contact-form" }
                         ] %}
                         {% for category in categoryLinks %}
                             {% if category.heading %}

@@ -327,3 +327,27 @@ html {
     @apply border-l-[#E92429] bg-[#E92429]/10 text-[#E92429];
   }
 }
+
+/* ====================================== */
+/* === SITE-WIDE WIDTH CONSTRAINT ===== */
+/* ====================================== */
+
+/* Make all content containers 90% wide while keeping backgrounds full width */
+.container {
+  max-width: 90% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure proper width limits on ultra-wide displays */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1728px !important; /* 90% of 1920px */
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    max-width: 2304px !important; /* 90% of 2560px */
+  }
+}

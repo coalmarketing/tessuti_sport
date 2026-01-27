@@ -2,23 +2,88 @@
 
 {% block head %}
 <style>
-.checkbox:checked + .checkmark {
+.checkbox:checked {
     background-color: #00A44F;
     border-color: #00A44F;
 }
 .checkbox:checked + .checkmark svg {
     opacity: 1;
 }
+
+/* Product Search Enhancements */
+#search-results {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+#search-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+#search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#search-results::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.search-result:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.search-result:last-child {
+  border-radius: 0 0 6px 6px;
+}
 </style>
 {% endblock %}
 
 {% block body %}
 <section class="py-16 ~px-4/8 bg-[#E92429]/20">
-  <div class="container m-auto max-w-7xl">
+  <div class="container m-auto max-w-3xl px-4 md:px-8 lg:px-16">
     <!-- Header -->
     <div class="mb-6 md:mb-8 mt-12 md:mt-16">
       <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-heading">{{ heading or title }}</h1>
       {% if topper %}<p class="text-sm md:text-md text-red-500 mb-4 font-body">{{ topper }}</p>{% endif %}
+    </div>
+
+    <!-- Product Search -->
+    <div class="mb-8 md:mb-10">
+      <div class="relative max-w-2xl mx-auto">
+        <label for="product-search" class="sr-only">Vyhledat produkt</label>
+        <div class="relative">
+          <input
+            type="text"
+            id="product-search"
+            placeholder="Vyhledat produkt..."
+            autocomplete="off"
+            class="w-full px-4 py-3 md:py-4 pr-10 border-2 border-gray-300 rounded-lg focus:border-[#E92429] focus:outline-none focus:ring-2 focus:ring-[#E92429]/20 text-base md:text-lg font-body transition-colors"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="search-results"
+          />
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+        
+        <!-- Results Dropdown -->
+        <div
+          id="search-results"
+          role="listbox"
+          class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
+          aria-label="Výsledky vyhledávání"
+        >
+          <!-- Results injected by JS -->
+        </div>
+        
+        <!-- No Results Message -->
+        <div id="search-no-results" class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-lg px-4 py-3">
+          <p class="text-gray-600 text-sm md:text-base font-body">Žádné produkty nenalezeny</p>
+        </div>
+      </div>
     </div>
 
     <!-- View Toggle Controls -->
@@ -55,50 +120,38 @@
         {
           name: "Cyklovložky",
           slug: "cyklovlozky",
-          description: "Kvalitní cyklovložky pro cyklisty všech úrovní. Pohodlí a ochrana během dlouhých jízd.",
+          description: "Naše cyklovložky kombinují pohodlí, odolnost a precizní zpracování, aby poskytovaly maximální komfort i při dlouhých jízdách.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-1.png"
         },
         {
           name: "Dresoviny",
           slug: "dresoviny",
-          description: "Kvalitní dresoviny vhodné pro sportovní oblečení a aktivní životní styl. Prodyšné a pohodlné materiály.",
+          description: "Funkční dresoviny spojují pružnost, prodyšnost a odvod vlhkosti, což zajišťuje optimální výkon a komfort při sportovní aktivitě.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-2.png"
         },
         {
           name: "Tkaniny",
           slug: "tkaniny",
-          description: "Široký výběr tkanin pro různé účely. Od lehkých materiálů po robustní tkaniny pro náročné podmínky.",
+          description: "Široký sortiment tkanin spojujících funkčnost, odolnost a estetiku. Vybrané materiály jsou vhodné pro sériovou výrobu i individuální designové zakázky.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-3.png"
         },
         {
           name: "Elastické úplety",
           slug: "elasticke-uplety",
-          description: "Pružné a pohodlné materiály ideální pro sportovní a funkční oblečení.",
+          description: "Naše elastické úplety poskytují díky kvalitním vláknům a technologii zpracování vysokou pružnost a tvarovou stálost.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-4.png"
         },
         {
-          name: "Softshell",
-          slug: "softshell",
-          description: "Funkční softshellové materiály pro outdoor aktivity. Odolnost proti větru a vodě.",
+          name: "Materiály s membránou",
+          slug: "materialy-s-membranou",
+          description: "Membránové materiály kombinují ochranu proti vodě a větru s prodyšností, což umožňuje komfort i při extrémních podmínkách.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-5.png"
-        },
-        {
-          name: "Rukavičky",
-          slug: "rukavicky",
-          description: "Specializované materiály pro výrobu rukavic různých typů a účelů.",
-          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-6.png"
         },
         {
           name: "Pásky, gumy, reflexní materiály",
           slug: "pasky-gumy-reflexni-materialy", 
-          description: "Bezpečnostní a funkční materiály pro zlepšení viditelnosti a ochrany.",
+          description: "Kompletní doplňky, které dokonale doplní vaše výrobky – od pružných pásků a gum po reflexní prvky pro bezpečnost.",
           image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-7.png"
-        },
-        {
-          name: "Individuální poptávka",
-          slug: "individuální poptávka",
-          description: "Různé doplňky pro sportovní a outdoor vybavení.",
-          image: "/assets/images/Katalog-imgs/divazus-fabric-store-6VJEqAemnIA-unsplash 1-8.png"
         }
       ] %}
       
@@ -110,8 +163,8 @@
     <!-- List View -->
     <div id="listView" class="grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 hidden">
       {% for cat in staticCategories %}
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between px-3 md:px-4 py-3 md:py-4 border-dashed-custom rounded-lg bg-white hover:shadow-md transition-shadow">
-          <div class="flex items-center space-x-3 md:space-x-6 mb-3 md:mb-0">
+        <div class="flex items-center justify-between px-3 md:px-4 py-3 md:py-4 border-dashed-custom rounded-lg bg-white hover:shadow-md transition-shadow gap-3">
+          <div class="flex items-center space-x-3 md:space-x-6 flex-1 min-w-0">
             <div class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
               <svg class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -122,21 +175,11 @@
             </div>
             <span class="text-base md:text-lg lg:text-xl font-bold text-gray-900 font-heading">{{ cat.name }}</span>
           </div>
-          {% if cat.name == "Individuální poptávka" %}
-            <a href="#contact-form" class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3 px-4 md:px-5 lg:px-6 py-2 md:py-3 lg:py-4 text-sm md:text-lg lg:text-xl bg-[#00A44F] text-white rounded hover:bg-green-700 transition-colors font-body">
-              <span>Kontaktní formulář</span>
-              <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <polyline points="9,18 15,12 9,6"></polyline>
-              </svg>
-            </a>
-          {% else %}
-            <a href="/cs/katalog/{{ cat.slug }}/" class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3 px-4 md:px-5 lg:px-6 py-2 md:py-3 lg:py-4 text-sm md:text-lg lg:text-xl bg-[#E92429] text-white rounded hover:bg-[#d41e24] transition-colors font-body">
-              <span>Otevřít kategorii</span>
-              <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <polyline points="9,18 15,12 9,6"></polyline>
-              </svg>
-            </a>
-          {% endif %}
+          <a href="/cs/katalog/{{ cat.slug }}/" class="flex items-center justify-center flex-shrink-0 px-8 py-2 md:p-3 bg-[#00A44F] hover:bg-green-700 rounded transition-colors">
+            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </a>
         </div>
       {% endfor %}
     </div>
@@ -283,11 +326,10 @@
                             { heading: bottomSection.listheading1, url: "/cs/katalog/cyklovlozky/" },
                             { heading: bottomSection.listheading2, url: "/cs/katalog/tkaniny/" },
                             { heading: bottomSection.listheading3, url: "/cs/katalog/elasticke-uplety/" },
-                            { heading: bottomSection.listheading4, url: "/cs/katalog/softshell/" },
-                            { heading: bottomSection.listheading5, url: "/cs/katalog/rukavicky/" },
+                            { heading: bottomSection.listheading4, url: "/cs/katalog/materialy-s-membranou/" },
+                            { heading: bottomSection.listheading5, url: "/cs/katalog/pasky-gumy-reflexni-materialy/" },
                             { heading: bottomSection.listheading6, url: "/cs/katalog/dresoviny/" },
-                            { heading: bottomSection.listheading7, url: "/cs/katalog/pasky-gumy-reflexni-materialy/" },
-                            { heading: bottomSection.listheading8, url: "/cs/katalog/#contact-form" }
+                            { heading: bottomSection.listheading7, url: "/cs/katalog/#contact-form" }
                         ] %}
                         {% for category in categoryLinks %}
                             {% if category.heading %}
@@ -337,4 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
   showGridView();
 });
 </script>
+
+<!-- Product Search Script -->
+<script src="/assets/js/product-search.js"></script>
 {% endblock %}

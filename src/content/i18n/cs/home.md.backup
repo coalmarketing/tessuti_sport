@@ -2,7 +2,7 @@
 layout: "pages/home.njk"
 
 title: "Tessuti sport"
-description: "Jsme jedničkou v importu materiálu pro sportovní oblečení · Cyklovložky · Materiály s membránou · Tkaniny · Dresoviny · Elastické úplety · Pásky, Gumy"
+description: "Jsme jedničkou v importu materiálu pro sportovní oblečení · Cyklovložky · Rukavičky · Tkaniny · Dresoviny · Elastické úplety · Softshell · Pásky , Gumy"
 permalink: "/"
 
 eleventyNavigation:
@@ -28,7 +28,7 @@ section2:
     note: Vivamus ornare vehicula odio quis congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et diam eu ligula mollis iaculis in eu diam. Donec fringilla ligula sit amet est congue.
   listspan2:
     title: Rozsah sortimentu
-    description: Nabízíme široký sortiment materiálu a tkanin (od materiálů s membránou po cyklistické vložky).
+    description: Nabízíme široký sortiment materiálu a tkanin (od softshell látek po cyklistické vložky).
     note: Vivamus ornare vehicula odio quis congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc et diam eu ligula mollis iaculis in eu diam. Donec fringilla ligula sit amet est congue.
 
   listspan3:
@@ -70,15 +70,19 @@ section4:
   listheading2: Tkaniny
   listheading3: Elastické úplety
   listheading4: Pásky, gumy, reflexní materiály
-  listheading5: Materiály s membránou
+  listheading5: Rukavičky
   listheading6: Dresoviny
+  listheading7: Softshell
+  listheading8: Individuální <br> poptávka
 
-  listnote1: Naše cyklovložky kombinují pohodlí, odolnost a precizní zpracování, aby poskytovaly maximální komfort i při dlouhých jízdách.
-  listnote2: Široký sortiment tkanin spojujících funkčnost, odolnost a estetiku. Vybrané materiály jsou vhodné pro sériovou výrobu i individuální designové zakázky.
-  listnote3: Naše elastické úplety poskytují díky kvalitním vláknům a technologii zpracování vysokou pružnost a tvarovou stálost.
-  listnote4: Kompletní doplňky, které dokonale doplní vaše výrobky – od pružných pásků a gum po reflexní prvky pro bezpečnost.
-  listnote5: Membránové materiály kombinují ochranu proti vodě a větru s prodyšností, což umožňuje komfort i při extrémních podmínkách.
-  listnote6: Funkční dresoviny spojují pružnost, prodyšnost a odvod vlhkosti, což zajišťuje optimální výkon a komfort při sportovní aktivitě.
+  listnote1: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote2: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote3: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote4: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote5: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote6: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote7: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
+  listnote8: Vestibulum sollicitudin sapien sit amet dui ornare volutpat. Praesent vestibulum ante vitae sollicitudin scelerisque.
 
 cta2:
   heading2: Nevíte, jaká látka je ta správná <br >pro vaši potřebu? Poradíme <br> vám s výběrem.
@@ -110,8 +114,9 @@ bottomSection:
   listheading1: Cyklovložky
   listheading2: Tkaniny
   listheading3: Elastické úplety
-  listheading4: Materiály s membránou
-  listheading5: Pásky, gumy, reflexní materiály
+  listheading4: Softshell
+  listheading5: Rukavičky
   listheading6: Dresoviny
-  listheading7: Individuální <br> poptávka
+  listheading7: Pásky, gumy, reflexní materiály
+  listheading8: Individuální <br> poptávka
 ---

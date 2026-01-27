@@ -60,15 +60,119 @@ collections:
       - { label: "Obsah", name: "body", widget: "markdown" }
       - { label: "Štítky", name: "tags", widget: "hidden", default: ["post"] }
 
-  # PRODUKTY (CS)
-  - label: "Produkty (CS)"
-    name: "products"
-    folder: "src/products"
+  # ========================================
+  # PRODUKTY (CS) - ORGANIZOVANÉ DLE KATEGORIÍ
+  # ========================================
+
+  # 1. CYKLOVLOŽKY
+  - label: "📦 Cyklovložky"
+    name: "products_cyklovlozky"
+    folder: "src/products/cyklovlozky"
     create: true
-    nested: { depth: 1 }
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
+    fields: &product_fields
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Cyklovložky",
+        }
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # 2. DRESOVINY
+  - label: "📦 Dresoviny"
+    name: "products_dresoviny"
+    folder: "src/products/dresoviny"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
     fields:
       - { label: "Název", name: "title", widget: "string" }
       - { label: "URL slug", name: "slug", widget: "string" }
@@ -104,17 +208,412 @@ collections:
             widget: "image",
             choose_url: false,
           }
-      - label: "Kategorie"
-        name: "category"
-        widget: "select"
-        options:
-          - "Cyklovložky"
-          - "Rukavičky"
-          - "Tkaniny"
-          - "Dresoviny"
-          - "Elastické úplety"
-          - "Softshell"
-          - "Pásky, gumy, reflexní materiály"
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Dresoviny",
+        }
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # 3. ELASTICKÉ ÚPLETY
+  - label: "📦 Elastické úplety"
+    name: "products_elasticke_uplety"
+    folder: "src/products/elasticke-uplety"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
+    fields:
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Elastické úplety",
+        }
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # 4. MATERIÁLY S MEMBRÁNOU
+  - label: "📦 Materiály s membránou"
+    name: "products_materialy_s_membranou"
+    folder: "src/products/materialy-s-membranou"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
+    fields:
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Materiály s membránou",
+        }
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # 5. PÁSKY, GUMY, REFLEXNÍ MATERIÁLY
+  - label: "📦 Pásky, gumy, reflexní materiály"
+    name: "products_pasky_gumy_reflexni"
+    folder: "src/products/pasky-gumy-reflexni-materialy"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
+    fields:
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Pásky, gumy, reflexní materiály",
+        }
+      - label: "Štítky/Labels"
+        name: "labels"
+        widget: "list"
+        required: false
+        hint: "Přidejte štítky jako #waterproof, #breathable, atd."
+        field:
+          {
+            label: "Štítek",
+            name: "label",
+            widget: "string",
+            hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
+          }
+      - label: "Parametry produktu"
+        name: "parameters"
+        widget: "list"
+        required: false
+        hint: "Přidejte technické parametry produktu (materiál, rozměry, hmotnost, atd.)"
+        fields:
+          - {
+              label: "Název parametru",
+              name: "name",
+              widget: "string",
+              hint: "Například: Materiál, Rozměry, Hmotnost, Barva",
+            }
+          - {
+              label: "Hodnota",
+              name: "value",
+              widget: "string",
+              hint: "Například: 100% polyester, 50x30cm, 200g",
+            }
+      - {
+          label: "Tagy",
+          name: "tags",
+          widget: "list",
+          default: ["product", "cs"],
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "hidden",
+          default: "layouts/product.njk",
+        }
+      - {
+          label: "Permalink",
+          name: "permalink",
+          widget: "hidden",
+          default: "/cs/katalog/{{ category | slug }}/{{ slug }}/",
+        }
+      - { label: "Obsah", name: "body", widget: "markdown", required: false }
+
+  # 6. TKANINY
+  - label: "📦 Tkaniny"
+    name: "products_tkaniny"
+    folder: "src/products/tkaniny"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} - {{price}} {{currency}}"
+    fields:
+      - { label: "Název", name: "title", widget: "string" }
+      - { label: "URL slug", name: "slug", widget: "string" }
+      - { label: "Cena", name: "price", widget: "number", required: false }
+      - {
+          label: "Měna",
+          name: "currency",
+          widget: "string",
+          default: "CZK",
+          required: false,
+        }
+      - {
+          label: "Krátký popis",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "Hlavní obrázek",
+          name: "image",
+          widget: "image",
+          choose_url: false,
+          required: false,
+        }
+      - label: "Galerie"
+        name: "images"
+        widget: "list"
+        required: false
+        field:
+          {
+            label: "Obrázek",
+            name: "image",
+            widget: "image",
+            choose_url: false,
+          }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "hidden",
+          default: "Tkaniny",
+        }
       - label: "Štítky/Labels"
         name: "labels"
         widget: "list"

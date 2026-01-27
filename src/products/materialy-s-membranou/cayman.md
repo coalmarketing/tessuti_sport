@@ -14,14 +14,14 @@ excerpt: |-
 
   https://youtu.be/kiTOykNTkE0
 image: /assets/images/cms/cayman.jpg
-category: Softshell
+category: Materiály s membránou
 labels:
   - nový
   - waterproof
   - softshell
 parameters:
   - name: Druh
-    value: Softshell
+    value: Materiál s membránou
   - name: Složení
     value: 91% Polyester / 9 % Polyuretan
   - name: Gramáž

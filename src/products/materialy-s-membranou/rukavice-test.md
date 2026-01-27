@@ -5,7 +5,7 @@ price: 599
 currency: CZK
 excerpt: Testovací rukavice s vodotěsným štítkem
 image: /assets/images/cms/divazus-fabric-store-6vjeqaemnia-unsplash-1.png
-category: Rukavičky
+category: Materiály s membránou
 labels:
   - label: waterproof
   - label: breathable

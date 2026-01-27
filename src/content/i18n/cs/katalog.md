@@ -1,7 +1,7 @@
 ---
 layout: "layouts/katalog.njk"
 title: "Katalog"
-description: "Projděte si náš katalog produktů rozdělený do kategorií. Najdete zde cyklovložky, rukavičky, tkaniny, dresoviny, elastické úplety, softshell a pásky, gumy i reflexní materiály."
+description: "Projděte si náš katalog produktů rozdělený do kategorií. Najdete zde cyklovložky, tkaniny, dresoviny, elastické úplety, materiály s membránou a pásky, gumy i reflexní materiály."
 permalink: "/cs/katalog/"
 
 eleventyNavigation:
@@ -41,9 +41,8 @@ bottomSection:
   listheading1: Cyklovložky
   listheading2: Tkaniny
   listheading3: Elastické úplety
-  listheading4: Softshell
-  listheading5: Rukavičky
+  listheading4: Materiály s membránou
+  listheading5: Pásky, gumy, reflexní materiály
   listheading6: Dresoviny
-  listheading7: Pásky, gumy, reflexní materiály
-  listheading8: Individuální <br> poptávka
+  listheading7: Individuální <br> poptávka
 ---
