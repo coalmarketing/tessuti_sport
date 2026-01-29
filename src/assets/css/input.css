@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* Normalize root font-size to prevent browser zoom differences */
+  /* Scale entire design system to 90% by reducing root font-size */
+  /* This scales all rem-based typography, spacing, and responsive fluid-tailwind values */
   html {
-    font-size: 16px !important; /* Force explicit base size - prevents browser default variations */
+    font-size: 14.4px !important; /* 90% of 16px = 14.4px - scales entire design system */
     -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjustment */
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -13,15 +14,15 @@
   }
 
   body {
-    font-size: 1rem !important; /* Ensure body uses rem based on 16px */
+    font-size: 1rem !important; /* Ensure body uses rem based on 14.4px root */
     min-height: 100vh;
     min-height: 100dvh; /* Use dynamic viewport height on mobile */
   }
 
-  /* CRITICAL: Fix viewport width calculation for fluid-tailwind clamp() functions */
+  /* CRITICAL: Maintain consistent base size across all viewports */
   @media (min-width: 320px) {
     html {
-      font-size: 16px !important;
+      font-size: 14.4px !important; /* Keep 90% scale on all devices */
     }
   }
 

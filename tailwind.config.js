@@ -11,6 +11,44 @@ module.exports = {
   theme: {
     fontSize: fontSize,
     screens: screens,
+    // Scale spacing to 90% to match the 90% root font-size reduction
+    spacing: {
+      px: "1px",
+      0: "0px",
+      0.5: "0.113rem", // 90% of 0.125rem (2px)
+      1: "0.225rem", // 90% of 0.25rem (4px)
+      1.5: "0.338rem", // 90% of 0.375rem (6px)
+      2: "0.45rem", // 90% of 0.5rem (8px)
+      2.5: "0.563rem", // 90% of 0.625rem (10px)
+      3: "0.675rem", // 90% of 0.75rem (12px)
+      3.5: "0.788rem", // 90% of 0.875rem (14px)
+      4: "0.9rem", // 90% of 1rem (16px)
+      5: "1.125rem", // 90% of 1.25rem (20px)
+      6: "1.35rem", // 90% of 1.5rem (24px)
+      7: "1.575rem", // 90% of 1.75rem (28px)
+      8: "1.8rem", // 90% of 2rem (32px)
+      9: "2.025rem", // 90% of 2.25rem (36px)
+      10: "2.25rem", // 90% of 2.5rem (40px)
+      11: "2.475rem", // 90% of 2.75rem (44px)
+      12: "2.7rem", // 90% of 3rem (48px)
+      14: "3.15rem", // 90% of 3.5rem (56px)
+      16: "3.6rem", // 90% of 4rem (64px)
+      20: "4.5rem", // 90% of 5rem (80px)
+      24: "5.4rem", // 90% of 6rem (96px)
+      28: "6.3rem", // 90% of 7rem (112px)
+      32: "7.2rem", // 90% of 8rem (128px)
+      36: "8.1rem", // 90% of 9rem (144px)
+      40: "9rem", // 90% of 10rem (160px)
+      44: "9.9rem", // 90% of 11rem (176px)
+      48: "10.8rem", // 90% of 12rem (192px)
+      52: "11.7rem", // 90% of 13rem (208px)
+      56: "12.6rem", // 90% of 14rem (224px)
+      60: "13.5rem", // 90% of 15rem (240px)
+      64: "14.4rem", // 90% of 16rem (256px)
+      72: "16.2rem", // 90% of 18rem (288px)
+      80: "18rem", // 90% of 20rem (320px)
+      96: "21.6rem", // 90% of 24rem (384px)
+    },
     extend: {
       fontFamily: {
         sans: ["Red Hat Text", defaultTheme.fontFamily.sans],
