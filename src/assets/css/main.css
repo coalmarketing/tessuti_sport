@@ -3088,21 +3088,6 @@ body,
   padding-right: clamp(0.9rem,0.26rem + 1.61vw,1.8rem)/* fluid from 0.9rem at 40rem to 1.8rem at 96rem */;
 }
 
-.\~px-5\/8 {
-  padding-left: clamp(1.125rem,0.643rem + 1.205vw,1.8rem)/* fluid from 1.125rem at 40rem to 1.8rem at 96rem */;
-  padding-right: clamp(1.125rem,0.643rem + 1.205vw,1.8rem)/* fluid from 1.125rem at 40rem to 1.8rem at 96rem */;
-}
-
-.\~px-3\/8 {
-  padding-left: clamp(0.675rem,-0.129rem + 2.009vw,1.8rem)/* fluid from 0.675rem at 40rem to 1.8rem at 96rem */;
-  padding-right: clamp(0.675rem,-0.129rem + 2.009vw,1.8rem)/* fluid from 0.675rem at 40rem to 1.8rem at 96rem */;
-}
-
-.\~px-6\/8 {
-  padding-left: clamp(1.35rem,1.03rem + 0.8vw,1.8rem)/* fluid from 1.35rem at 40rem to 1.8rem at 96rem */;
-  padding-right: clamp(1.35rem,1.03rem + 0.8vw,1.8rem)/* fluid from 1.35rem at 40rem to 1.8rem at 96rem */;
-}
-
 .scrollbar::-webkit-scrollbar-track {
   background-color: var(--scrollbar-track);
   border-radius: var(--scrollbar-track-radius);
@@ -4179,10 +4164,6 @@ html {
     max-width: 28rem;
   }
 
-  .md\:max-w-none {
-    max-width: none;
-  }
-
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4197,10 +4178,6 @@ html {
 
   .md\:justify-between {
     justify-content: space-between;
-  }
-
-  .md\:justify-evenly {
-    justify-content: space-evenly;
   }
 
   .md\:gap-12 {
@@ -4535,6 +4512,11 @@ html {
     padding: 1.8rem;
   }
 
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
   .lg\:px-12 {
     padding-left: 2.7rem;
     padding-right: 2.7rem;
@@ -4548,6 +4530,11 @@ html {
   .lg\:px-4 {
     padding-left: 0.9rem;
     padding-right: 0.9rem;
+  }
+
+  .lg\:px-40 {
+    padding-left: 9rem;
+    padding-right: 9rem;
   }
 
   .lg\:px-48 {
@@ -4593,31 +4580,6 @@ html {
   .lg\:py-6 {
     padding-top: 1.35rem;
     padding-bottom: 1.35rem;
-  }
-
-  .lg\:px-24 {
-    padding-left: 5.4rem;
-    padding-right: 5.4rem;
-  }
-
-  .lg\:px-32 {
-    padding-left: 7.2rem;
-    padding-right: 7.2rem;
-  }
-
-  .lg\:px-36 {
-    padding-left: 8.1rem;
-    padding-right: 8.1rem;
-  }
-
-  .lg\:px-40 {
-    padding-left: 9rem;
-    padding-right: 9rem;
-  }
-
-  .lg\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
   }
 
   .lg\:text-2xl {

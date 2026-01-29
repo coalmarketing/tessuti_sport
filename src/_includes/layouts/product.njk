@@ -42,9 +42,12 @@
           {% if images and images.length > 0 %}
             <div class="grid grid-cols-4 gap-4">
               {% for img in images %}
-                <div class="aspect-square overflow-hidden rounded border border-gray-300">
-                  <img src="{{ img.image }}" alt="{{ title }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80" loading="lazy">
-                </div>
+                {% set imgSrc = img.image if img.image else img %}
+                {% if imgSrc %}
+                  <div class="aspect-square overflow-hidden rounded border border-gray-300">
+                    <img src="{{ imgSrc }}" alt="{{ title }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80" loading="lazy">
+                  </div>
+                {% endif %}
               {% endfor %}
             </div>
           {% endif %}
