@@ -5,7 +5,7 @@
 @layer base {
   /* Normalize root font-size to prevent browser zoom differences */
   html {
-    font-size: 16px; /* Explicit base size - prevents browser default variations */
+    font-size: 16px !important; /* Force explicit base size - prevents browser default variations */
     -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjustment */
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -13,7 +13,16 @@
   }
 
   body {
-    font-size: 1rem; /* Ensure body uses rem based on 16px */
+    font-size: 1rem !important; /* Ensure body uses rem based on 16px */
+    min-height: 100vh;
+    min-height: 100dvh; /* Use dynamic viewport height on mobile */
+  }
+
+  /* CRITICAL: Fix viewport width calculation for fluid-tailwind clamp() functions */
+  @media (min-width: 320px) {
+    html {
+      font-size: 16px !important;
+    }
   }
 
   /* Typography - Ensure all headings use Gabarito with tight line-height, body text uses Red Hat Text */
