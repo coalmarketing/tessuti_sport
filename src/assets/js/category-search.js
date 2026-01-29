@@ -1,5 +1,5 @@
 /**
- * Product Search - Typeahead with diacritic normalization
+ * Category Search - Scoped search within a single category
  * Zero dependencies, vanilla JS
  */
 (function () {
@@ -7,45 +7,47 @@
 
   // Configuration
   const CONFIG = {
-    indexUrl: "/assets/data/products-index.json",
     maxResults: 10,
     minChars: 1,
   };
 
   // State
-  let productsIndex = [];
+  let categoryProducts = [];
   let currentFocus = -1;
   let isOpen = false;
+  let isSearchMode = false;
 
-  // DOM elements - Autocomplete
-  const searchInput = document.getElementById("product-search");
-  const autocompleteContainer = document.getElementById("search-autocomplete");
-  const noAutocompleteMsg = document.getElementById("search-no-autocomplete");
-  const searchButton = document.getElementById("search-button");
-
-  // DOM elements - Search Results View
-  const searchResultsHeader = document.getElementById("search-results-header");
-  const searchQueryDisplay = document.getElementById("search-query-display");
-  const searchQueryBreadcrumb = document.getElementById(
-    "search-query-breadcrumb"
+  // DOM elements - Search UI
+  const searchInput = document.getElementById("category-search");
+  const autocompleteContainer = document.getElementById(
+    "category-search-autocomplete"
   );
-  const searchResultsGrid = document.getElementById("searchResultsGrid");
-  const searchResultsSummary = document.getElementById(
-    "search-results-summary"
+  const noAutocompleteMsg = document.getElementById(
+    "category-search-no-autocomplete"
   );
-  const searchResultsCount = document.getElementById("search-results-count");
+  const searchButton = document.getElementById("category-search-button");
 
-  // DOM elements - Normal Catalog View
-  const gridView = document.getElementById("gridView");
-  const listView = document.getElementById("listView");
+  // DOM elements - Results Header
+  const searchResultsHeader = document.getElementById(
+    "category-search-results-header"
+  );
+  const searchQueryDisplay = document.getElementById(
+    "category-search-query-display"
+  );
+
+  // DOM elements - Products Grid
+  const productsGrid = document.getElementById("category-products-grid");
+  const labelFilters = document.getElementById("category-label-filters");
+  const resultsCounter = document.getElementById("resultsCounter");
 
   if (
     !searchInput ||
     !autocompleteContainer ||
     !noAutocompleteMsg ||
-    !searchButton
+    !searchButton ||
+    !productsGrid
   ) {
-    console.warn("Product search: Required elements not found");
+    console.warn("Category search: Required elements not found");
     return;
   }
 
@@ -132,7 +134,30 @@
   }
 
   /**
-   * Search products by title
+   * Build product index from DOM
+   */
+  function buildProductIndex() {
+    const productItems = productsGrid.querySelectorAll(".product-item");
+    categoryProducts = [];
+
+    productItems.forEach((item) => {
+      const title = item.dataset.productTitle || "";
+      const url = item.dataset.productUrl || "";
+
+      if (title && url) {
+        categoryProducts.push({
+          title: title,
+          url: url,
+          element: item,
+        });
+      }
+    });
+
+    console.log(`Category search: Loaded ${categoryProducts.length} products`);
+  }
+
+  /**
+   * Search products by title (category-scoped)
    */
   function searchProducts(query) {
     if (!query || query.length < CONFIG.minChars) return [];
@@ -140,7 +165,7 @@
     const normalizedQuery = normalize(query);
 
     // Filter and score results
-    const results = productsIndex
+    const results = categoryProducts
       .map((product) => {
         const normalizedTitle = normalize(product.title);
         const startsWith = normalizedTitle.startsWith(normalizedQuery);
@@ -184,9 +209,6 @@
       >
         <div class="font-semibold text-gray-900 font-heading text-sm md:text-base">
           ${highlightMatch(product.title, query)}
-        </div>
-        <div class="text-xs md:text-sm text-gray-500 mt-1 font-body">
-          ${escapeHtml(product.category)}
         </div>
       </a>
     `
@@ -257,26 +279,20 @@
   }
 
   /**
-   * Filter and show pre-rendered product cards based on search query
+   * Filter product cards based on search query
    */
   function filterProductCards(query) {
-    if (!searchResultsGrid) return 0;
-
     const normalizedQuery = normalize(query);
-    const productCards = searchResultsGrid.querySelectorAll(
-      ".search-product-card"
-    );
     let visibleCount = 0;
 
-    productCards.forEach((card) => {
-      const title = card.dataset.title || "";
-      const normalizedTitle = normalize(title);
+    categoryProducts.forEach((product) => {
+      const normalizedTitle = normalize(product.title);
 
       if (normalizedTitle.includes(normalizedQuery)) {
-        card.style.display = "";
+        product.element.style.display = "";
         visibleCount++;
       } else {
-        card.style.display = "none";
+        product.element.style.display = "none";
       }
     });
 
@@ -284,41 +300,34 @@
   }
 
   /**
-   * Show search results view using pre-rendered product cards
+   * Show search results view
    */
   function showSearchResults(query) {
     // Close autocomplete
     closeAutocomplete();
 
-    // Update header and breadcrumbs
+    // Update header
     if (searchQueryDisplay) searchQueryDisplay.textContent = query;
-    if (searchQueryBreadcrumb) searchQueryBreadcrumb.textContent = query;
-
-    // Hide normal catalog views
-    if (gridView) gridView.classList.add("hidden");
-    if (listView) listView.classList.add("hidden");
-
-    // Show search results header
     if (searchResultsHeader) searchResultsHeader.classList.remove("hidden");
+
+    // Hide label filters during search
+    if (labelFilters) labelFilters.classList.add("hidden");
 
     // Filter and show matching product cards
     const visibleCount = filterProductCards(query);
 
-    if (searchResultsGrid) {
-      searchResultsGrid.classList.remove("hidden");
+    // Update results counter
+    if (resultsCounter) {
+      resultsCounter.textContent = `Nalezeno ${visibleCount} produktů`;
     }
 
-    // Update and show results summary
-    if (searchResultsCount) searchResultsCount.textContent = visibleCount;
-    if (searchResultsSummary) searchResultsSummary.classList.remove("hidden");
-
-    // Add body class to indicate search mode
-    document.body.classList.add("is-searching");
+    // Mark as in search mode
+    isSearchMode = true;
+    document.body.classList.add("is-category-searching");
   }
 
   /**
-   * Exit search mode and return to normal catalog view
-   * This function is exposed globally for view toggle controls
+   * Exit search mode and return to normal category view
    */
   function exitSearchMode() {
     // Clear search input
@@ -327,17 +336,25 @@
     // Close autocomplete
     closeAutocomplete();
 
-    // Hide search results elements
+    // Hide search results header
     if (searchResultsHeader) searchResultsHeader.classList.add("hidden");
-    if (searchResultsGrid) searchResultsGrid.classList.add("hidden");
-    if (searchResultsSummary) searchResultsSummary.classList.add("hidden");
 
-    // Show normal catalog views
-    if (gridView) gridView.classList.remove("hidden");
-    // listView visibility is controlled by view toggle
+    // Show label filters again
+    if (labelFilters) labelFilters.classList.remove("hidden");
 
-    // Remove body class
-    document.body.classList.remove("is-searching");
+    // Show all products
+    categoryProducts.forEach((product) => {
+      product.element.style.display = "";
+    });
+
+    // Reset counter
+    if (resultsCounter) {
+      resultsCounter.textContent = `V kategorii se nachází ${categoryProducts.length} položek`;
+    }
+
+    // Mark as not in search mode
+    isSearchMode = false;
+    document.body.classList.remove("is-category-searching");
   }
 
   /**
@@ -392,7 +409,7 @@
   function handleInput() {
     const query = searchInput.value.trim();
 
-    // If search is cleared, return to normal catalog view
+    // If search is cleared, return to normal category view
     if (query.length === 0) {
       closeAutocomplete();
       exitSearchMode();
@@ -416,32 +433,17 @@
     const query = searchInput.value.trim();
     if (query.length >= CONFIG.minChars) {
       showSearchResults(query);
+    } else if (query.length === 0) {
+      exitSearchMode();
     }
   }
 
   /**
-   * Load products index
-   */
-  async function loadIndex() {
-    try {
-      const response = await fetch(CONFIG.indexUrl);
-      if (!response.ok) throw new Error("Failed to load search index");
-
-      productsIndex = await response.json();
-      console.log(`Product search: Loaded ${productsIndex.length} products`);
-    } catch (error) {
-      console.error("Product search: Failed to load index", error);
-      searchInput.disabled = true;
-      searchInput.placeholder = "Vyhledávání není k dispozici";
-    }
-  }
-
-  /**
-   * Initialize search
+   * Initialize category search
    */
   function init() {
-    // Load index (still used for autocomplete)
-    loadIndex();
+    // Build product index from DOM
+    buildProductIndex();
 
     // Event listeners
     searchInput.addEventListener("input", handleInput);
@@ -468,8 +470,8 @@
       }
     });
 
-    // Expose exitSearchMode globally for view toggle controls
-    window.productSearch = {
+    // Expose exitSearchMode globally for filter controls
+    window.categorySearch = {
       exitSearchMode: exitSearchMode,
     };
   }

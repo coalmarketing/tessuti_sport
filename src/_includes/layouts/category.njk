@@ -1,5 +1,41 @@
 {% extends "layouts/base.njk" %}
 
+{% block head %}
+<style>
+/* Category Search Enhancements */
+#category-search-autocomplete {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+#category-search-autocomplete::-webkit-scrollbar {
+  width: 8px;
+}
+
+#category-search-autocomplete::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#category-search-autocomplete::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.search-result:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.search-result:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+/* Search bar green background */
+.bg-green-50 {
+  background-color: #f0fdf4;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 <section class="py-16 ~px-4/8 bg-[#E92429]/20">
   <div class="container m-auto max-w-7xl">
@@ -18,8 +54,71 @@
     {% set categoryProducts = collections.products | categoryProducts(name) %}
     
     {% if categoryProducts | length > 0 %}
-      <!-- Collect all unique labels from products in this category -->
-      {% set allLabels = [] %}
+    <!-- Category Search -->
+    <div class="mb-8">
+      <div class="relative max-w-2xl">
+        <label for="category-search" class="sr-only">Vyhledat v kategorii {{ name }}</label>
+        
+        <!-- Search Bar with Icon, Input, and Button -->
+        <div class="flex items-center gap-2 bg-green-50 rounded-xl p-2" data-search-scope="category" data-category-name="{{ name }}">
+          <!-- Magnifier Icon Box -->
+          <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-[#00A44F]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          
+          <!-- Input Field (with autocomplete dropdown) -->
+          <div class="relative flex-1">
+            <input
+              type="text"
+              id="category-search"
+              placeholder="Vyhledat v kategorii..."
+              autocomplete="off"
+              class="w-full px-4 py-2 md:py-3 bg-white rounded-lg border-2 border-transparent focus:border-[#00A44F] focus:outline-none text-base md:text-lg font-body transition-colors"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="category-search-autocomplete"
+            />
+            
+            <!-- Autocomplete Dropdown -->
+            <div
+              id="category-search-autocomplete"
+              role="listbox"
+              class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto left-0"
+              aria-label="Návrhy produktů"
+            >
+              <!-- Suggestions injected by JS -->
+            </div>
+            
+            <!-- No Autocomplete Results -->
+            <div id="category-search-no-autocomplete" class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-lg px-4 py-3 left-0">
+              <p class="text-gray-600 text-sm md:text-base font-body">Žádné produkty nenalezeny</p>
+            </div>
+          </div>
+          
+          <!-- Search Button -->
+          <button
+            type="button"
+            id="category-search-button"
+            class="flex-shrink-0 px-6 md:px-8 py-2 md:py-3 bg-[#00A44F] hover:bg-green-700 text-white font-semibold rounded-lg transition-colors text-base md:text-lg font-body"
+          >
+            Vyhledat
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Search Results Header (hidden by default) -->
+    <div id="category-search-results-header" class="hidden mb-6">
+      <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 font-heading">
+        Vyhledávání v kategorii {{ name }}: "<span id="category-search-query-display"></span>"
+      </h2>
+    </div>
+
+    <!-- Collect all unique labels from products in this category -->
+    {% set allLabels = [] %}
       {% for product in categoryProducts %}
         {% if product.data.labels %}
           {% for label in product.data.labels %}
@@ -33,7 +132,7 @@
 
       <!-- Label Filters -->
       {% if allLabels.length > 0 %}
-        <div class="mb-8">
+        <div class="mb-8" id="category-label-filters">
           <div class="mb-4">
             <span class="text-lg font-semibold">Filtry:</span>
           </div>
@@ -55,7 +154,7 @@
       {% endif %}
 
       <!-- Products Grid -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8" id="category-products-grid" data-category-products="{{ name }}">
         {% for p in categoryProducts %}
           {% set productLabels = [] %}
           {% if p.data.labels %}
@@ -64,7 +163,10 @@
               {% set productLabels = productLabels.concat([labelText]) %}
             {% endfor %}
           {% endif %}
-          <div class="product-item" data-labels="{{ productLabels | join(',') }}">
+          <div class="product-item" 
+               data-labels="{{ productLabels | join(',') }}"
+               data-product-title="{{ p.data.title | lower }}"
+               data-product-url="{{ p.url }}">
             {% include "components/product-card.njk" %}
           </div>
         {% endfor %}
@@ -113,6 +215,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function clearAllFilters() {
+    // Exit search mode when using filters
+    if (window.categorySearch && window.categorySearch.exitSearchMode) {
+      window.categorySearch.exitSearchMode();
+    }
+    
     activeFilters = [];
     
     // Reset all filter buttons
@@ -130,6 +237,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function toggleFilter(label, button) {
+    // Exit search mode when using filters
+    if (window.categorySearch && window.categorySearch.exitSearchMode) {
+      window.categorySearch.exitSearchMode();
+    }
+    
     const index = activeFilters.indexOf(label);
     
     if (index === -1) {
@@ -174,4 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
   clearAllFilters();
 });
 </script>
+
+<!-- Category Search Script -->
+<script src="/assets/js/category-search.js"></script>
 {% endblock %}

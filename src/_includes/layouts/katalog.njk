@@ -11,20 +11,20 @@
 }
 
 /* Product Search Enhancements */
-#search-results {
+#search-autocomplete {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-#search-results::-webkit-scrollbar {
+#search-autocomplete::-webkit-scrollbar {
   width: 8px;
 }
 
-#search-results::-webkit-scrollbar-track {
+#search-autocomplete::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#search-results::-webkit-scrollbar-thumb {
+#search-autocomplete::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 }
@@ -35,6 +35,11 @@
 
 .search-result:last-child {
   border-radius: 0 0 6px 6px;
+}
+
+/* Search bar green background */
+.bg-green-50 {
+  background-color: #f0fdf4;
 }
 </style>
 {% endblock %}
@@ -50,40 +55,72 @@
 
     <!-- Product Search -->
     <div class="mb-8 md:mb-10">
-      <div class="relative max-w-2xl mx-auto">
+      <div class="relative max-w-2xl">
         <label for="product-search" class="sr-only">Vyhledat produkt</label>
-        <div class="relative">
-          <input
-            type="text"
-            id="product-search"
-            placeholder="Vyhledat produkt..."
-            autocomplete="off"
-            class="w-full px-4 py-3 md:py-4 pr-10 border-2 border-gray-300 rounded-lg focus:border-[#E92429] focus:outline-none focus:ring-2 focus:ring-[#E92429]/20 text-base md:text-lg font-body transition-colors"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-controls="search-results"
-          />
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </div>
         
-        <!-- Results Dropdown -->
-        <div
-          id="search-results"
-          role="listbox"
-          class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
-          aria-label="Výsledky vyhledávání"
-        >
-          <!-- Results injected by JS -->
-        </div>
-        
-        <!-- No Results Message -->
-        <div id="search-no-results" class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-lg px-4 py-3">
-          <p class="text-gray-600 text-sm md:text-base font-body">Žádné produkty nenalezeny</p>
+        <!-- Search Bar with Icon, Input, and Button -->
+        <div class="flex items-center gap-2 bg-green-50 rounded-xl p-2">
+          <!-- Magnifier Icon Box -->
+          <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-white rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-[#00A44F]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          
+          <!-- Input Field (with autocomplete dropdown) -->
+          <div class="relative flex-1">
+            <input
+              type="text"
+              id="product-search"
+              placeholder="Vyhledat produkt..."
+              autocomplete="off"
+              class="w-full px-4 py-2 md:py-3 bg-white rounded-lg border-2 border-transparent focus:border-[#00A44F] focus:outline-none text-base md:text-lg font-body transition-colors"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="search-autocomplete"
+            />
+            
+            <!-- Autocomplete Dropdown (unchanged) -->
+            <div
+              id="search-autocomplete"
+              role="listbox"
+              class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto left-0"
+              aria-label="Návrhy produktů"
+            >
+              <!-- Suggestions injected by JS -->
+            </div>
+            
+            <!-- No Autocomplete Results -->
+            <div id="search-no-autocomplete" class="hidden absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-lg px-4 py-3 left-0">
+              <p class="text-gray-600 text-sm md:text-base font-body">Žádné produkty nenalezeny</p>
+            </div>
+          </div>
+          
+          <!-- Search Button -->
+          <button
+            type="button"
+            id="search-button"
+            class="flex-shrink-0 px-6 md:px-8 py-2 md:py-3 bg-[#00A44F] hover:bg-green-700 text-white font-semibold rounded-lg transition-colors text-base md:text-lg font-body"
+          >
+            Vyhledat
+          </button>
         </div>
       </div>
+    </div>
+    
+    <!-- Search Results Header (hidden by default) -->
+    <div id="search-results-header" class="hidden mb-6 md:mb-8">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-heading">
+        Vyhledávání: "<span id="search-query-display"></span>"
+      </h1>
+      <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
+        <span class="mx-2">»</span>
+        <a href="/cs/katalog" class="hover:text-[#E92429]">Katalog</a>
+        <span class="mx-2">»</span>
+        <span>Vyhledávání: "<span id="search-query-breadcrumb"></span>"</span>
+      </nav>
     </div>
 
     <!-- View Toggle Controls -->
@@ -182,6 +219,28 @@
           </a>
         </div>
       {% endfor %}
+    </div>
+    
+    <!-- Search Results Grid (hidden by default) -->
+    <div id="searchResultsGrid" class="hidden">
+      <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+        <!-- Pre-rendered product cards for search results -->
+        {% for p in collections.products %}
+          <div class="search-product-card" 
+               data-title="{{ p.data.title | lower }}"
+               data-category="{{ p.data.category }}"
+               style="display: none;">
+            {% include "components/product-card.njk" %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <!-- Search Results Summary -->
+    <div id="search-results-summary" class="hidden text-center mt-8 py-4">
+      <p class="text-base md:text-lg text-gray-700 font-body">
+        Výsledky vyhledávání obsahují <span id="search-results-count" class="font-semibold">0</span> položky.
+      </p>
     </div>
   </div>
 </section>
@@ -353,6 +412,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const listView = document.getElementById('listView');
 
   function showGridView() {
+    // Exit search mode when toggling views
+    if (window.productSearch && window.productSearch.exitSearchMode) {
+      window.productSearch.exitSearchMode();
+    }
+    
     gridView.classList.remove('hidden');
     listView.classList.add('hidden');
     listView.classList.remove('grid');
@@ -363,6 +427,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function showListView() {
+    // Exit search mode when toggling views
+    if (window.productSearch && window.productSearch.exitSearchMode) {
+      window.productSearch.exitSearchMode();
+    }
+    
     gridView.classList.add('hidden');
     listView.classList.remove('hidden');
     listView.classList.add('grid');
