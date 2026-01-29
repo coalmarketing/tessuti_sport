@@ -31,6 +31,7 @@ parameters:
 tags:
   - product
   - cs
+download_pdf: /assets/images/cms/manta_front.png
 layout: layouts/product.njk
 permalink: /cs/katalog/{{ category | slug }}/{{ slug }}/
 ---

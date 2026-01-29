@@ -63,7 +63,7 @@
 
 {% block body %}
     <!-- HERO SECTION -->
-    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 relative overflow-hidden lg:bg-[url('/assets/images/hero/MaskHero.png')] bg-white" style="background-size: 100%; background-position: right top; background-repeat: no-repeat;">
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-48 relative overflow-hidden lg:bg-[url('/assets/images/hero/MaskHero.png')] bg-white" style="background-size: 100%; background-position: right top; background-repeat: no-repeat;">
         <!-- Content Container -->
         <div class="container m-auto mt-16 min-h-[35vh] md:h-[35vh] lg:h-[80vh] lg:mt-0 flex items-center relative z-10">
             <div class="w-full text-left mb-4 md:mb-8 lg:mb-16 flex flex-col gap-3 md:gap-4 lg:gap-6">
@@ -86,15 +86,15 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#E92429]">
-        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8">
-            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-none font-heading leading-normal md:leading-normal lg:leading-normal">{{ cta.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="/cs/katalog" class="text-lg md:text-2xl lg:text-4xl flex px-6 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl bg-white text-[#E92429] whitespace-nowrap font-body">{{ cta.btnCTA }}</a>{% endif %}
+    <section class="py-6 md:py-10 lg:py-14 px-4 md:px-8 lg:px-48 bg-[#E92429]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-5 md:gap-6">
+            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-md lg:max-w-7xl font-heading leading-tight md:leading-tight lg:leading-tight">{{ cta.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="/cs/katalog" class="text-base md:text-xl lg:text-3xl flex px-5 md:px-10 lg:px-12 py-2.5 md:py-3.5 lg:py-4 rounded-xl bg-white text-[#E92429] whitespace-nowrap font-body">{{ cta.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
     <!-- SECTION 2 -->
-    <section id="o-nas" class="py-12 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16">
+    <section id="o-nas" class="py-12 md:py-16 lg:py-24 px-4 md:px-8 lg:px-40">
         <div class="container m-auto">
             <div class="grid gap-8 lg:gap-12 md:grid-cols-2">
                 <div class="px-2 md:px-4 lg:px-8">
@@ -141,7 +141,7 @@
         </div>
     </section>
     <!-- News from catalogue -->
-    <section id="novinky" class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#B8E8D1]">
+    <section id="novinky" class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-48 bg-[#B8E8D1]">
         <div class="container m-auto">
             <!-- Section Title -->
             <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-[#00A44F] mb-2 md:mb-3 lg:mb-4 font-heading">Novinky</h2>
@@ -223,7 +223,7 @@
     </section>
 
     <!-- Partners Section -->
-    <section class="py-8 md:py-12 lg:py-12 px-4 md:px-8 lg:px-16 bg-white border-t-dashed-custom-red">
+    <section class="py-8 md:py-12 lg:py-12 px-4 md:px-8 lg:px-48 bg-white border-t-dashed-custom-red">
         <div class="container m-auto">
             <!-- Section Title -->
             <div class="text-center mb-8 md:mb-12 lg:mb-16">
@@ -259,7 +259,7 @@
             </div>
         </div>
     </section>
-    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#E92429]/20">
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-48 bg-[#E92429]/20">
         <div class="container m-auto flex flex-col">
             {% if section4.heading1 %}<h3 class="text-2xl md:text-4xl lg:text-6xl font-bold text-left text-black font-heading leading-normal md:leading-normal lg:leading-normal">{{ section4.heading1 | safe }}</h3>{% endif %}
             {% if section4.subheading1 %}<h4 class="text-2xl md:text-4xl lg:text-6xl text-[#E92429] font-bold mb-8 md:mb-12 font-heading leading-normal md:leading-normal lg:leading-normal">{{ section4.subheading1 | safe }}</h4>{% endif %}
@@ -309,15 +309,15 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#00A44F]">
-        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8">
-            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-none font-heading leading-normal md:leading-normal lg:leading-normal">{{ cta2.heading2 | safe }}</h2>{% endif %}
-            {% if cta.btnCTA %}<a href="#contact-form" class="text-lg md:text-2xl lg:text-4xl flex px-6 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl bg-white text-[#00A44F] whitespace-nowrap font-body">{{ cta2.btnCTA }}</a>{% endif %}
+    <section class="py-6 md:py-10 lg:py-14 px-4 md:px-8 lg:px-48 bg-[#00A44F]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-5 md:gap-6">
+            {% if cta.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-md lg:max-w-7xl font-heading leading-tight md:leading-tight lg:leading-tight">{{ cta2.heading2 | safe }}</h2>{% endif %}
+            {% if cta.btnCTA %}<a href="#contact-form" class="text-base md:text-xl lg:text-3xl flex px-5 md:px-10 lg:px-12 py-2.5 md:py-3.5 lg:py-4 rounded-xl bg-white text-[#00A44F] whitespace-nowrap font-body">{{ cta2.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16" id="contact-form">
+    <section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-48" id="contact-form">
         <div class="container m-auto">
             {% if contact.heading %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-block font-heading">{{ contact.heading }}</h2>{% endif %}
             {% if contact.note %}<p class="text-lg md:text-xl text-neutral-600 mb-6 md:mb-8 text-block font-body">{{ contact.note }}</p>{% endif %}
@@ -372,7 +372,7 @@
     </section>
 
     <!-- FOOTER SECTION -->
-    <section class="bg-white py-8 md:py-12 px-4 md:px-8 lg:px-16">
+    <section class="bg-white py-8 md:py-12 px-4 md:px-8 lg:px-48">
         <div class="container m-auto">
             <svg 
                 alt="Tessuti Logo" 

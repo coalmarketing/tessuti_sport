@@ -784,6 +784,22 @@ body {
   }
 }
 
+/* Homepage-only: Reduce container width to ~90% for more centered layout with whitespace */
+
+body.home .container {
+  max-width: 90%;
+}
+
+/* On mobile, keep reasonable padding to avoid content touching edges */
+
+@media (max-width: 768px) {
+  body.home .container {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* Typography - Ensure all headings use Gabarito with tight line-height, body text uses Red Hat Text */
 
 h1,
@@ -1791,6 +1807,10 @@ body,
   margin-left: 0.45rem;
 }
 
+.mr-1 {
+  margin-right: 0.225rem;
+}
+
 .mr-2 {
   margin-right: 0.45rem;
 }
@@ -2094,10 +2114,6 @@ body,
   max-width: 56rem;
 }
 
-.max-w-7xl {
-  max-width: 80rem;
-}
-
 .max-w-\[75ch\] {
   max-width: 75ch;
 }
@@ -2217,6 +2233,10 @@ body,
 
 .gap-4 {
   gap: 0.9rem;
+}
+
+.gap-5 {
+  gap: 1.125rem;
 }
 
 .gap-6 {
@@ -2628,6 +2648,11 @@ body,
   padding-right: 0.9rem;
 }
 
+.px-5 {
+  padding-left: 1.125rem;
+  padding-right: 1.125rem;
+}
+
 .px-6 {
   padding-left: 1.35rem;
   padding-right: 1.35rem;
@@ -2658,6 +2683,11 @@ body,
   padding-bottom: 0.45rem;
 }
 
+.py-2\.5 {
+  padding-top: 0.563rem;
+  padding-bottom: 0.563rem;
+}
+
 .py-24 {
   padding-top: 5.4rem;
   padding-bottom: 5.4rem;
@@ -2676,6 +2706,11 @@ body,
 .py-4 {
   padding-top: 0.9rem;
   padding-bottom: 0.9rem;
+}
+
+.py-6 {
+  padding-top: 1.35rem;
+  padding-bottom: 1.35rem;
 }
 
 .py-8 {
@@ -2920,6 +2955,12 @@ body,
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -3045,6 +3086,21 @@ body,
 .\~px-4\/8 {
   padding-left: clamp(0.9rem,0.26rem + 1.61vw,1.8rem)/* fluid from 0.9rem at 40rem to 1.8rem at 96rem */;
   padding-right: clamp(0.9rem,0.26rem + 1.61vw,1.8rem)/* fluid from 0.9rem at 40rem to 1.8rem at 96rem */;
+}
+
+.\~px-5\/8 {
+  padding-left: clamp(1.125rem,0.643rem + 1.205vw,1.8rem)/* fluid from 1.125rem at 40rem to 1.8rem at 96rem */;
+  padding-right: clamp(1.125rem,0.643rem + 1.205vw,1.8rem)/* fluid from 1.125rem at 40rem to 1.8rem at 96rem */;
+}
+
+.\~px-3\/8 {
+  padding-left: clamp(0.675rem,-0.129rem + 2.009vw,1.8rem)/* fluid from 0.675rem at 40rem to 1.8rem at 96rem */;
+  padding-right: clamp(0.675rem,-0.129rem + 2.009vw,1.8rem)/* fluid from 0.675rem at 40rem to 1.8rem at 96rem */;
+}
+
+.\~px-6\/8 {
+  padding-left: clamp(1.35rem,1.03rem + 0.8vw,1.8rem)/* fluid from 1.35rem at 40rem to 1.8rem at 96rem */;
+  padding-right: clamp(1.35rem,1.03rem + 0.8vw,1.8rem)/* fluid from 1.35rem at 40rem to 1.8rem at 96rem */;
 }
 
 .scrollbar::-webkit-scrollbar-track {
@@ -3651,6 +3707,10 @@ html {
   background-color: rgb(0 164 79 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-\[\#00A44F\]\/90:hover {
+  background-color: rgb(0 164 79 / 0.9);
+}
+
 .hover\:bg-\[\#E92429\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(233 36 41 / var(--tw-bg-opacity, 1));
@@ -4115,6 +4175,10 @@ html {
     width: auto;
   }
 
+  .md\:max-w-md {
+    max-width: 28rem;
+  }
+
   .md\:max-w-none {
     max-width: none;
   }
@@ -4133,6 +4197,10 @@ html {
 
   .md\:justify-between {
     justify-content: space-between;
+  }
+
+  .md\:justify-evenly {
+    justify-content: space-evenly;
   }
 
   .md\:gap-12 {
@@ -4209,6 +4277,11 @@ html {
     padding: 1.8rem;
   }
 
+  .md\:px-10 {
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
+
   .md\:px-12 {
     padding-left: 2.7rem;
     padding-right: 2.7rem;
@@ -4234,6 +4307,11 @@ html {
     padding-right: 1.8rem;
   }
 
+  .md\:py-10 {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+
   .md\:py-12 {
     padding-top: 2.7rem;
     padding-bottom: 2.7rem;
@@ -4257,6 +4335,11 @@ html {
   .md\:py-3 {
     padding-top: 0.675rem;
     padding-bottom: 0.675rem;
+  }
+
+  .md\:py-3\.5 {
+    padding-top: 0.788rem;
+    padding-bottom: 0.788rem;
   }
 
   .md\:py-4 {
@@ -4318,6 +4401,10 @@ html {
 
   .md\:leading-normal {
     line-height: 1.5;
+  }
+
+  .md\:leading-tight {
+    line-height: 1.25;
   }
 }
 
@@ -4382,6 +4469,10 @@ html {
     width: 1.35rem;
   }
 
+  .lg\:max-w-7xl {
+    max-width: 80rem;
+  }
+
   .lg\:translate-x-4 {
     --tw-translate-x: 0.9rem;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4444,6 +4535,11 @@ html {
     padding: 1.8rem;
   }
 
+  .lg\:px-12 {
+    padding-left: 2.7rem;
+    padding-right: 2.7rem;
+  }
+
   .lg\:px-16 {
     padding-left: 3.6rem;
     padding-right: 3.6rem;
@@ -4454,6 +4550,11 @@ html {
     padding-right: 0.9rem;
   }
 
+  .lg\:px-48 {
+    padding-left: 10.8rem;
+    padding-right: 10.8rem;
+  }
+
   .lg\:px-8 {
     padding-left: 1.8rem;
     padding-right: 1.8rem;
@@ -4462,6 +4563,11 @@ html {
   .lg\:py-12 {
     padding-top: 2.7rem;
     padding-bottom: 2.7rem;
+  }
+
+  .lg\:py-14 {
+    padding-top: 3.15rem;
+    padding-bottom: 3.15rem;
   }
 
   .lg\:py-2 {
@@ -4479,9 +4585,39 @@ html {
     padding-bottom: 7.2rem;
   }
 
+  .lg\:py-4 {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
   .lg\:py-6 {
     padding-top: 1.35rem;
     padding-bottom: 1.35rem;
+  }
+
+  .lg\:px-24 {
+    padding-left: 5.4rem;
+    padding-right: 5.4rem;
+  }
+
+  .lg\:px-32 {
+    padding-left: 7.2rem;
+    padding-right: 7.2rem;
+  }
+
+  .lg\:px-36 {
+    padding-left: 8.1rem;
+    padding-right: 8.1rem;
+  }
+
+  .lg\:px-40 {
+    padding-left: 9rem;
+    padding-right: 9rem;
+  }
+
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .lg\:text-2xl {
@@ -4526,6 +4662,10 @@ html {
 
   .lg\:leading-normal {
     line-height: 1.5;
+  }
+
+  .lg\:leading-tight {
+    line-height: 1.25;
   }
 
   .lg\:opacity-0 {

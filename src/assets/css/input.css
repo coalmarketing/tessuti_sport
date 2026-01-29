@@ -26,6 +26,20 @@
     }
   }
 
+  /* Homepage-only: Reduce container width to ~90% for more centered layout with whitespace */
+  body.home .container {
+    max-width: 90%;
+  }
+
+  /* On mobile, keep reasonable padding to avoid content touching edges */
+  @media (max-width: 768px) {
+    body.home .container {
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
   /* Typography - Ensure all headings use Gabarito with tight line-height, body text uses Red Hat Text */
   h1,
   h2,

@@ -81,7 +81,7 @@ section4:
   listnote6: Funkční dresoviny spojují pružnost, prodyšnost a odvod vlhkosti, což zajišťuje optimální výkon a komfort při sportovní aktivitě.
 
 cta2:
-  heading2: Nevíte, jaká látka je ta správná <br >pro vaši potřebu? Poradíme <br> vám s výběrem.
+  heading2: Nevíte, který materiál je ten správný pro vaši potřebu? Kontaktujte nás, poradíme vám s výběrem a domluvíme se na dodání zboží přesně pro potřeby vaší firmy.
   btnCTA: Kontaktní formulář
 
 contact:

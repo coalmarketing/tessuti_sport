@@ -45,8 +45,8 @@
 {% endblock %}
 
 {% block body %}
-<section class="py-16 ~px-4/8 bg-[#E92429]/20">
-  <div class="container m-auto max-w-3xl px-4 md:px-8 lg:px-16">
+<section class="py-16 ~px-4/8 bg-[#E92429]/20 lg:px-48">
+  <div class="container m-auto max-w-3xl px-4 md:px-8 lg:px-0">
     <!-- Header -->
     <div class="mb-6 md:mb-8 mt-12 md:mt-16">
       <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-heading">{{ heading or title }}</h1>
@@ -125,7 +125,7 @@
 
     <!-- View Toggle Controls -->
 
-    <div class="flex justify-center md:justify-end items-center mb-6">
+    <div class="flex justify-center md:justify-end items-center mb-6 lg:px-16">
       <div class="flex items-center space-x-2">
         <span class="text-base md:text-lg text-grey-800 font-body">Zobrazení:</span>
         <div class="flex border rounded overflow-hidden">
@@ -152,7 +152,7 @@
     </div>
 
     <!-- Grid View -->
-    <div id="gridView" class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+    <div id="gridView" class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:px-16">
       {% set staticCategories = [
         {
           name: "Cyklovložky",
@@ -198,7 +198,7 @@
     </div>
 
     <!-- List View -->
-    <div id="listView" class="grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 hidden">
+    <div id="listView" class="grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 hidden lg:px-16">
       {% for cat in staticCategories %}
         <div class="flex items-center justify-between px-3 md:px-4 py-3 md:py-4 border-dashed-custom rounded-lg bg-white hover:shadow-md transition-shadow gap-3">
           <div class="flex items-center space-x-3 md:space-x-6 flex-1 min-w-0">
@@ -223,7 +223,7 @@
     
     <!-- Search Results Grid (hidden by default) -->
     <div id="searchResultsGrid" class="hidden">
-      <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+      <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:px-16">
         <!-- Pre-rendered product cards for search results -->
         {% for p in collections.products %}
           <div class="search-product-card" 
@@ -246,15 +246,15 @@
 </section>
 
 <!-- CTA SECTION -->
-<section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#00A44F]">
-        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8">
-            {% if cta2.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-none font-heading leading-normal md:leading-normal lg:leading-normal">{{ cta2.heading2 | safe }}</h2>{% endif %}
-            {% if cta2.btnCTA %}<a href="#contact-form" class="text-lg md:text-2xl lg:text-4xl flex px-6 md:px-12 lg:px-16 py-3 md:py-4 lg:py-6 rounded-xl bg-white text-[#00A44F] whitespace-nowrap font-body">{{ cta2.btnCTA }}</a>{% endif %}
+<section class="py-6 md:py-10 lg:py-14 px-4 md:px-8 lg:px-48 bg-[#00A44F]">
+        <div class="container m-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-5 md:gap-6">
+            {% if cta2.heading2 %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-0 text-center md:text-left text-white max-w-xs md:max-w-md lg:max-w-7xl font-heading leading-tight md:leading-tight lg:leading-tight">{{ cta2.heading2 | safe }}</h2>{% endif %}
+            {% if cta2.btnCTA %}<a href="#contact-form" class="text-base md:text-xl lg:text-3xl flex px-5 md:px-10 lg:px-12 py-2.5 md:py-3.5 lg:py-4 rounded-xl bg-white text-[#00A44F] whitespace-nowrap font-body">{{ cta2.btnCTA }}</a>{% endif %}
         </div>
     </section>
 
 <!-- CONTACT SECTION -->
-<section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-16" id="contact-form">
+<section class="py-8 md:py-16 lg:py-24 px-4 md:px-8 lg:px-48" id="contact-form">
     <div class="container m-auto">
         {% if contact.heading %}<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-block leading-[1.1] font-heading">{{ contact.heading }}</h2>{% endif %}
         {% if contact.note %}<p class="text-lg md:text-xl text-neutral-600 mb-6 md:mb-8 text-block font-body">{{ contact.note }}</p>{% endif %}
@@ -305,7 +305,7 @@
 
 
 <!-- FOOTER SECTION -->
-<section class="bg-white py-8 md:py-12 px-4 md:px-8 lg:px-16">
+<section class="bg-white py-8 md:py-12 px-4 md:px-8 lg:px-48">
         <div class="container m-auto">
             <svg 
                 alt="Tessuti Logo" 

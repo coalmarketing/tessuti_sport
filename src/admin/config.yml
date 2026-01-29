@@ -151,6 +151,14 @@ collections:
           default: ["product", "cs"],
         }
       - {
+          label: "PDF ke stažení",
+          name: "download_pdf",
+          widget: "file",
+          required: false,
+          hint: "Nahrajte PDF soubor s detailními informacemi o produktu (technický list, certifikát, atd.)",
+          media_library: { config: { max_file_size: 10485760 } },
+        }
+      - {
           label: "Layout",
           name: "layout",
           widget: "hidden",
@@ -249,6 +257,14 @@ collections:
           name: "tags",
           widget: "list",
           default: ["product", "cs"],
+        }
+      - {
+          label: "PDF ke stažení",
+          name: "download_pdf",
+          widget: "file",
+          required: false,
+          hint: "Nahrajte PDF soubor s detailními informacemi o produktu (technický list, certifikát, atd.)",
+          media_library: { config: { max_file_size: 10485760 } },
         }
       - {
           label: "Layout",
@@ -351,6 +367,14 @@ collections:
           default: ["product", "cs"],
         }
       - {
+          label: "PDF ke stažení",
+          name: "download_pdf",
+          widget: "file",
+          required: false,
+          hint: "Nahrajte PDF soubor s detailními informacemi o produktu (technický list, certifikát, atd.)",
+          media_library: { config: { max_file_size: 10485760 } },
+        }
+      - {
           label: "Layout",
           name: "layout",
           widget: "hidden",
@@ -451,6 +475,14 @@ collections:
           default: ["product", "cs"],
         }
       - {
+          label: "PDF ke stažení",
+          name: "download_pdf",
+          widget: "file",
+          required: false,
+          hint: "Nahrajte PDF soubor s detailními informacemi o produktu (technický list, certifikát, atd.)",
+          media_library: { config: { max_file_size: 10485760 } },
+        }
+      - {
           label: "Layout",
           name: "layout",
           widget: "hidden",
@@ -549,6 +581,14 @@ collections:
           name: "tags",
           widget: "list",
           default: ["product", "cs"],
+        }
+      - {
+          label: "PDF ke stažení",
+          name: "download_pdf",
+          widget: "file",
+          required: false,
+          hint: "Nahrajte PDF soubor s detailními informacemi o produktu (technický list, certifikát, atd.)",
+          media_library: { config: { max_file_size: 10485760 } },
         }
       - {
           label: "Layout",
