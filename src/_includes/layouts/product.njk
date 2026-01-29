@@ -31,10 +31,15 @@
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
         
         <!-- Product Image -->
-        <div class="space-y-4">
+        <div class="space-y-4" data-gallery>
           {% if image %}
-            <div class="aspect-[3/3] overflow-hidden rounded-lg  border-gray-400">
-              <img src="{{ image }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy">
+            <div class="aspect-[3/3] overflow-hidden rounded-lg border-gray-400">
+              <img src="{{ image }}" 
+                   alt="{{ title }}" 
+                   class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" 
+                   loading="lazy"
+                   data-gallery-item
+                   data-index="0">
             </div>
           {% endif %}
           
@@ -45,7 +50,12 @@
                 {% set imgSrc = img.image if img.image else img %}
                 {% if imgSrc %}
                   <div class="aspect-square overflow-hidden rounded border border-gray-300">
-                    <img src="{{ imgSrc }}" alt="{{ title }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80" loading="lazy">
+                    <img src="{{ imgSrc }}" 
+                         alt="{{ title }}" 
+                         class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity" 
+                         loading="lazy"
+                         data-gallery-item
+                         data-index="{{ loop.index }}">
                   </div>
                 {% endif %}
               {% endfor %}
@@ -229,4 +239,6 @@
     </div>
   </div>
 </section>
+
+<script src="/assets/js/gallery-lightbox.js"></script>
 {% endblock %}

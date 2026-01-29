@@ -1,7 +1,7 @@
 <div class="border-2 border-dashed-custom border-gray-400 rounded-lg p-6 bg-white hover:shadow-lg transition-shadow group">
   {% if cat.image %}
-    <div class="mb-4 overflow-hidden rounded">
-      <img src="{{ cat.image }}" alt="{{ cat.name }}" class="w-full h-40 object-cover">
+    <div class="mb-4 overflow-hidden rounded aspect-[16/10]">
+      <img src="{{ cat.image }}" alt="{{ cat.name }}" class="w-full h-full object-cover">
     </div>
   {% endif %}
   
