@@ -3,8 +3,8 @@ title: Manta test
 slug: manta-test
 price: 195
 currency: CZK  bez DPH
-excerpt: Manta, nejnovější vývojový typ v nabídce firmy Teosport. Cyklovložka má
-  tvar půlměsíce. Toto inovační řešení je jedinečné a nelze jej nalézt na
+excerpt: "Manta, nejnovější vývojový typ v nabídce firmy Teosport. Cyklovložka
+  má tvar půlměsíce. Toto inovační řešení je jedinečné a nelze jej nalézt na
   současném trhu. Tento tvar pomáhá jezdci zlepšit stabilitu na sedle, protože
   tvar dokonale obepíná tělo cyklisty a přizpůsobuje se všem pohybům při
   šlapání. Odstranění centrálního švu je prvním krokem k nové éře cyklistických
@@ -12,7 +12,7 @@ excerpt: Manta, nejnovější vývojový typ v nabídce firmy Teosport. Cyklovlo
   jsme schopni spojit nejlepší vlastnosti našich tkanin a pěn, vytvářit
   cyklovložku, která poskytuje bezprecedentní výkonnost a absorbční vlastnosti.
   Manta je díky svým ergonomickým vlastnostem vhodná pro všechny typy
-  cyklistických disciplín.
+  cyklistických disciplín. "
 image: /assets/images/cms/manta-transparent-1-.png
 images:
   - /assets/images/cms/divazus-fabric-store-6vjeqaemnia-unsplash-1.png
