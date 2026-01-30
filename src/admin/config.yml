@@ -32,7 +32,7 @@ local_backend: true
 
 # Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
-  src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
+  src: "https://coalmarketing.cz/wp-content/uploads/2024/08/coalmarketing_logo_long_color-black-1024x239.png"
   show_in_header: false
 
 locale: "cs"
