@@ -11,26 +11,11 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png"/>
         <link rel="manifest" href="/assets/favicons/site.webmanifest"/>
 
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-        <script>
-            if (window.netlifyIdentity) {
-                window
-                    .netlifyIdentity
-                    .on('logout', () => {
-                        document.location.href = '/admin/';
-                    });
-
-                window
-                    .netlifyIdentity
-                    .setLocale('cs');
-            }
-        </script>
-
         <title>Správa obsahu</title>
     </head>
     <body>
         <!-- Include the script that builds the page and powers Decap CMS -->
-        <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
+        <script src="https://unpkg.com/decap-cms@^3.10.0/dist/decap-cms.js"></script>
 
         <!-- Documentation: https://decapcms.org/docs/customization/ -->
         <script>
