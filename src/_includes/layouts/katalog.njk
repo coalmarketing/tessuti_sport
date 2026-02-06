@@ -125,9 +125,6 @@
 
     <!-- Filter Results Header (hidden by default) -->
     <div id="filter-results-header" class="hidden mb-6 md:mb-8">
-      <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-heading">
-        Filtry: <span id="filter-active-label"></span>
-      </h1>
       <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
         <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
         <span class="mx-2">»</span>
@@ -137,9 +134,42 @@
       </nav>
     </div>
 
-    <!-- View Toggle Controls -->
+    <!-- View Toggle Controls & Filters -->
+    {% set allCatalogLabels = [] %}
+    {% for product in collections.products %}
+      {% if product.data.labels %}
+        {% for label in product.data.labels %}
+          {% set labelText = label.label if label.label else label %}
+          {% if labelText and allCatalogLabels.indexOf(labelText) == -1 %}
+            {% set allCatalogLabels = allCatalogLabels.concat([labelText]) %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
 
-    <div class="flex justify-center md:justify-end items-center mb-6 lg:px-16">
+    <div class="flex flex-row justify-between items-center gap-4 mb-6 lg:px-16">
+      <!-- Filter Toggle (Left side) -->
+      {% if allCatalogLabels.length > 0 %}
+        <div class="flex items-center space-x-2" id="catalog-label-filters">
+          <span class="text-base md:text-lg font-semibold font-heading">Filtry:</span>
+          <button 
+            id="filterToggleBtn" 
+            type="button"
+            class="filter-toggle-btn flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-[#00A44F] hover:bg-[#008f43] text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00A44F] focus:ring-offset-2"
+            aria-expanded="false"
+            aria-controls="filterPanel"
+            aria-label="Zobrazit filtry"
+            title="Zobrazit/skrýt filtry"
+          >
+            <!-- Filter Icon SVG -->
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+
+      <!-- View Toggle (Right side) -->
       <div class="flex items-center space-x-2">
         <span class="text-base md:text-lg text-grey-800 font-body">Zobrazení:</span>
         <div class="flex border rounded overflow-hidden">
@@ -165,39 +195,9 @@
       </div>
     </div>
 
-    <!-- Catalog-Wide Label Filters -->
-    {% set allCatalogLabels = [] %}
-    {% for product in collections.products %}
-      {% if product.data.labels %}
-        {% for label in product.data.labels %}
-          {% set labelText = label.label if label.label else label %}
-          {% if labelText and allCatalogLabels.indexOf(labelText) == -1 %}
-            {% set allCatalogLabels = allCatalogLabels.concat([labelText]) %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-
+    <!-- Collapsible Filter Panel -->
     {% if allCatalogLabels.length > 0 %}
-      <div class="mb-8 lg:px-16" id="catalog-label-filters">
-        <!-- Filter Toggle Header -->
-        <div class="flex items-center justify-start mb-4">
-          <span class="text-lg md:text-2xl font-semibold font-heading px-3">Filtry:</span>
-          <button 
-            id="filterToggleBtn" 
-            type="button"
-            class="filter-toggle-btn flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-[#00A44F] hover:bg-[#008f43] text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00A44F] focus:ring-offset-2"
-            aria-expanded="false"
-            aria-controls="filterPanel"
-            aria-label="Zobrazit filtry"
-            title="Zobrazit/skrýt filtry"
-          >
-            <!-- Filter Icon SVG -->
-            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-            </svg>
-          </button>
-        </div>
+      <div class="mb-8 lg:px-16">
         
         <!-- Collapsible Filter Panel -->
         <div 
