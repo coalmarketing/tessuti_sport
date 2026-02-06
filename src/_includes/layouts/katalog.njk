@@ -123,6 +123,20 @@
       </nav>
     </div>
 
+    <!-- Filter Results Header (hidden by default) -->
+    <div id="filter-results-header" class="hidden mb-6 md:mb-8">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-heading">
+        Filtry: <span id="filter-active-label"></span>
+      </h1>
+      <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
+        <span class="mx-2">»</span>
+        <a href="/cs/katalog" class="hover:text-[#E92429]">Katalog</a>
+        <span class="mx-2">»</span>
+        <span>Filtry: <span id="filter-active-label-breadcrumb"></span></span>
+      </nav>
+    </div>
+
     <!-- View Toggle Controls -->
 
     <div class="flex justify-center md:justify-end items-center mb-6 lg:px-16">
@@ -150,6 +164,65 @@
         </div>
       </div>
     </div>
+
+    <!-- Catalog-Wide Label Filters -->
+    {% set allCatalogLabels = [] %}
+    {% for product in collections.products %}
+      {% if product.data.labels %}
+        {% for label in product.data.labels %}
+          {% set labelText = label.label if label.label else label %}
+          {% if labelText and allCatalogLabels.indexOf(labelText) == -1 %}
+            {% set allCatalogLabels = allCatalogLabels.concat([labelText]) %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% if allCatalogLabels.length > 0 %}
+      <div class="mb-8 lg:px-16" id="catalog-label-filters">
+        <!-- Filter Toggle Header -->
+        <div class="flex items-center justify-start mb-4">
+          <span class="text-lg md:text-2xl font-semibold font-heading px-3">Filtry:</span>
+          <button 
+            id="filterToggleBtn" 
+            type="button"
+            class="filter-toggle-btn flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-[#00A44F] hover:bg-[#008f43] text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00A44F] focus:ring-offset-2"
+            aria-expanded="false"
+            aria-controls="filterPanel"
+            aria-label="Zobrazit filtry"
+            title="Zobrazit/skrýt filtry"
+          >
+            <!-- Filter Icon SVG -->
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Collapsible Filter Panel -->
+        <div 
+          id="filterPanel" 
+          class="filter-panel"
+          role="region"
+          aria-labelledby="filterToggleBtn"
+        >
+          <div class="flex flex-wrap gap-3">
+            <!-- Clear All Filter -->
+            <button id="clearFilters" class="filter-tag active px-4 py-2 bg-[#00A44F] text-white rounded-full text-sm font-medium transition-colors hover:bg-green-700">
+              Vše
+            </button>
+            
+            <!-- Label Filter Tags (sorted alphabetically) -->
+            {% set sortedLabels = allCatalogLabels | sort %}
+            {% for label in sortedLabels %}
+              <button class="filter-tag px-4 py-2 bg-white border-2 border-[#00A44F] text-[#00A44F] rounded-full text-sm font-medium transition-colors hover:bg-[#00A44F] hover:text-white" data-label="{{ label }}">
+                #{{ label }}
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
     <!-- Grid View -->
     <div id="gridView" class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:px-16">
@@ -223,12 +296,21 @@
     
     <!-- Search Results Grid (hidden by default) -->
     <div id="searchResultsGrid" class="hidden">
-      <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:px-16">
+      <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:px-16" id="products-container">
         <!-- Pre-rendered product cards for search results -->
         {% for p in collections.products %}
-          <div class="search-product-card" 
+          {% set productLabels = [] %}
+          {% if p.data.labels %}
+            {% for label in p.data.labels %}
+              {% set labelText = label.label if label.label else label %}
+              {% set productLabels = productLabels.concat([labelText]) %}
+            {% endfor %}
+          {% endif %}
+          <div class="search-product-card product-item" 
                data-title="{{ p.data.title | lower }}"
                data-category="{{ p.data.category }}"
+               data-labels="{{ productLabels | join(',') }}"
+               data-product-url="{{ p.url }}"
                style="display: none;">
             {% include "components/product-card.njk" %}
           </div>
@@ -241,6 +323,18 @@
       <p class="text-base md:text-lg text-gray-700 font-body">
         Výsledky vyhledávání obsahují <span id="search-results-count" class="font-semibold">0</span> položky.
       </p>
+    </div>
+    
+    <!-- Filter Results Summary -->
+    <div id="filter-results-summary" class="hidden text-center mt-8 py-4">
+      <p class="text-base md:text-lg text-gray-700 font-body">
+        Filtr zobrazuje <span id="filter-results-count" class="font-semibold">0</span> produktů.
+      </p>
+    </div>
+    
+    <!-- Filter Results Counter -->
+    <div class="text-center mt-6 mb-4 lg:px-16">
+      <p id="resultsCounter" class="text-base md:text-lg text-gray-700 font-body"></p>
     </div>
   </div>
 </section>
@@ -416,6 +510,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.productSearch && window.productSearch.exitSearchMode) {
       window.productSearch.exitSearchMode();
     }
+    // Exit filter mode when toggling views
+    if (window.labelFilters && window.labelFilters.clearAllFilters) {
+      window.labelFilters.clearAllFilters();
+    }
     
     gridView.classList.remove('hidden');
     listView.classList.add('hidden');
@@ -430,6 +528,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Exit search mode when toggling views
     if (window.productSearch && window.productSearch.exitSearchMode) {
       window.productSearch.exitSearchMode();
+    }
+    // Exit filter mode when toggling views
+    if (window.labelFilters && window.labelFilters.clearAllFilters) {
+      window.labelFilters.clearAllFilters();
     }
     
     gridView.classList.add('hidden');
@@ -448,6 +550,12 @@ document.addEventListener('DOMContentLoaded', function() {
   showGridView();
 });
 </script>
+
+<!-- Filter Toggle Script -->
+<script src="/assets/js/filter-toggle.js"></script>
+
+<!-- Label Filters Script -->
+<script src="/assets/js/label-filters.js"></script>
 
 <!-- Product Search Script -->
 <script src="/assets/js/product-search.js"></script>

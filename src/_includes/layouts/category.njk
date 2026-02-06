@@ -133,28 +133,51 @@
       <!-- Label Filters -->
       {% if allLabels.length > 0 %}
         <div class="mb-8" id="category-label-filters">
-          <div class="mb-4">
-            <span class="text-lg font-semibold">Filtry:</span>
+          <!-- Filter Toggle Header -->
+          <div class="flex items-center justify-start mb-4">
+            <span class="text-lg md:text-2xl font-semibold font-heading px-3">Filtry:</span>
+            <button 
+              id="filterToggleBtn" 
+              type="button"
+              class="filter-toggle-btn flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-[#00A44F] hover:bg-[#008f43] text-white rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00A44F] focus:ring-offset-2"
+              aria-expanded="false"
+              aria-controls="filterPanel"
+              aria-label="Zobrazit filtry"
+              title="Zobrazit/skrýt filtry"
+            >
+              <!-- Filter Icon SVG -->
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+              </svg>
+            </button>
           </div>
           
-          <div class="flex flex-wrap gap-3">
-            <!-- Clear All Filter -->
-            <button id="clearFilters" class="filter-tag active px-4 py-2 bg-[#00A44F] text-white rounded-full text-sm font-medium transition-colors hover:bg-green-700">
-              Vše
-            </button>
-            
-            <!-- Label Filter Tags -->
-            {% for label in allLabels %}
-              <button class="filter-tag px-4 py-2 bg-white border-2 border-[#00A44F] text-[#00A44F] rounded-full text-sm font-medium transition-colors hover:bg-[#00A44F] hover:text-white" data-label="{{ label }}">
-                #{{ label }}
+          <!-- Collapsible Filter Panel -->
+          <div 
+            id="filterPanel" 
+            class="filter-panel"
+            role="region"
+            aria-labelledby="filterToggleBtn"
+          >
+            <div class="flex flex-wrap gap-3">
+              <!-- Clear All Filter -->
+              <button id="clearFilters" class="filter-tag active px-4 py-2 bg-[#00A44F] text-white rounded-full text-sm font-medium transition-colors hover:bg-green-700">
+                Vše
               </button>
-            {% endfor %}
+              
+              <!-- Label Filter Tags -->
+              {% for label in allLabels %}
+                <button class="filter-tag px-4 py-2 bg-white border-2 border-[#00A44F] text-[#00A44F] rounded-full text-sm font-medium transition-colors hover:bg-[#00A44F] hover:text-white" data-label="{{ label }}">
+                  #{{ label }}
+                </button>
+              {% endfor %}
+            </div>
           </div>
         </div>
       {% endif %}
 
       <!-- Products Grid -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8" id="category-products-grid" data-category-products="{{ name }}">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8" id="products-container" data-category-products="{{ name }}">
         {% for p in categoryProducts %}
           {% set productLabels = [] %}
           {% if p.data.labels %}
@@ -184,108 +207,11 @@
   </div>
 </section>
 
-<!-- JavaScript for Filtering -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const filterTags = document.querySelectorAll('.filter-tag');
-  const clearFiltersBtn = document.getElementById('clearFilters');
-  const productItems = document.querySelectorAll('.product-item');
-  const resultsCounter = document.getElementById('resultsCounter');
-  
-  let activeFilters = [];
+<!-- Filter Toggle Script -->
+<script src="/assets/js/filter-toggle.js"></script>
 
-  // Filter Functions
-  function applyFilters() {
-    let visibleCount = 0;
-    
-    productItems.forEach(item => {
-      const itemLabels = item.dataset.labels ? item.dataset.labels.split(',') : [];
-      const shouldShow = activeFilters.length === 0 || activeFilters.some(filter => itemLabels.includes(filter));
-      
-      if (shouldShow) {
-        item.style.display = '';
-        visibleCount++;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-    
-    // Update counter
-    resultsCounter.textContent = `Zobrazeno ${visibleCount} z {{ categoryProducts | length }} položek`;
-  }
-
-  function clearAllFilters() {
-    // Exit search mode when using filters
-    if (window.categorySearch && window.categorySearch.exitSearchMode) {
-      window.categorySearch.exitSearchMode();
-    }
-    
-    activeFilters = [];
-    
-    // Reset all filter buttons
-    filterTags.forEach(tag => {
-      if (tag.id === 'clearFilters') {
-        tag.classList.add('active', 'bg-[#00A44F]', 'text-white');
-        tag.classList.remove('bg-white', 'text-[#00A44F]');
-      } else {
-        tag.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-        tag.classList.add('bg-white', 'text-[#00A44F]');
-      }
-    });
-    
-    applyFilters();
-  }
-
-  function toggleFilter(label, button) {
-    // Exit search mode when using filters
-    if (window.categorySearch && window.categorySearch.exitSearchMode) {
-      window.categorySearch.exitSearchMode();
-    }
-    
-    const index = activeFilters.indexOf(label);
-    
-    if (index === -1) {
-      // Add filter
-      activeFilters.push(label);
-      button.classList.add('active', 'bg-[#00A44F]', 'text-white');
-      button.classList.remove('bg-white', 'text-[#00A44F]');
-      
-      // Deactivate "Vše" button
-      clearFiltersBtn.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-      clearFiltersBtn.classList.add('bg-white', 'text-[#00A44F]');
-    } else {
-      // Remove filter
-      activeFilters.splice(index, 1);
-      button.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-      button.classList.add('bg-white', 'text-[#00A44F]');
-      
-      // If no filters active, activate "Vše" button
-      if (activeFilters.length === 0) {
-        clearFiltersBtn.classList.add('active', 'bg-[#00A44F]', 'text-white');
-        clearFiltersBtn.classList.remove('bg-white', 'text-[#00A44F]');
-      }
-    }
-    
-    applyFilters();
-  }
-
-  // Event Listeners
-  if (clearFiltersBtn) {
-    clearFiltersBtn.addEventListener('click', clearAllFilters);
-  }
-  
-  filterTags.forEach(tag => {
-    if (tag.dataset.label) {
-      tag.addEventListener('click', () => {
-        toggleFilter(tag.dataset.label, tag);
-      });
-    }
-  });
-
-  // Initialize with no filters
-  clearAllFilters();
-});
-</script>
+<!-- Label Filters Script -->
+<script src="/assets/js/label-filters.js"></script>
 
 <!-- Category Search Script -->
 <script src="/assets/js/category-search.js"></script>

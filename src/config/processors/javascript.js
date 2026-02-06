@@ -8,6 +8,8 @@ const excludeFiles = [
   "cookieconsent-config.js",
   "cookieconsent.umd.js",
   "gallery-lightbox.js",
+  "filter-toggle.js",
+  "label-filters.js",
 ];
 
 module.exports = async function () {
