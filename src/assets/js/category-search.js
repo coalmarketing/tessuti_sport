@@ -36,7 +36,7 @@
   );
 
   // DOM elements - Products Grid
-  const productsGrid = document.getElementById("category-products-grid");
+  const productsGrid = document.getElementById("products-container");
   const labelFilters = document.getElementById("category-label-filters");
   const resultsCounter = document.getElementById("resultsCounter");
 

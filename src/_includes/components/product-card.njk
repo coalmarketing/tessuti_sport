@@ -17,6 +17,18 @@
     {% if p.data.isNew %}<span class="inline-block w-3 h-3 bg-red-500 rounded-full ml-2"></span>{% endif %}
   </h3>
   
+  {%- if p.data.icons and p.data.icons.length > 0 -%}
+  <div class="product-icons flex items-center gap-3 mb-3" role="list" aria-label="Vlastnosti produktu">
+    {%- for icon in p.data.icons -%}
+    <div class="product-icon-wrapper" role="listitem">
+      <i class="{{ icon.iconClass }}" 
+         aria-label="{{ icon.tooltip }}"></i>
+      <span class="icon-tooltip">{{ icon.tooltip }}</span>
+    </div>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+  
   {% if p.data.excerpt %}
     <p class="text-sm text-gray-700 mb-3 line-clamp-3 group-hover:text-gray-600 transition-colors duration-300 font-body">{{ p.data.excerpt }}</p>
   {% endif %}

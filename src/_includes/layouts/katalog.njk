@@ -123,17 +123,6 @@
       </nav>
     </div>
 
-    <!-- Filter Results Header (hidden by default) -->
-    <div id="filter-results-header" class="hidden mb-6 md:mb-8">
-      <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-[#E92429]">Hlavní stránka</a>
-        <span class="mx-2">»</span>
-        <a href="/cs/katalog" class="hover:text-[#E92429]">Katalog</a>
-        <span class="mx-2">»</span>
-        <span>Filtry: <span id="filter-active-label-breadcrumb"></span></span>
-      </nav>
-    </div>
-
     <!-- View Toggle Controls & Filters -->
     {% set allCatalogLabels = [] %}
     {% for product in collections.products %}

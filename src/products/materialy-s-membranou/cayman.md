@@ -19,6 +19,9 @@ labels:
   - nový
   - waterproof
   - softshell
+icons:
+  - iconClass: fa-solid fa-water
+    tooltip: voděodolné
 parameters:
   - name: Druh
     value: Materiál s membránou

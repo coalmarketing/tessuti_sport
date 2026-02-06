@@ -32,12 +32,10 @@ class LabelFilters {
     this.gridView = document.getElementById("gridView");
     this.listView = document.getElementById("listView");
     this.searchResultsGrid = document.getElementById("searchResultsGrid");
-    this.filterResultsHeader = document.getElementById("filter-results-header");
     this.filterResultsSummary = document.getElementById(
       "filter-results-summary"
     );
     this.filterResultsCount = document.getElementById("filter-results-count");
-    this.filterActiveLabel = document.getElementById("filter-active-label");
 
     if (!this.searchResultsGrid) {
       console.warn("LabelFilters (catalog): searchResultsGrid not found");
@@ -112,18 +110,6 @@ class LabelFilters {
       }
     });
 
-    // Update header with active filters
-    if (this.filterActiveLabel) {
-      this.filterActiveLabel.textContent = this.activeFilters
-        .map((f) => `#${f}`)
-        .join(", ");
-    }
-
-    // Show filter results header
-    if (this.filterResultsHeader) {
-      this.filterResultsHeader.classList.remove("hidden");
-    }
-
     // Show results grid
     if (this.searchResultsGrid) {
       this.searchResultsGrid.classList.remove("hidden");
@@ -181,8 +167,6 @@ class LabelFilters {
     if (!this.isCatalogPage) return;
 
     // Hide filter results elements
-    if (this.filterResultsHeader)
-      this.filterResultsHeader.classList.add("hidden");
     if (this.searchResultsGrid) this.searchResultsGrid.classList.add("hidden");
     if (this.filterResultsSummary)
       this.filterResultsSummary.classList.add("hidden");

@@ -8,6 +8,7 @@ module.exports = {
     files: ["./src/**/*.{html,njk,js}"],
     extract,
   },
+  safelist: ["product-icons", "product-icon-wrapper", "icon-tooltip"],
   theme: {
     fontSize: fontSize,
     screens: screens,

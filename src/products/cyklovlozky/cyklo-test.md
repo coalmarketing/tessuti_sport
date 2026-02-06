@@ -8,6 +8,9 @@ image: /assets/images/cms/divazus-fabric-store-6vjeqaemnia-unsplash-1.png
 category: Cyklovložky
 labels:
   - label: reflex
+icons:
+  - iconClass: fa-solid fa-water
+    tooltip: voděodolné
 tags:
   - product
   - cs

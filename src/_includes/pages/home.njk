@@ -177,57 +177,8 @@
             {% set newProducts = collections.products | newProducts(3) %}
             {% if newProducts.length > 0 %}
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12 lg:mb-16">
-                    {% for product in newProducts %}
-                        <div class="bg-white border-2 border-dashed-custom border-gray-400 rounded-lg p-4 md:p-6 hover:shadow-lg transition-shadow">
-                            <!-- Product Image -->
-                            {% if product.data.image %}
-                                <div class="aspect-[4/3] mb-4 md:mb-6 overflow-hidden rounded ">
-                                    <img src="{{ product.data.image }}" alt="{{ product.data.title }}" class="w-full h-full object-cover" loading="lazy">
-                                </div>
-                            {% endif %}
-
-                            <!-- Product Title and Labels -->
-                            <div class="mb-3 md:mb-4">
-                                <!-- Product Name -->
-                                <h3 class="text-xl md:text-2xl font-bold text-black mb-2 md:mb-3 leading-tight font-heading">
-                                    {{ product.data.title }}
-                                    {% set hasNewLabel = false %}
-                                    {% for label in product.data.labels %}
-                                        {% set labelText = label.label if label.label else 
-                                            label %}
-                                        {% if labelText == 'nový' %}
-                                            {% set hasNewLabel = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                </h3>
-
-                                <!-- Labels -->
-                                {% if product.data.labels and product.data.labels.length > 0 %}
-                                    <div class="flex flex-wrap gap-2 mb-3">
-                                        {% for label in product.data.labels %}
-                                            {% set labelText = label.label if label.label else 
-                                                label %}
-                                            {% if labelText != 'nový' %}
-                                                <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs md:text-sm font-medium">
-                                                    #{{ labelText }}
-                                                </span>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-
-                            <!-- Product Description -->
-                            {% if product.data.excerpt %}
-                                {% set truncatedExcerpt = product.data.excerpt | truncate(150, true, '...') %}
-                                <p class="text-sm md:text-base text-gray-700 mb-4 md:mb-6 leading-relaxed font-body">{{ truncatedExcerpt }}</p>
-                            {% endif %}
-
-                            <!-- View Product Button -->
-                            <a href="{{ product.url }}" class="inline-block w-full text-center bg-[#E92429] text-white px-4 md:px-6 py-2 md:py-3 rounded font-semibold hover:bg-[#d41e24] transition-colors text-sm md:text-base font-body">
-                                Zobrazit produkt
-                            </a>
-                        </div>
+                    {% for p in newProducts %}
+                        {% include "components/product-card.njk" %}
                     {% endfor %}
                 </div>
             {% else %}

@@ -291,26 +291,40 @@
     if (window.labelFilters && window.labelFilters.activeFilters) {
       // Reset filter state without triggering filter mode
       window.labelFilters.activeFilters = [];
-      
+
       // Reset all filter button UI states
-      const filterTags = document.querySelectorAll('.filter-tag');
+      const filterTags = document.querySelectorAll(".filter-tag");
       filterTags.forEach((tag) => {
-        if (tag.id === 'clearFilters') {
-          tag.classList.add('active', 'bg-[#00A44F]', 'text-white');
-          tag.classList.remove('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+        if (tag.id === "clearFilters") {
+          tag.classList.add("active", "bg-[#00A44F]", "text-white");
+          tag.classList.remove(
+            "bg-white",
+            "text-[#00A44F]",
+            "border-2",
+            "border-[#00A44F]"
+          );
         } else {
-          tag.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-          tag.classList.add('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+          tag.classList.remove("active", "bg-[#00A44F]", "text-white");
+          tag.classList.add(
+            "bg-white",
+            "text-[#00A44F]",
+            "border-2",
+            "border-[#00A44F]"
+          );
         }
       });
-      
+
       // Exit filter mode if active
-      if (document.body.classList.contains('is-filtering')) {
-        document.body.classList.remove('is-filtering');
-        const filterResultsHeader = document.getElementById('filter-results-header');
-        const filterResultsSummary = document.getElementById('filter-results-summary');
-        if (filterResultsHeader) filterResultsHeader.classList.add('hidden');
-        if (filterResultsSummary) filterResultsSummary.classList.add('hidden');
+      if (document.body.classList.contains("is-filtering")) {
+        document.body.classList.remove("is-filtering");
+        const filterResultsHeader = document.getElementById(
+          "filter-results-header"
+        );
+        const filterResultsSummary = document.getElementById(
+          "filter-results-summary"
+        );
+        if (filterResultsHeader) filterResultsHeader.classList.add("hidden");
+        if (filterResultsSummary) filterResultsSummary.classList.add("hidden");
       }
     }
 

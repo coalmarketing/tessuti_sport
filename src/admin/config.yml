@@ -152,6 +152,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na <a href="https://fontawesome.com">fontawesome.com</a>'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"
@@ -260,6 +285,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na fontawesome.com'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"
@@ -368,6 +418,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na fontawesome.com'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"
@@ -476,6 +551,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na fontawesome.com'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"
@@ -584,6 +684,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na fontawesome.com'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"
@@ -692,6 +817,31 @@ collections:
             widget: "string",
             hint: "Zadejte štítek (například: waterproof, breathable, UV protection)",
           }
+      - label: "Ikony funkcí"
+        name: "icons"
+        widget: "list"
+        required: false
+        max: 5
+        hint: "Přidejte až 5 ikon představujících vlastnosti produktu (např. vodotěsnost, prodyšnost). Ikony se zobrazí pod názvem produktu."
+        fields:
+          - label: "Font Awesome třídy"
+            name: "iconClass"
+            widget: "string"
+            hint: 'Zadejte pouze Font Awesome třídy bez HTML (např: "fa-solid fa-palette" nebo "fa-solid fa-droplet"). Vyhledejte ikony na fontawesome.com'
+            pattern:
+              [
+                "^fa-(solid|regular|brands|light|thin|duotone|sharp) fa-[a-z0-9-]+$",
+                "Musí začínat 'fa-solid', 'fa-regular' atd. a pokračovat 'fa-název-ikony'. Příklad: fa-solid fa-palette",
+              ]
+          - label: "Popisek (tooltip)"
+            name: "tooltip"
+            widget: "string"
+            hint: "Krátký text, který se zobrazí při najetí myší na ikonu (např: 'Barevné varianty', 'Vodotěsný materiál')"
+            pattern:
+              [
+                "^.{1,50}$",
+                "Tooltip může mít maximálně 50 znaků pro lepší zobrazení",
+              ]
       - label: "Parametry produktu"
         name: "parameters"
         widget: "list"

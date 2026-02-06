@@ -3,10 +3,12 @@
 ## Problem Statement
 
 Previously, when a user:
+
 1. Clicked a filter chip (e.g., `#reflex`) → Filter mode activated
 2. Then performed a search → Search results were mixed with or constrained by the previous filter state
 
 This caused confusion because:
+
 - Active filter chips remained visually "active" during search
 - The internal filter state wasn't cleared
 - Results appeared to be "search within filtered results" instead of global search
@@ -16,6 +18,7 @@ This caused confusion because:
 **Search now completely overrides and clears any active filters.**
 
 When the user clicks "Vyhledat" or presses Enter:
+
 1. ✅ All active filters are cleared
 2. ✅ Filter chip UI states are reset (all chips become inactive, "Vše" becomes active)
 3. ✅ Filter mode is exited (body class removed, filter headers hidden)
@@ -25,6 +28,7 @@ When the user clicks "Vyhledat" or presses Enter:
 ## Implementation Details
 
 ### File Modified
+
 **`src/assets/js/product-search.js`** - Function `showSearchResults(query)`
 
 ### Code Changes
@@ -37,26 +41,40 @@ function showSearchResults(query) {
   if (window.labelFilters && window.labelFilters.activeFilters) {
     // Reset filter state without triggering filter mode
     window.labelFilters.activeFilters = [];
-    
+
     // Reset all filter button UI states
-    const filterTags = document.querySelectorAll('.filter-tag');
+    const filterTags = document.querySelectorAll(".filter-tag");
     filterTags.forEach((tag) => {
-      if (tag.id === 'clearFilters') {
-        tag.classList.add('active', 'bg-[#00A44F]', 'text-white');
-        tag.classList.remove('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+      if (tag.id === "clearFilters") {
+        tag.classList.add("active", "bg-[#00A44F]", "text-white");
+        tag.classList.remove(
+          "bg-white",
+          "text-[#00A44F]",
+          "border-2",
+          "border-[#00A44F]"
+        );
       } else {
-        tag.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-        tag.classList.add('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+        tag.classList.remove("active", "bg-[#00A44F]", "text-white");
+        tag.classList.add(
+          "bg-white",
+          "text-[#00A44F]",
+          "border-2",
+          "border-[#00A44F]"
+        );
       }
     });
-    
+
     // Exit filter mode if active
-    if (document.body.classList.contains('is-filtering')) {
-      document.body.classList.remove('is-filtering');
-      const filterResultsHeader = document.getElementById('filter-results-header');
-      const filterResultsSummary = document.getElementById('filter-results-summary');
-      if (filterResultsHeader) filterResultsHeader.classList.add('hidden');
-      if (filterResultsSummary) filterResultsSummary.classList.add('hidden');
+    if (document.body.classList.contains("is-filtering")) {
+      document.body.classList.remove("is-filtering");
+      const filterResultsHeader = document.getElementById(
+        "filter-results-header"
+      );
+      const filterResultsSummary = document.getElementById(
+        "filter-results-summary"
+      );
+      if (filterResultsHeader) filterResultsHeader.classList.add("hidden");
+      if (filterResultsSummary) filterResultsSummary.classList.add("hidden");
     }
   }
 
@@ -67,41 +85,59 @@ function showSearchResults(query) {
 ### How It Works
 
 #### 1. **Filter State Reset**
+
 ```javascript
 window.labelFilters.activeFilters = [];
 ```
+
 - Directly clears the internal filter state array
 - No filters are considered "active" anymore
 
 #### 2. **UI State Reset**
+
 ```javascript
-const filterTags = document.querySelectorAll('.filter-tag');
+const filterTags = document.querySelectorAll(".filter-tag");
 filterTags.forEach((tag) => {
-  if (tag.id === 'clearFilters') {
+  if (tag.id === "clearFilters") {
     // Make "Vše" button active (green)
-    tag.classList.add('active', 'bg-[#00A44F]', 'text-white');
-    tag.classList.remove('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+    tag.classList.add("active", "bg-[#00A44F]", "text-white");
+    tag.classList.remove(
+      "bg-white",
+      "text-[#00A44F]",
+      "border-2",
+      "border-[#00A44F]"
+    );
   } else {
     // Make all other filter chips inactive (white with green border)
-    tag.classList.remove('active', 'bg-[#00A44F]', 'text-white');
-    tag.classList.add('bg-white', 'text-[#00A44F]', 'border-2', 'border-[#00A44F]');
+    tag.classList.remove("active", "bg-[#00A44F]", "text-white");
+    tag.classList.add(
+      "bg-white",
+      "text-[#00A44F]",
+      "border-2",
+      "border-[#00A44F]"
+    );
   }
 });
 ```
+
 - Visually resets all filter chips to inactive state
 - "Vše" (All) button becomes active (green background)
 - All label chips become inactive (white background, green border)
 
 #### 3. **Exit Filter Mode**
+
 ```javascript
-if (document.body.classList.contains('is-filtering')) {
-  document.body.classList.remove('is-filtering');
-  const filterResultsHeader = document.getElementById('filter-results-header');
-  const filterResultsSummary = document.getElementById('filter-results-summary');
-  if (filterResultsHeader) filterResultsHeader.classList.add('hidden');
-  if (filterResultsSummary) filterResultsSummary.classList.add('hidden');
+if (document.body.classList.contains("is-filtering")) {
+  document.body.classList.remove("is-filtering");
+  const filterResultsHeader = document.getElementById("filter-results-header");
+  const filterResultsSummary = document.getElementById(
+    "filter-results-summary"
+  );
+  if (filterResultsHeader) filterResultsHeader.classList.add("hidden");
+  if (filterResultsSummary) filterResultsSummary.classList.add("hidden");
 }
 ```
+
 - Removes `is-filtering` class from body
 - Hides filter results header (breadcrumb navigation)
 - Hides filter results summary (product count)
@@ -110,6 +146,7 @@ if (document.body.classList.contains('is-filtering')) {
 ## User Flow Examples
 
 ### Scenario 1: Filter → Search
+
 ```
 1. User clicks #reflex filter
    → Filter mode activated
@@ -125,6 +162,7 @@ if (document.body.classList.contains('is-filtering')) {
 ```
 
 ### Scenario 2: Multiple Filters → Search
+
 ```
 1. User clicks #prodyšné + #lehké
    → Filter mode activated
@@ -139,6 +177,7 @@ if (document.body.classList.contains('is-filtering')) {
 ```
 
 ### Scenario 3: Empty Search (Return to Catalog)
+
 ```
 1. User in search mode
 2. Clears search input and searches again (empty query)
@@ -153,7 +192,7 @@ if (document.body.classList.contains('is-filtering')) {
 ✅ **Visual consistency** - Filter chips always reflect actual state  
 ✅ **Clean data** - Results based ONLY on search query, not filtered subset  
 ✅ **No side effects** - Filter behavior unchanged when search isn't used  
-✅ **Reversible** - Clicking "Vše" or clearing search returns to catalog  
+✅ **Reversible** - Clicking "Vše" or clearing search returns to catalog
 
 ## Testing Checklist
 
@@ -169,22 +208,27 @@ if (document.body.classList.contains('is-filtering')) {
 ## Technical Notes
 
 ### Why Direct State Manipulation?
+
 Instead of calling `window.labelFilters.clearAllFilters()`, we directly manipulate the state because:
+
 1. **Avoids circular calls** - `clearAllFilters()` calls `applyFilters()` which could interfere
 2. **Performance** - No unnecessary filter rendering during search
 3. **Control** - Search function has full control over the transition
 
 ### Global Access Pattern
+
 ```javascript
 if (window.labelFilters && window.labelFilters.activeFilters) {
   // Safe to access
 }
 ```
+
 - Checks for existence before accessing
 - Works even if label filters aren't initialized
 - Won't break on pages without filters
 
 ### Body Class States
+
 - `is-searching` - Search mode active
 - `is-filtering` - Filter mode active
 - Never both at the same time (search clears filtering)
@@ -199,6 +243,7 @@ if (window.labelFilters && window.labelFilters.activeFilters) {
 ## Deployment
 
 This is a JavaScript-only change:
+
 1. ✅ No HTML changes needed
 2. ✅ No CSS changes needed
 3. ✅ No build configuration changes needed

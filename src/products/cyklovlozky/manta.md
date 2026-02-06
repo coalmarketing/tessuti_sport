@@ -21,6 +21,9 @@ category: Cyklovložky
 labels:
   - silniční
   - nový
+icons:
+  - iconClass: fa-solid fa-person-biking
+    tooltip: Pro silniční cyklistiku
 parameters:
   - name: Kategorie
     value: Silniční
@@ -35,4 +38,5 @@ download_pdf: /assets/images/cms/manta_front.png
 layout: layouts/product.njk
 permalink: /cs/katalog/{{ category | slug }}/{{ slug }}/
 ---
+
 PDF v AJ ke stažení zde <https://www.tessuti-sport.cz/katalog/produkt/manta>
