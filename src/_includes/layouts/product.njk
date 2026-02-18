@@ -65,29 +65,23 @@
 
         <!-- Product Info -->
         <div class="space-y-4 md:space-y-6">
-          <!-- Title and Labels -->
+          <!-- Title -->
           <div>
             <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-heading">{{ title }}</h1>
             
-            <!-- Labels -->
-            {% if labels and labels.length > 0 %}
-              <div class="flex flex-wrap gap-2 mb-3 md:mb-4">
-                {% for label in labels %}
-                  {% set labelText = label.label if label.label else label %}
-                  <span class="inline-block bg-[#00A44F] text-white px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium font-body">
-                    #{{ labelText }}
-                  </span>
-                {% endfor %}
+            <!-- Icons -->
+            {%- if icons and icons.length > 0 -%}
+            <div class="product-icons flex items-center gap-3 mb-3" role="list" aria-label="Vlastnosti produktu">
+              {%- for icon in icons -%}
+              <div class="product-icon-wrapper" role="listitem">
+                <i class="{{ icon.iconClass }}" 
+                   aria-label="{{ icon.tooltip }}"></i>
+                <span class="icon-tooltip">{{ icon.tooltip }}</span>
               </div>
-            {% endif %}
-          </div>
-
-          <!-- Price -->
-          {% if price %}
-            <div class="text-2xl md:text-3xl font-bold text-[#E92429] font-body">
-              {{ price }} {{ currency or 'CZK' }}
+              {%- endfor -%}
             </div>
-          {% endif %}
+            {%- endif -%}
+          </div>
 
           <!-- Category -->
           <div class="text-base md:text-lg text-gray-600 font-body">
@@ -106,6 +100,18 @@
               </div>
             {% endif %}
           </div>
+
+          <!-- Labels -->
+          {% if labels and labels.length > 0 %}
+            <div class="flex flex-wrap gap-2">
+              {% for label in labels %}
+                {% set labelText = label.label if label.label else label %}
+                <span class="inline-block bg-[#00A44F] text-white px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium font-body">
+                  #{{ labelText }}
+                </span>
+              {% endfor %}
+            </div>
+          {% endif %}
 
           <!-- PDF Download Button -->
           {% if download_pdf %}
