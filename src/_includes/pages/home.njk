@@ -410,10 +410,19 @@
                 </g>
             </svg>
             <h3 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-heading">{{ bottomSection.locationheading }}</h3>
-            <div class="flex items-start mb-6 md:mb-8">
+            <div class="flex items-start mb-3 md:mb-4">
                 <img src="/assets/images/hero/Vector (1).png" alt="" class="w-8 h-8 md:w-12 md:h-10 mr-3 md:mr-4 flex-shrink-0 mt-1">
                 <p class="text-base md:text-xl font-body">{{ bottomSection.location | safe }}</p>
             </div>
+            {% if bottomSection.provozovna %}
+            <div class="flex items-start mb-6 md:mb-8">
+                
+                <div class="text-base md:text-xl font-body">
+                    <p class="font-semibold mb-1">Provozovna:</p>
+                    <p>{{ bottomSection.provozovna }}</p>
+                </div>
+            </div>
+            {% endif %}
             <div class="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-36">
                 <div>
                     <h4 class="text-2xl md:text-3xl font-semibold mb-3 md:mb-4 font-heading">{{ bottomSection.contactheading }}</h4>
@@ -432,15 +441,15 @@
                         </li>
                         <li class="flex items-center text-lg md:text-2xl font-body">
                             <img src="/assets/images/hero/Vector (4).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
-                            <a href="mailto:{{ bottomSection.mail }}" class="break-all hover:text-[#E92429] transition-colors duration-300">{{ bottomSection.mail }}</a>
+                            <a href="mailto:{{ bottomSection.mail }}" class="break-all hover:text-[#E92429] transition-colors duration-300 hover:underline">{{ bottomSection.mail }}</a>
                         </li>
                         <li class="flex items-center text-lg md:text-2xl font-body">
-                            <img src="/assets/images/hero/Vector (5).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
-                            <a href="tel:{{ bottomSection.tel }}" class="hover:text-[#E92429] transition-colors duration-300">{{ bottomSection.tel }}</a>
+                            <i class="fa-regular fa-user w-6 h-6 md:w-8 md:h-8 mr-2 flex items-center justify-center text-xl md:text-2xl"></i>
+                            <span>{{ bottomSection.osoba }}</span>
                         </li>
                         <li class="flex items-center text-lg md:text-2xl font-body">
                             <img src="/assets/images/hero/Vector (6).png" alt="" class="w-6 h-6 md:w-8 md:h-8 mr-2 flex-shrink-0">
-                            <a href="tel:{{ bottomSection.tel2 }}" class="hover:text-[#E92429] transition-colors duration-300">{{ bottomSection.tel2 }}</a>
+                            <a href="tel:{{ bottomSection.tel2 }}" class="hover:text-[#E92429] transition-colors duration-300 hover:underline">{{ bottomSection.tel2 }}</a>
                         </li>
                     </ul>
                 </div>

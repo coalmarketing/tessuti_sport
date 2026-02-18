@@ -97,7 +97,8 @@ contact:
 
 bottomSection:
   locationheading: Sídlo
-  location: Tessuti Sport, s.r.o. <br> Havlíčkovo nábřeží 979, 564 01 Žamberk
+  location: Tessuti Sport s.r.o. <br> Komenského náměstí 1021/3, Předměstí, 568 02 Svitavy
+  provozovna: Havlíčkovo nábřeží 979, 564 01 Žamberk
   contactheading: Kontakty
   Catalogheading: Katalog
   web: www.tessuti-sport.cz
@@ -105,7 +106,7 @@ bottomSection:
   ic: IČO 25916521
   mail: info@tessuti-sport.cz
   tel2: +420 603 853 086
-  tel: +420 465 613 179
+  osoba: Ing. Milan Holešovský
 
   listheading1: Cyklovložky
   listheading2: Tkaniny
