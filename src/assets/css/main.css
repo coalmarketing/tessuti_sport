@@ -2831,6 +2831,10 @@ body,
   padding-bottom: 1.8rem;
 }
 
+.pb-1 {
+  padding-bottom: 0.225rem;
+}
+
 .pb-16 {
   padding-bottom: 3.6rem;
 }
@@ -2841,6 +2845,10 @@ body,
 
 .pr-0 {
   padding-right: 0px;
+}
+
+.pt-1 {
+  padding-top: 0.225rem;
 }
 
 .pt-2 {
@@ -2857,18 +2865,6 @@ body,
 
 .pt-8 {
   padding-top: 1.8rem;
-}
-
-.pb-4 {
-  padding-bottom: 0.9rem;
-}
-
-.pb-1 {
-  padding-bottom: 0.225rem;
-}
-
-.pt-1 {
-  padding-top: 0.225rem;
 }
 
 .text-left {

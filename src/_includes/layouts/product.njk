@@ -227,11 +227,28 @@
     <!-- Related Products Section -->
     <div class="mt-12 md:mt-16">
       <h2 class="text-xl md:text-2xl font-bold mb-6 md:mb-8 font-heading">Podobné produkty</h2>
-      {% set categoryProducts = collections.products | categoryProducts(category) %}
+      
       {% set relatedProducts = [] %}
-      {% for p in categoryProducts %}
-        {% if p.data.title != title and relatedProducts.length < 3 %}
-          {% set relatedProducts = relatedProducts.concat([p]) %}
+      {% set currentLabels = labels or [] %}
+      
+      {% for p in collections.products %}
+        {% if p.data.title != title %}
+          {% set productLabels = p.data.labels or [] %}
+          {% set hasMatchingLabel = false %}
+          
+          {% for currentLabel in currentLabels %}
+            {% set currentLabelText = currentLabel.label if currentLabel.label else currentLabel %}
+            {% for productLabel in productLabels %}
+              {% set productLabelText = productLabel.label if productLabel.label else productLabel %}
+              {% if currentLabelText == productLabelText %}
+                {% set hasMatchingLabel = true %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          
+          {% if hasMatchingLabel and relatedProducts.length < 6 %}
+            {% set relatedProducts = relatedProducts.concat([p]) %}
+          {% endif %}
         {% endif %}
       {% endfor %}
       
@@ -241,6 +258,8 @@
             {% include "components/product-card.njk" %}
           {% endfor %}
         </div>
+      {% else %}
+        <p class="text-gray-600 text-base md:text-lg font-body">Momentálně nejsou k dispozici žádné podobné produkty.</p>
       {% endif %}
     </div>
   </div>
