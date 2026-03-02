@@ -9,6 +9,9 @@ category: Dresoviny
 labels:
   - UV protection
   - prodyšný
+icons:
+  - iconClass: fa-solid fa-droplet-slash
+    tooltip: Nepromokavý materiál
 tags:
   - product
   - cs
