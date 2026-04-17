@@ -10,12 +10,12 @@ images:
   - /assets/images/cms/web_barca-5.jpg
 category: Tkaniny
 icons:
-  - iconClass: fa-regular fa-droplet-slash
-    tooltip: vodoodpudivé
   - iconClass: fa-solid fa-wind
     tooltip: větruodolné
   - iconClass: fa-solid fa-arrow-down-up-across-line
     tooltip: prodyšné
+  - iconClass: fa-regular fa-droplet-slash
+    tooltip: vodoodpudivé
 parameters:
   - name: Druh
     value: Tkaniny vodoodpudivé
