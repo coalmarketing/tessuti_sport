@@ -9,6 +9,15 @@ images:
   - /assets/images/cms/web_mountain-2.jpg
   - /assets/images/cms/web_mountain-3.jpg
 category: Tkaniny
+parameters:
+  - name: Druh
+    value: Tkaniny vodoodpudivé
+  - name: Složení
+    value: 100% Polyamid
+  - name: Gramáž
+    value: 115 g/qm
+  - name: Šířka
+    value: 150 cm
 tags:
   - product
   - cs
