@@ -9,6 +9,15 @@ images:
   - /assets/images/cms/web_chifon-2.jpg
 category: Tkaniny
 labels: []
+parameters:
+  - name: Druh
+    value: Tkaniny
+  - name: Složení
+    value: 100% Polyester
+  - name: Gramáž
+    value: 80 g/qm
+  - name: Šířka
+    value: 148 cm
 tags:
   - product
   - cs
