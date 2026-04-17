@@ -1,5 +1,5 @@
 ---
-title: BJ 14620 Mesh diagonale
+title: Mesh diagonale
 slug: mesh-diagonale
 currency: ""
 excerpt: Strukturovaná mesh dresovina s diagonální ventilací
