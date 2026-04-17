@@ -1,5 +1,5 @@
 ---
-title: BJ 14624 Carbon TEK mesh
+title: Carbon TEK mesh
 slug: carbon-tek-mesh
 currency: ""
 excerpt: Lehká karbonová mesh tkanina s vysokou prodyšností
