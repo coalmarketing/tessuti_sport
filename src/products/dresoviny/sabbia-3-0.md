@@ -9,6 +9,15 @@ images:
   - /assets/images/cms/web_bj-19633-sabbia-3-2.jpg
 category: Dresoviny
 labels: []
+parameters:
+  - name: Druh
+    value: Dresovina letní
+  - name: Složení
+    value: 84 % Polyamid, 16% elastan
+  - name: Gramáž
+    value: 140 g/qm
+  - name: Šířka
+    value: 140 cm
 tags:
   - product
   - cs
